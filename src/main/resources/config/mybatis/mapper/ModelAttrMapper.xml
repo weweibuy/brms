@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.weweibuy.brms.mapper.ModelAttrMapper">
   <resultMap id="BaseResultMap" type="com.weweibuy.brms.model.po.ModelAttr">
-    <result column="id" jdbcType="BIGINT" property="id" />
+    <id column="id" jdbcType="BIGINT" property="id" />
     <result column="model_key" jdbcType="VARCHAR" property="modelKey" />
     <result column="attr_key" jdbcType="VARCHAR" property="attrKey" />
     <result column="attr_name" jdbcType="VARCHAR" property="attrName" />
@@ -104,6 +104,16 @@
     </if>
      for update
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from brms_model_attr
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from brms_model_attr
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
   <delete id="deleteByExample" parameterType="com.weweibuy.brms.model.example.ModelAttrExample">
     delete from brms_model_attr
     <if test="_parameter != null">
@@ -246,6 +256,52 @@
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.weweibuy.brms.model.po.ModelAttr">
+    update brms_model_attr
+    <set>
+      <if test="modelKey != null">
+        model_key = #{modelKey,jdbcType=VARCHAR},
+      </if>
+      <if test="attrKey != null">
+        attr_key = #{attrKey,jdbcType=VARCHAR},
+      </if>
+      <if test="attrName != null">
+        attr_name = #{attrName,jdbcType=VARCHAR},
+      </if>
+      <if test="attrDesc != null">
+        attr_desc = #{attrDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="attrType != null">
+        attr_type = #{attrType,jdbcType=VARCHAR},
+      </if>
+      <if test="attrValueSource != null">
+        attr_value_source = #{attrValueSource,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null">
+        is_delete = #{deleted,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.weweibuy.brms.model.po.ModelAttr">
+    update brms_model_attr
+    set model_key = #{modelKey,jdbcType=VARCHAR},
+      attr_key = #{attrKey,jdbcType=VARCHAR},
+      attr_name = #{attrName,jdbcType=VARCHAR},
+      attr_desc = #{attrDesc,jdbcType=VARCHAR},
+      attr_type = #{attrType,jdbcType=VARCHAR},
+      attr_value_source = #{attrValueSource,jdbcType=VARCHAR},
+      is_delete = #{deleted,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
   </update>
   <select id="selectOneByExample" parameterType="com.weweibuy.brms.model.example.ModelAttrExample" resultMap="BaseResultMap">
     select

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.weweibuy.brms.mapper.RuleModelAttrMapper">
   <resultMap id="BaseResultMap" type="com.weweibuy.brms.model.po.RuleModelAttr">
-    <result column="id" jdbcType="BIGINT" property="id" />
+    <id column="id" jdbcType="BIGINT" property="id" />
     <result column="rule_key" jdbcType="VARCHAR" property="ruleKey" />
     <result column="rule_model_attr_type" jdbcType="CHAR" property="ruleModelAttrType" />
     <result column="attr_key" jdbcType="VARCHAR" property="attrKey" />
@@ -102,6 +102,16 @@
     </if>
      for update
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from brms_rule_model_attr
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from brms_rule_model_attr
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
   <delete id="deleteByExample" parameterType="com.weweibuy.brms.model.example.RuleModelAttrExample">
     delete from brms_rule_model_attr
     <if test="_parameter != null">
@@ -222,6 +232,44 @@
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.weweibuy.brms.model.po.RuleModelAttr">
+    update brms_rule_model_attr
+    <set>
+      <if test="ruleKey != null">
+        rule_key = #{ruleKey,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleModelAttrType != null">
+        rule_model_attr_type = #{ruleModelAttrType,jdbcType=CHAR},
+      </if>
+      <if test="attrKey != null">
+        attr_key = #{attrKey,jdbcType=VARCHAR},
+      </if>
+      <if test="attrValue != null">
+        attr_value = #{attrValue,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null">
+        is_delete = #{deleted,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.weweibuy.brms.model.po.RuleModelAttr">
+    update brms_rule_model_attr
+    set rule_key = #{ruleKey,jdbcType=VARCHAR},
+      rule_model_attr_type = #{ruleModelAttrType,jdbcType=CHAR},
+      attr_key = #{attrKey,jdbcType=VARCHAR},
+      attr_value = #{attrValue,jdbcType=VARCHAR},
+      is_delete = #{deleted,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
   </update>
   <select id="selectOneByExample" parameterType="com.weweibuy.brms.model.example.RuleModelAttrExample" resultMap="BaseResultMap">
     select

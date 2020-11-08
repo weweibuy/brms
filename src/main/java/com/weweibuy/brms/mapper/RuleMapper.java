@@ -12,6 +12,8 @@ public interface RuleMapper {
 
     int deleteByExample(RuleExample example);
 
+    int deleteByPrimaryKey(Long id);
+
     int insert(Rule record);
 
     int insertSelective(Rule record);
@@ -24,7 +26,13 @@ public interface RuleMapper {
 
     List<Rule> selectByExample(RuleExample example);
 
+    Rule selectByPrimaryKey(Long id);
+
     int updateByExampleSelective(@Param("record") Rule record, @Param("example") RuleExample example);
 
     int updateByExample(@Param("record") Rule record, @Param("example") RuleExample example);
+
+    int updateByPrimaryKeySelective(Rule record);
+
+    int updateByPrimaryKey(Rule record);
 }
