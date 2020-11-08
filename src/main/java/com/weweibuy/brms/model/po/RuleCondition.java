@@ -4,41 +4,41 @@ import java.time.LocalDateTime;
 import lombok.Data;
 
 @Data
-public class Rule {
+public class RuleCondition {
     /**
      * id自增1
      */
     private Long id;
 
     /**
-     * 规则
+     * 规则key
      */
     private String ruleKey;
 
     /**
-     * 规则描述
+     * 属性key
      */
-    private String ruleDesc;
+    private String attrKey;
 
     /**
-     * 规则集key(package)
+     * 条件符
      */
-    private String ruleSetKey;
+    private String conditionOperator;
 
     /**
-     * 规则属性
+     * 条件值
      */
-    private String ruleAttr;
+    private String conditionValue;
 
     /**
-     * 规则lhs
+     * 排序
      */
-    private String ruleLhs;
+    private Integer conditionOrder;
 
     /**
-     * 规则rhs
+     * 逻辑运算符(与下一个条件的逻辑运算符;取值: &&,|| )
      */
-    private String ruleRhs;
+    private String logicalOperator;
 
     /**
      * 是否删除

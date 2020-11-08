@@ -4,11 +4,16 @@ import java.time.LocalDateTime;
 import lombok.Data;
 
 @Data
-public class RuleModel {
+public class RuleAction {
     /**
      * id自增1
      */
     private Long id;
+
+    /**
+     * 规则key
+     */
+    private String ruleKey;
 
     /**
      * 模型key
@@ -16,9 +21,14 @@ public class RuleModel {
     private String modelKey;
 
     /**
-     * 规则集key(package)
+     * 属性key
      */
-    private String ruleSetKey;
+    private String attrKey;
+
+    /**
+     * 动作值
+     */
+    private String actionValue;
 
     /**
      * 是否删除

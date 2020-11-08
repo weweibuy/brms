@@ -4,14 +4,14 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RuleModelExample {
+public class RuleActionExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public RuleModelExample() {
+    public RuleActionExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -45,12 +45,12 @@ public class RuleModelExample {
         return criteria;
     }
 
-    public RuleModelExample orderBy(String orderByClause) {
+    public RuleActionExample orderBy(String orderByClause) {
         this.setOrderByClause(orderByClause);
         return this;
     }
 
-    public RuleModelExample orderBy(String ... orderByClauses) {
+    public RuleActionExample orderBy(String ... orderByClauses) {
         StringBuffer sb = new StringBuffer();
         for (int i = 0; i < orderByClauses.length; i++) {
             sb.append(orderByClauses[i]);
@@ -82,18 +82,18 @@ public class RuleModelExample {
     }
 
     public static Criteria newAndCreateCriteria() {
-        RuleModelExample example = new RuleModelExample();
+        RuleActionExample example = new RuleActionExample();
         return example.createCriteria();
     }
 
-    public RuleModelExample when(boolean condition, IExampleWhen then) {
+    public RuleActionExample when(boolean condition, IExampleWhen then) {
         if (condition) {
             then.example(this);
         }
         return this;
     }
 
-    public RuleModelExample when(boolean condition, IExampleWhen then, IExampleWhen otherwise) {
+    public RuleActionExample when(boolean condition, IExampleWhen then, IExampleWhen otherwise) {
         if (condition) {
             then.example(this);
         } else {
@@ -203,6 +203,76 @@ public class RuleModelExample {
             return (Criteria) this;
         }
 
+        public Criteria andRuleKeyIsNull() {
+            addCriterion("rule_key is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleKeyIsNotNull() {
+            addCriterion("rule_key is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleKeyEqualTo(String value) {
+            addCriterion("rule_key =", value, "ruleKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleKeyNotEqualTo(String value) {
+            addCriterion("rule_key <>", value, "ruleKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleKeyGreaterThan(String value) {
+            addCriterion("rule_key >", value, "ruleKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleKeyGreaterThanOrEqualTo(String value) {
+            addCriterion("rule_key >=", value, "ruleKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleKeyLessThan(String value) {
+            addCriterion("rule_key <", value, "ruleKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleKeyLessThanOrEqualTo(String value) {
+            addCriterion("rule_key <=", value, "ruleKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleKeyLike(String value) {
+            addCriterion("rule_key like", value, "ruleKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleKeyNotLike(String value) {
+            addCriterion("rule_key not like", value, "ruleKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleKeyIn(List<String> values) {
+            addCriterion("rule_key in", values, "ruleKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleKeyNotIn(List<String> values) {
+            addCriterion("rule_key not in", values, "ruleKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleKeyBetween(String value1, String value2) {
+            addCriterion("rule_key between", value1, value2, "ruleKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleKeyNotBetween(String value1, String value2) {
+            addCriterion("rule_key not between", value1, value2, "ruleKey");
+            return (Criteria) this;
+        }
+
         public Criteria andModelKeyIsNull() {
             addCriterion("model_key is null");
             return (Criteria) this;
@@ -273,73 +343,143 @@ public class RuleModelExample {
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyIsNull() {
-            addCriterion("rule_set_key is null");
+        public Criteria andAttrKeyIsNull() {
+            addCriterion("attr_key is null");
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyIsNotNull() {
-            addCriterion("rule_set_key is not null");
+        public Criteria andAttrKeyIsNotNull() {
+            addCriterion("attr_key is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyEqualTo(String value) {
-            addCriterion("rule_set_key =", value, "ruleSetKey");
+        public Criteria andAttrKeyEqualTo(String value) {
+            addCriterion("attr_key =", value, "attrKey");
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyNotEqualTo(String value) {
-            addCriterion("rule_set_key <>", value, "ruleSetKey");
+        public Criteria andAttrKeyNotEqualTo(String value) {
+            addCriterion("attr_key <>", value, "attrKey");
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyGreaterThan(String value) {
-            addCriterion("rule_set_key >", value, "ruleSetKey");
+        public Criteria andAttrKeyGreaterThan(String value) {
+            addCriterion("attr_key >", value, "attrKey");
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyGreaterThanOrEqualTo(String value) {
-            addCriterion("rule_set_key >=", value, "ruleSetKey");
+        public Criteria andAttrKeyGreaterThanOrEqualTo(String value) {
+            addCriterion("attr_key >=", value, "attrKey");
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyLessThan(String value) {
-            addCriterion("rule_set_key <", value, "ruleSetKey");
+        public Criteria andAttrKeyLessThan(String value) {
+            addCriterion("attr_key <", value, "attrKey");
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyLessThanOrEqualTo(String value) {
-            addCriterion("rule_set_key <=", value, "ruleSetKey");
+        public Criteria andAttrKeyLessThanOrEqualTo(String value) {
+            addCriterion("attr_key <=", value, "attrKey");
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyLike(String value) {
-            addCriterion("rule_set_key like", value, "ruleSetKey");
+        public Criteria andAttrKeyLike(String value) {
+            addCriterion("attr_key like", value, "attrKey");
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyNotLike(String value) {
-            addCriterion("rule_set_key not like", value, "ruleSetKey");
+        public Criteria andAttrKeyNotLike(String value) {
+            addCriterion("attr_key not like", value, "attrKey");
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyIn(List<String> values) {
-            addCriterion("rule_set_key in", values, "ruleSetKey");
+        public Criteria andAttrKeyIn(List<String> values) {
+            addCriterion("attr_key in", values, "attrKey");
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyNotIn(List<String> values) {
-            addCriterion("rule_set_key not in", values, "ruleSetKey");
+        public Criteria andAttrKeyNotIn(List<String> values) {
+            addCriterion("attr_key not in", values, "attrKey");
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyBetween(String value1, String value2) {
-            addCriterion("rule_set_key between", value1, value2, "ruleSetKey");
+        public Criteria andAttrKeyBetween(String value1, String value2) {
+            addCriterion("attr_key between", value1, value2, "attrKey");
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyNotBetween(String value1, String value2) {
-            addCriterion("rule_set_key not between", value1, value2, "ruleSetKey");
+        public Criteria andAttrKeyNotBetween(String value1, String value2) {
+            addCriterion("attr_key not between", value1, value2, "attrKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionValueIsNull() {
+            addCriterion("action_value is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionValueIsNotNull() {
+            addCriterion("action_value is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionValueEqualTo(String value) {
+            addCriterion("action_value =", value, "actionValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionValueNotEqualTo(String value) {
+            addCriterion("action_value <>", value, "actionValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionValueGreaterThan(String value) {
+            addCriterion("action_value >", value, "actionValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionValueGreaterThanOrEqualTo(String value) {
+            addCriterion("action_value >=", value, "actionValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionValueLessThan(String value) {
+            addCriterion("action_value <", value, "actionValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionValueLessThanOrEqualTo(String value) {
+            addCriterion("action_value <=", value, "actionValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionValueLike(String value) {
+            addCriterion("action_value like", value, "actionValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionValueNotLike(String value) {
+            addCriterion("action_value not like", value, "actionValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionValueIn(List<String> values) {
+            addCriterion("action_value in", values, "actionValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionValueNotIn(List<String> values) {
+            addCriterion("action_value not in", values, "actionValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionValueBetween(String value1, String value2) {
+            addCriterion("action_value between", value1, value2, "actionValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionValueNotBetween(String value1, String value2) {
+            addCriterion("action_value not between", value1, value2, "actionValue");
             return (Criteria) this;
         }
 
@@ -525,14 +665,14 @@ public class RuleModelExample {
     }
 
     public static class Criteria extends GeneratedCriteria {
-        private RuleModelExample example;
+        private RuleActionExample example;
 
-        protected Criteria(RuleModelExample example) {
+        protected Criteria(RuleActionExample example) {
             super();
             this.example = example;
         }
 
-        public RuleModelExample example() {
+        public RuleActionExample example() {
             return this.example;
         }
 
@@ -657,6 +797,6 @@ public class RuleModelExample {
     }
 
     public interface IExampleWhen {
-        void example(com.weweibuy.brms.model.example.RuleModelExample example);
+        void example(com.weweibuy.brms.model.example.RuleActionExample example);
     }
 }

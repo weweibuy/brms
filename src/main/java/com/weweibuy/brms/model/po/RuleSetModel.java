@@ -4,41 +4,21 @@ import java.time.LocalDateTime;
 import lombok.Data;
 
 @Data
-public class Rule {
+public class RuleSetModel {
     /**
      * id自增1
      */
     private Long id;
 
     /**
-     * 规则
+     * 模型key
      */
-    private String ruleKey;
-
-    /**
-     * 规则描述
-     */
-    private String ruleDesc;
+    private String modelKey;
 
     /**
      * 规则集key(package)
      */
     private String ruleSetKey;
-
-    /**
-     * 规则属性
-     */
-    private String ruleAttr;
-
-    /**
-     * 规则lhs
-     */
-    private String ruleLhs;
-
-    /**
-     * 规则rhs
-     */
-    private String ruleRhs;
 
     /**
      * 是否删除

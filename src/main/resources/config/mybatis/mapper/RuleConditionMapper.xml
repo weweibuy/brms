@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.weweibuy.brms.mapper.RuleModelMapper">
-  <resultMap id="BaseResultMap" type="com.weweibuy.brms.model.po.RuleModel">
+<mapper namespace="com.weweibuy.brms.mapper.RuleConditionMapper">
+  <resultMap id="BaseResultMap" type="com.weweibuy.brms.model.po.RuleCondition">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="model_key" jdbcType="VARCHAR" property="modelKey" />
-    <result column="rule_set_key" jdbcType="VARCHAR" property="ruleSetKey" />
+    <result column="rule_key" jdbcType="VARCHAR" property="ruleKey" />
+    <result column="attr_key" jdbcType="VARCHAR" property="attrKey" />
+    <result column="condition_operator" jdbcType="VARCHAR" property="conditionOperator" />
+    <result column="condition_value" jdbcType="VARCHAR" property="conditionValue" />
+    <result column="condition_order" jdbcType="INTEGER" property="conditionOrder" />
+    <result column="logical_operator" jdbcType="VARCHAR" property="logicalOperator" />
     <result column="is_delete" jdbcType="TINYINT" property="deleted" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
@@ -68,15 +72,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, model_key, rule_set_key, is_delete, create_time, update_time
+    id, rule_key, attr_key, condition_operator, condition_value, condition_order, logical_operator, 
+    is_delete, create_time, update_time
   </sql>
-  <select id="selectByExample" parameterType="com.weweibuy.brms.model.example.RuleModelExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.weweibuy.brms.model.example.RuleConditionExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from brms_rule_model
+    from brms_rule_condition
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -84,13 +89,13 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExampleForUpdate" parameterType="com.weweibuy.brms.model.example.RuleModelExample" resultMap="BaseResultMap">
+  <select id="selectByExampleForUpdate" parameterType="com.weweibuy.brms.model.example.RuleConditionExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from brms_rule_model
+    from brms_rule_condition
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -102,38 +107,52 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from brms_rule_model
+    from brms_rule_condition
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from brms_rule_model
+    delete from brms_rule_condition
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.weweibuy.brms.model.example.RuleModelExample">
-    delete from brms_rule_model
+  <delete id="deleteByExample" parameterType="com.weweibuy.brms.model.example.RuleConditionExample">
+    delete from brms_rule_condition
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.weweibuy.brms.model.po.RuleModel">
-    insert into brms_rule_model (id, model_key, rule_set_key, 
-      is_delete, create_time, update_time
-      )
-    values (#{id,jdbcType=BIGINT}, #{modelKey,jdbcType=VARCHAR}, #{ruleSetKey,jdbcType=VARCHAR}, 
-      #{deleted,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
-      )
+  <insert id="insert" parameterType="com.weweibuy.brms.model.po.RuleCondition">
+    insert into brms_rule_condition (id, rule_key, attr_key, 
+      condition_operator, condition_value, condition_order, 
+      logical_operator, is_delete, create_time, 
+      update_time)
+    values (#{id,jdbcType=BIGINT}, #{ruleKey,jdbcType=VARCHAR}, #{attrKey,jdbcType=VARCHAR}, 
+      #{conditionOperator,jdbcType=VARCHAR}, #{conditionValue,jdbcType=VARCHAR}, #{conditionOrder,jdbcType=INTEGER}, 
+      #{logicalOperator,jdbcType=VARCHAR}, #{deleted,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.weweibuy.brms.model.po.RuleModel">
-    insert into brms_rule_model
+  <insert id="insertSelective" parameterType="com.weweibuy.brms.model.po.RuleCondition">
+    insert into brms_rule_condition
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="modelKey != null">
-        model_key,
+      <if test="ruleKey != null">
+        rule_key,
       </if>
-      <if test="ruleSetKey != null">
-        rule_set_key,
+      <if test="attrKey != null">
+        attr_key,
+      </if>
+      <if test="conditionOperator != null">
+        condition_operator,
+      </if>
+      <if test="conditionValue != null">
+        condition_value,
+      </if>
+      <if test="conditionOrder != null">
+        condition_order,
+      </if>
+      <if test="logicalOperator != null">
+        logical_operator,
       </if>
       <if test="deleted != null">
         is_delete,
@@ -149,11 +168,23 @@
       <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="modelKey != null">
-        #{modelKey,jdbcType=VARCHAR},
+      <if test="ruleKey != null">
+        #{ruleKey,jdbcType=VARCHAR},
       </if>
-      <if test="ruleSetKey != null">
-        #{ruleSetKey,jdbcType=VARCHAR},
+      <if test="attrKey != null">
+        #{attrKey,jdbcType=VARCHAR},
+      </if>
+      <if test="conditionOperator != null">
+        #{conditionOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="conditionValue != null">
+        #{conditionValue,jdbcType=VARCHAR},
+      </if>
+      <if test="conditionOrder != null">
+        #{conditionOrder,jdbcType=INTEGER},
+      </if>
+      <if test="logicalOperator != null">
+        #{logicalOperator,jdbcType=VARCHAR},
       </if>
       <if test="deleted != null">
         #{deleted,jdbcType=TINYINT},
@@ -166,23 +197,35 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.weweibuy.brms.model.example.RuleModelExample" resultType="java.lang.Long">
-    select count(*) from brms_rule_model
+  <select id="countByExample" parameterType="com.weweibuy.brms.model.example.RuleConditionExample" resultType="java.lang.Long">
+    select count(*) from brms_rule_condition
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update brms_rule_model
+    update brms_rule_condition
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.modelKey != null">
-        model_key = #{record.modelKey,jdbcType=VARCHAR},
+      <if test="record.ruleKey != null">
+        rule_key = #{record.ruleKey,jdbcType=VARCHAR},
       </if>
-      <if test="record.ruleSetKey != null">
-        rule_set_key = #{record.ruleSetKey,jdbcType=VARCHAR},
+      <if test="record.attrKey != null">
+        attr_key = #{record.attrKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.conditionOperator != null">
+        condition_operator = #{record.conditionOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.conditionValue != null">
+        condition_value = #{record.conditionValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.conditionOrder != null">
+        condition_order = #{record.conditionOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.logicalOperator != null">
+        logical_operator = #{record.logicalOperator,jdbcType=VARCHAR},
       </if>
       <if test="record.deleted != null">
         is_delete = #{record.deleted,jdbcType=TINYINT},
@@ -199,10 +242,14 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update brms_rule_model
+    update brms_rule_condition
     set id = #{record.id,jdbcType=BIGINT},
-      model_key = #{record.modelKey,jdbcType=VARCHAR},
-      rule_set_key = #{record.ruleSetKey,jdbcType=VARCHAR},
+      rule_key = #{record.ruleKey,jdbcType=VARCHAR},
+      attr_key = #{record.attrKey,jdbcType=VARCHAR},
+      condition_operator = #{record.conditionOperator,jdbcType=VARCHAR},
+      condition_value = #{record.conditionValue,jdbcType=VARCHAR},
+      condition_order = #{record.conditionOrder,jdbcType=INTEGER},
+      logical_operator = #{record.logicalOperator,jdbcType=VARCHAR},
       is_delete = #{record.deleted,jdbcType=TINYINT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
@@ -210,14 +257,26 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.weweibuy.brms.model.po.RuleModel">
-    update brms_rule_model
+  <update id="updateByPrimaryKeySelective" parameterType="com.weweibuy.brms.model.po.RuleCondition">
+    update brms_rule_condition
     <set>
-      <if test="modelKey != null">
-        model_key = #{modelKey,jdbcType=VARCHAR},
+      <if test="ruleKey != null">
+        rule_key = #{ruleKey,jdbcType=VARCHAR},
       </if>
-      <if test="ruleSetKey != null">
-        rule_set_key = #{ruleSetKey,jdbcType=VARCHAR},
+      <if test="attrKey != null">
+        attr_key = #{attrKey,jdbcType=VARCHAR},
+      </if>
+      <if test="conditionOperator != null">
+        condition_operator = #{conditionOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="conditionValue != null">
+        condition_value = #{conditionValue,jdbcType=VARCHAR},
+      </if>
+      <if test="conditionOrder != null">
+        condition_order = #{conditionOrder,jdbcType=INTEGER},
+      </if>
+      <if test="logicalOperator != null">
+        logical_operator = #{logicalOperator,jdbcType=VARCHAR},
       </if>
       <if test="deleted != null">
         is_delete = #{deleted,jdbcType=TINYINT},
@@ -231,19 +290,23 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.weweibuy.brms.model.po.RuleModel">
-    update brms_rule_model
-    set model_key = #{modelKey,jdbcType=VARCHAR},
-      rule_set_key = #{ruleSetKey,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.weweibuy.brms.model.po.RuleCondition">
+    update brms_rule_condition
+    set rule_key = #{ruleKey,jdbcType=VARCHAR},
+      attr_key = #{attrKey,jdbcType=VARCHAR},
+      condition_operator = #{conditionOperator,jdbcType=VARCHAR},
+      condition_value = #{conditionValue,jdbcType=VARCHAR},
+      condition_order = #{conditionOrder,jdbcType=INTEGER},
+      logical_operator = #{logicalOperator,jdbcType=VARCHAR},
       is_delete = #{deleted,jdbcType=TINYINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <select id="selectOneByExample" parameterType="com.weweibuy.brms.model.example.RuleModelExample" resultMap="BaseResultMap">
+  <select id="selectOneByExample" parameterType="com.weweibuy.brms.model.example.RuleConditionExample" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from brms_rule_model
+    from brms_rule_condition
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -252,10 +315,10 @@
     </if>
     limit 1
   </select>
-  <select id="selectOneByExampleForUpdate" parameterType="com.weweibuy.brms.model.example.RuleModelExample" resultMap="BaseResultMap">
+  <select id="selectOneByExampleForUpdate" parameterType="com.weweibuy.brms.model.example.RuleConditionExample" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from brms_rule_model
+    from brms_rule_condition
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>

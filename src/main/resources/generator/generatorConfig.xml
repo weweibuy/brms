@@ -84,7 +84,11 @@
             <columnOverride column="is_delete"  property="deleted"  javaType="Boolean"/>
         </table>
 
-        <table tableName="brms_rule_model" domainObjectName="RuleModel" >
+        <table tableName="brms_rule_action" domainObjectName="RuleAction" >
+            <columnOverride column="is_delete"  property="deleted"  javaType="Boolean"/>
+        </table>
+
+        <table tableName="brms_rule_condition" domainObjectName="RuleCondition" >
             <columnOverride column="is_delete"  property="deleted"  javaType="Boolean"/>
         </table>
 
@@ -93,6 +97,10 @@
         </table>
 
         <table tableName="brms_rule_set" domainObjectName="RuleSet" >
+            <columnOverride column="is_delete"  property="deleted"  javaType="Boolean"/>
+        </table>
+
+        <table tableName="brms_rule_set_model" domainObjectName="RuleSetModel" >
             <columnOverride column="is_delete"  property="deleted"  javaType="Boolean"/>
         </table>
 

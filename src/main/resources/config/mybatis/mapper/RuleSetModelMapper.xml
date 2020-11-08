@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.weweibuy.brms.mapper.RuleMapper">
-  <resultMap id="BaseResultMap" type="com.weweibuy.brms.model.po.Rule">
+<mapper namespace="com.weweibuy.brms.mapper.RuleSetModelMapper">
+  <resultMap id="BaseResultMap" type="com.weweibuy.brms.model.po.RuleSetModel">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="rule_key" jdbcType="VARCHAR" property="ruleKey" />
-    <result column="rule_desc" jdbcType="VARCHAR" property="ruleDesc" />
+    <result column="model_key" jdbcType="VARCHAR" property="modelKey" />
     <result column="rule_set_key" jdbcType="VARCHAR" property="ruleSetKey" />
-    <result column="rule_attr" jdbcType="VARCHAR" property="ruleAttr" />
-    <result column="rule_lhs" jdbcType="VARCHAR" property="ruleLhs" />
-    <result column="rule_rhs" jdbcType="VARCHAR" property="ruleRhs" />
     <result column="is_delete" jdbcType="TINYINT" property="deleted" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
@@ -72,16 +68,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, rule_key, rule_desc, rule_set_key, rule_attr, rule_lhs, rule_rhs, is_delete, 
-    create_time, update_time
+    id, model_key, rule_set_key, is_delete, create_time, update_time
   </sql>
-  <select id="selectByExample" parameterType="com.weweibuy.brms.model.example.RuleExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.weweibuy.brms.model.example.RuleSetModelExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from brms_rule
+    from brms_rule_set_model
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -89,13 +84,13 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExampleForUpdate" parameterType="com.weweibuy.brms.model.example.RuleExample" resultMap="BaseResultMap">
+  <select id="selectByExampleForUpdate" parameterType="com.weweibuy.brms.model.example.RuleSetModelExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from brms_rule
+    from brms_rule_set_model
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -107,52 +102,38 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from brms_rule
+    from brms_rule_set_model
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from brms_rule
+    delete from brms_rule_set_model
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.weweibuy.brms.model.example.RuleExample">
-    delete from brms_rule
+  <delete id="deleteByExample" parameterType="com.weweibuy.brms.model.example.RuleSetModelExample">
+    delete from brms_rule_set_model
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.weweibuy.brms.model.po.Rule">
-    insert into brms_rule (id, rule_key, rule_desc, 
-      rule_set_key, rule_attr, rule_lhs, 
-      rule_rhs, is_delete, create_time, 
-      update_time)
-    values (#{id,jdbcType=BIGINT}, #{ruleKey,jdbcType=VARCHAR}, #{ruleDesc,jdbcType=VARCHAR}, 
-      #{ruleSetKey,jdbcType=VARCHAR}, #{ruleAttr,jdbcType=VARCHAR}, #{ruleLhs,jdbcType=VARCHAR}, 
-      #{ruleRhs,jdbcType=VARCHAR}, #{deleted,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+  <insert id="insert" parameterType="com.weweibuy.brms.model.po.RuleSetModel">
+    insert into brms_rule_set_model (id, model_key, rule_set_key, 
+      is_delete, create_time, update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{modelKey,jdbcType=VARCHAR}, #{ruleSetKey,jdbcType=VARCHAR}, 
+      #{deleted,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.weweibuy.brms.model.po.Rule">
-    insert into brms_rule
+  <insert id="insertSelective" parameterType="com.weweibuy.brms.model.po.RuleSetModel">
+    insert into brms_rule_set_model
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="ruleKey != null">
-        rule_key,
-      </if>
-      <if test="ruleDesc != null">
-        rule_desc,
+      <if test="modelKey != null">
+        model_key,
       </if>
       <if test="ruleSetKey != null">
         rule_set_key,
-      </if>
-      <if test="ruleAttr != null">
-        rule_attr,
-      </if>
-      <if test="ruleLhs != null">
-        rule_lhs,
-      </if>
-      <if test="ruleRhs != null">
-        rule_rhs,
       </if>
       <if test="deleted != null">
         is_delete,
@@ -168,23 +149,11 @@
       <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="ruleKey != null">
-        #{ruleKey,jdbcType=VARCHAR},
-      </if>
-      <if test="ruleDesc != null">
-        #{ruleDesc,jdbcType=VARCHAR},
+      <if test="modelKey != null">
+        #{modelKey,jdbcType=VARCHAR},
       </if>
       <if test="ruleSetKey != null">
         #{ruleSetKey,jdbcType=VARCHAR},
-      </if>
-      <if test="ruleAttr != null">
-        #{ruleAttr,jdbcType=VARCHAR},
-      </if>
-      <if test="ruleLhs != null">
-        #{ruleLhs,jdbcType=VARCHAR},
-      </if>
-      <if test="ruleRhs != null">
-        #{ruleRhs,jdbcType=VARCHAR},
       </if>
       <if test="deleted != null">
         #{deleted,jdbcType=TINYINT},
@@ -197,35 +166,23 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.weweibuy.brms.model.example.RuleExample" resultType="java.lang.Long">
-    select count(*) from brms_rule
+  <select id="countByExample" parameterType="com.weweibuy.brms.model.example.RuleSetModelExample" resultType="java.lang.Long">
+    select count(*) from brms_rule_set_model
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update brms_rule
+    update brms_rule_set_model
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.ruleKey != null">
-        rule_key = #{record.ruleKey,jdbcType=VARCHAR},
-      </if>
-      <if test="record.ruleDesc != null">
-        rule_desc = #{record.ruleDesc,jdbcType=VARCHAR},
+      <if test="record.modelKey != null">
+        model_key = #{record.modelKey,jdbcType=VARCHAR},
       </if>
       <if test="record.ruleSetKey != null">
         rule_set_key = #{record.ruleSetKey,jdbcType=VARCHAR},
-      </if>
-      <if test="record.ruleAttr != null">
-        rule_attr = #{record.ruleAttr,jdbcType=VARCHAR},
-      </if>
-      <if test="record.ruleLhs != null">
-        rule_lhs = #{record.ruleLhs,jdbcType=VARCHAR},
-      </if>
-      <if test="record.ruleRhs != null">
-        rule_rhs = #{record.ruleRhs,jdbcType=VARCHAR},
       </if>
       <if test="record.deleted != null">
         is_delete = #{record.deleted,jdbcType=TINYINT},
@@ -242,14 +199,10 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update brms_rule
+    update brms_rule_set_model
     set id = #{record.id,jdbcType=BIGINT},
-      rule_key = #{record.ruleKey,jdbcType=VARCHAR},
-      rule_desc = #{record.ruleDesc,jdbcType=VARCHAR},
+      model_key = #{record.modelKey,jdbcType=VARCHAR},
       rule_set_key = #{record.ruleSetKey,jdbcType=VARCHAR},
-      rule_attr = #{record.ruleAttr,jdbcType=VARCHAR},
-      rule_lhs = #{record.ruleLhs,jdbcType=VARCHAR},
-      rule_rhs = #{record.ruleRhs,jdbcType=VARCHAR},
       is_delete = #{record.deleted,jdbcType=TINYINT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
@@ -257,26 +210,14 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.weweibuy.brms.model.po.Rule">
-    update brms_rule
+  <update id="updateByPrimaryKeySelective" parameterType="com.weweibuy.brms.model.po.RuleSetModel">
+    update brms_rule_set_model
     <set>
-      <if test="ruleKey != null">
-        rule_key = #{ruleKey,jdbcType=VARCHAR},
-      </if>
-      <if test="ruleDesc != null">
-        rule_desc = #{ruleDesc,jdbcType=VARCHAR},
+      <if test="modelKey != null">
+        model_key = #{modelKey,jdbcType=VARCHAR},
       </if>
       <if test="ruleSetKey != null">
         rule_set_key = #{ruleSetKey,jdbcType=VARCHAR},
-      </if>
-      <if test="ruleAttr != null">
-        rule_attr = #{ruleAttr,jdbcType=VARCHAR},
-      </if>
-      <if test="ruleLhs != null">
-        rule_lhs = #{ruleLhs,jdbcType=VARCHAR},
-      </if>
-      <if test="ruleRhs != null">
-        rule_rhs = #{ruleRhs,jdbcType=VARCHAR},
       </if>
       <if test="deleted != null">
         is_delete = #{deleted,jdbcType=TINYINT},
@@ -290,23 +231,19 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.weweibuy.brms.model.po.Rule">
-    update brms_rule
-    set rule_key = #{ruleKey,jdbcType=VARCHAR},
-      rule_desc = #{ruleDesc,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.weweibuy.brms.model.po.RuleSetModel">
+    update brms_rule_set_model
+    set model_key = #{modelKey,jdbcType=VARCHAR},
       rule_set_key = #{ruleSetKey,jdbcType=VARCHAR},
-      rule_attr = #{ruleAttr,jdbcType=VARCHAR},
-      rule_lhs = #{ruleLhs,jdbcType=VARCHAR},
-      rule_rhs = #{ruleRhs,jdbcType=VARCHAR},
       is_delete = #{deleted,jdbcType=TINYINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <select id="selectOneByExample" parameterType="com.weweibuy.brms.model.example.RuleExample" resultMap="BaseResultMap">
+  <select id="selectOneByExample" parameterType="com.weweibuy.brms.model.example.RuleSetModelExample" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from brms_rule
+    from brms_rule_set_model
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -315,10 +252,10 @@
     </if>
     limit 1
   </select>
-  <select id="selectOneByExampleForUpdate" parameterType="com.weweibuy.brms.model.example.RuleExample" resultMap="BaseResultMap">
+  <select id="selectOneByExampleForUpdate" parameterType="com.weweibuy.brms.model.example.RuleSetModelExample" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from brms_rule
+    from brms_rule_set_model
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>

@@ -4,14 +4,14 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RuleExample {
+public class RuleSetModelExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public RuleExample() {
+    public RuleSetModelExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -45,12 +45,12 @@ public class RuleExample {
         return criteria;
     }
 
-    public RuleExample orderBy(String orderByClause) {
+    public RuleSetModelExample orderBy(String orderByClause) {
         this.setOrderByClause(orderByClause);
         return this;
     }
 
-    public RuleExample orderBy(String ... orderByClauses) {
+    public RuleSetModelExample orderBy(String ... orderByClauses) {
         StringBuffer sb = new StringBuffer();
         for (int i = 0; i < orderByClauses.length; i++) {
             sb.append(orderByClauses[i]);
@@ -82,18 +82,18 @@ public class RuleExample {
     }
 
     public static Criteria newAndCreateCriteria() {
-        RuleExample example = new RuleExample();
+        RuleSetModelExample example = new RuleSetModelExample();
         return example.createCriteria();
     }
 
-    public RuleExample when(boolean condition, IExampleWhen then) {
+    public RuleSetModelExample when(boolean condition, IExampleWhen then) {
         if (condition) {
             then.example(this);
         }
         return this;
     }
 
-    public RuleExample when(boolean condition, IExampleWhen then, IExampleWhen otherwise) {
+    public RuleSetModelExample when(boolean condition, IExampleWhen then, IExampleWhen otherwise) {
         if (condition) {
             then.example(this);
         } else {
@@ -203,143 +203,73 @@ public class RuleExample {
             return (Criteria) this;
         }
 
-        public Criteria andRuleKeyIsNull() {
-            addCriterion("rule_key is null");
+        public Criteria andModelKeyIsNull() {
+            addCriterion("model_key is null");
             return (Criteria) this;
         }
 
-        public Criteria andRuleKeyIsNotNull() {
-            addCriterion("rule_key is not null");
+        public Criteria andModelKeyIsNotNull() {
+            addCriterion("model_key is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRuleKeyEqualTo(String value) {
-            addCriterion("rule_key =", value, "ruleKey");
+        public Criteria andModelKeyEqualTo(String value) {
+            addCriterion("model_key =", value, "modelKey");
             return (Criteria) this;
         }
 
-        public Criteria andRuleKeyNotEqualTo(String value) {
-            addCriterion("rule_key <>", value, "ruleKey");
+        public Criteria andModelKeyNotEqualTo(String value) {
+            addCriterion("model_key <>", value, "modelKey");
             return (Criteria) this;
         }
 
-        public Criteria andRuleKeyGreaterThan(String value) {
-            addCriterion("rule_key >", value, "ruleKey");
+        public Criteria andModelKeyGreaterThan(String value) {
+            addCriterion("model_key >", value, "modelKey");
             return (Criteria) this;
         }
 
-        public Criteria andRuleKeyGreaterThanOrEqualTo(String value) {
-            addCriterion("rule_key >=", value, "ruleKey");
+        public Criteria andModelKeyGreaterThanOrEqualTo(String value) {
+            addCriterion("model_key >=", value, "modelKey");
             return (Criteria) this;
         }
 
-        public Criteria andRuleKeyLessThan(String value) {
-            addCriterion("rule_key <", value, "ruleKey");
+        public Criteria andModelKeyLessThan(String value) {
+            addCriterion("model_key <", value, "modelKey");
             return (Criteria) this;
         }
 
-        public Criteria andRuleKeyLessThanOrEqualTo(String value) {
-            addCriterion("rule_key <=", value, "ruleKey");
+        public Criteria andModelKeyLessThanOrEqualTo(String value) {
+            addCriterion("model_key <=", value, "modelKey");
             return (Criteria) this;
         }
 
-        public Criteria andRuleKeyLike(String value) {
-            addCriterion("rule_key like", value, "ruleKey");
+        public Criteria andModelKeyLike(String value) {
+            addCriterion("model_key like", value, "modelKey");
             return (Criteria) this;
         }
 
-        public Criteria andRuleKeyNotLike(String value) {
-            addCriterion("rule_key not like", value, "ruleKey");
+        public Criteria andModelKeyNotLike(String value) {
+            addCriterion("model_key not like", value, "modelKey");
             return (Criteria) this;
         }
 
-        public Criteria andRuleKeyIn(List<String> values) {
-            addCriterion("rule_key in", values, "ruleKey");
+        public Criteria andModelKeyIn(List<String> values) {
+            addCriterion("model_key in", values, "modelKey");
             return (Criteria) this;
         }
 
-        public Criteria andRuleKeyNotIn(List<String> values) {
-            addCriterion("rule_key not in", values, "ruleKey");
+        public Criteria andModelKeyNotIn(List<String> values) {
+            addCriterion("model_key not in", values, "modelKey");
             return (Criteria) this;
         }
 
-        public Criteria andRuleKeyBetween(String value1, String value2) {
-            addCriterion("rule_key between", value1, value2, "ruleKey");
+        public Criteria andModelKeyBetween(String value1, String value2) {
+            addCriterion("model_key between", value1, value2, "modelKey");
             return (Criteria) this;
         }
 
-        public Criteria andRuleKeyNotBetween(String value1, String value2) {
-            addCriterion("rule_key not between", value1, value2, "ruleKey");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleDescIsNull() {
-            addCriterion("rule_desc is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleDescIsNotNull() {
-            addCriterion("rule_desc is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleDescEqualTo(String value) {
-            addCriterion("rule_desc =", value, "ruleDesc");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleDescNotEqualTo(String value) {
-            addCriterion("rule_desc <>", value, "ruleDesc");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleDescGreaterThan(String value) {
-            addCriterion("rule_desc >", value, "ruleDesc");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleDescGreaterThanOrEqualTo(String value) {
-            addCriterion("rule_desc >=", value, "ruleDesc");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleDescLessThan(String value) {
-            addCriterion("rule_desc <", value, "ruleDesc");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleDescLessThanOrEqualTo(String value) {
-            addCriterion("rule_desc <=", value, "ruleDesc");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleDescLike(String value) {
-            addCriterion("rule_desc like", value, "ruleDesc");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleDescNotLike(String value) {
-            addCriterion("rule_desc not like", value, "ruleDesc");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleDescIn(List<String> values) {
-            addCriterion("rule_desc in", values, "ruleDesc");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleDescNotIn(List<String> values) {
-            addCriterion("rule_desc not in", values, "ruleDesc");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleDescBetween(String value1, String value2) {
-            addCriterion("rule_desc between", value1, value2, "ruleDesc");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleDescNotBetween(String value1, String value2) {
-            addCriterion("rule_desc not between", value1, value2, "ruleDesc");
+        public Criteria andModelKeyNotBetween(String value1, String value2) {
+            addCriterion("model_key not between", value1, value2, "modelKey");
             return (Criteria) this;
         }
 
@@ -410,216 +340,6 @@ public class RuleExample {
 
         public Criteria andRuleSetKeyNotBetween(String value1, String value2) {
             addCriterion("rule_set_key not between", value1, value2, "ruleSetKey");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleAttrIsNull() {
-            addCriterion("rule_attr is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleAttrIsNotNull() {
-            addCriterion("rule_attr is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleAttrEqualTo(String value) {
-            addCriterion("rule_attr =", value, "ruleAttr");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleAttrNotEqualTo(String value) {
-            addCriterion("rule_attr <>", value, "ruleAttr");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleAttrGreaterThan(String value) {
-            addCriterion("rule_attr >", value, "ruleAttr");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleAttrGreaterThanOrEqualTo(String value) {
-            addCriterion("rule_attr >=", value, "ruleAttr");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleAttrLessThan(String value) {
-            addCriterion("rule_attr <", value, "ruleAttr");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleAttrLessThanOrEqualTo(String value) {
-            addCriterion("rule_attr <=", value, "ruleAttr");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleAttrLike(String value) {
-            addCriterion("rule_attr like", value, "ruleAttr");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleAttrNotLike(String value) {
-            addCriterion("rule_attr not like", value, "ruleAttr");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleAttrIn(List<String> values) {
-            addCriterion("rule_attr in", values, "ruleAttr");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleAttrNotIn(List<String> values) {
-            addCriterion("rule_attr not in", values, "ruleAttr");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleAttrBetween(String value1, String value2) {
-            addCriterion("rule_attr between", value1, value2, "ruleAttr");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleAttrNotBetween(String value1, String value2) {
-            addCriterion("rule_attr not between", value1, value2, "ruleAttr");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleLhsIsNull() {
-            addCriterion("rule_lhs is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleLhsIsNotNull() {
-            addCriterion("rule_lhs is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleLhsEqualTo(String value) {
-            addCriterion("rule_lhs =", value, "ruleLhs");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleLhsNotEqualTo(String value) {
-            addCriterion("rule_lhs <>", value, "ruleLhs");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleLhsGreaterThan(String value) {
-            addCriterion("rule_lhs >", value, "ruleLhs");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleLhsGreaterThanOrEqualTo(String value) {
-            addCriterion("rule_lhs >=", value, "ruleLhs");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleLhsLessThan(String value) {
-            addCriterion("rule_lhs <", value, "ruleLhs");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleLhsLessThanOrEqualTo(String value) {
-            addCriterion("rule_lhs <=", value, "ruleLhs");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleLhsLike(String value) {
-            addCriterion("rule_lhs like", value, "ruleLhs");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleLhsNotLike(String value) {
-            addCriterion("rule_lhs not like", value, "ruleLhs");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleLhsIn(List<String> values) {
-            addCriterion("rule_lhs in", values, "ruleLhs");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleLhsNotIn(List<String> values) {
-            addCriterion("rule_lhs not in", values, "ruleLhs");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleLhsBetween(String value1, String value2) {
-            addCriterion("rule_lhs between", value1, value2, "ruleLhs");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleLhsNotBetween(String value1, String value2) {
-            addCriterion("rule_lhs not between", value1, value2, "ruleLhs");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleRhsIsNull() {
-            addCriterion("rule_rhs is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleRhsIsNotNull() {
-            addCriterion("rule_rhs is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleRhsEqualTo(String value) {
-            addCriterion("rule_rhs =", value, "ruleRhs");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleRhsNotEqualTo(String value) {
-            addCriterion("rule_rhs <>", value, "ruleRhs");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleRhsGreaterThan(String value) {
-            addCriterion("rule_rhs >", value, "ruleRhs");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleRhsGreaterThanOrEqualTo(String value) {
-            addCriterion("rule_rhs >=", value, "ruleRhs");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleRhsLessThan(String value) {
-            addCriterion("rule_rhs <", value, "ruleRhs");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleRhsLessThanOrEqualTo(String value) {
-            addCriterion("rule_rhs <=", value, "ruleRhs");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleRhsLike(String value) {
-            addCriterion("rule_rhs like", value, "ruleRhs");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleRhsNotLike(String value) {
-            addCriterion("rule_rhs not like", value, "ruleRhs");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleRhsIn(List<String> values) {
-            addCriterion("rule_rhs in", values, "ruleRhs");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleRhsNotIn(List<String> values) {
-            addCriterion("rule_rhs not in", values, "ruleRhs");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleRhsBetween(String value1, String value2) {
-            addCriterion("rule_rhs between", value1, value2, "ruleRhs");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleRhsNotBetween(String value1, String value2) {
-            addCriterion("rule_rhs not between", value1, value2, "ruleRhs");
             return (Criteria) this;
         }
 
@@ -805,14 +525,14 @@ public class RuleExample {
     }
 
     public static class Criteria extends GeneratedCriteria {
-        private RuleExample example;
+        private RuleSetModelExample example;
 
-        protected Criteria(RuleExample example) {
+        protected Criteria(RuleSetModelExample example) {
             super();
             this.example = example;
         }
 
-        public RuleExample example() {
+        public RuleSetModelExample example() {
             return this.example;
         }
 
@@ -937,6 +657,6 @@ public class RuleExample {
     }
 
     public interface IExampleWhen {
-        void example(com.weweibuy.brms.model.example.RuleExample example);
+        void example(com.weweibuy.brms.model.example.RuleSetModelExample example);
     }
 }

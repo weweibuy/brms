@@ -4,14 +4,14 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RuleExample {
+public class RuleConditionExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public RuleExample() {
+    public RuleConditionExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -45,12 +45,12 @@ public class RuleExample {
         return criteria;
     }
 
-    public RuleExample orderBy(String orderByClause) {
+    public RuleConditionExample orderBy(String orderByClause) {
         this.setOrderByClause(orderByClause);
         return this;
     }
 
-    public RuleExample orderBy(String ... orderByClauses) {
+    public RuleConditionExample orderBy(String ... orderByClauses) {
         StringBuffer sb = new StringBuffer();
         for (int i = 0; i < orderByClauses.length; i++) {
             sb.append(orderByClauses[i]);
@@ -82,18 +82,18 @@ public class RuleExample {
     }
 
     public static Criteria newAndCreateCriteria() {
-        RuleExample example = new RuleExample();
+        RuleConditionExample example = new RuleConditionExample();
         return example.createCriteria();
     }
 
-    public RuleExample when(boolean condition, IExampleWhen then) {
+    public RuleConditionExample when(boolean condition, IExampleWhen then) {
         if (condition) {
             then.example(this);
         }
         return this;
     }
 
-    public RuleExample when(boolean condition, IExampleWhen then, IExampleWhen otherwise) {
+    public RuleConditionExample when(boolean condition, IExampleWhen then, IExampleWhen otherwise) {
         if (condition) {
             then.example(this);
         } else {
@@ -273,353 +273,343 @@ public class RuleExample {
             return (Criteria) this;
         }
 
-        public Criteria andRuleDescIsNull() {
-            addCriterion("rule_desc is null");
+        public Criteria andAttrKeyIsNull() {
+            addCriterion("attr_key is null");
             return (Criteria) this;
         }
 
-        public Criteria andRuleDescIsNotNull() {
-            addCriterion("rule_desc is not null");
+        public Criteria andAttrKeyIsNotNull() {
+            addCriterion("attr_key is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRuleDescEqualTo(String value) {
-            addCriterion("rule_desc =", value, "ruleDesc");
+        public Criteria andAttrKeyEqualTo(String value) {
+            addCriterion("attr_key =", value, "attrKey");
             return (Criteria) this;
         }
 
-        public Criteria andRuleDescNotEqualTo(String value) {
-            addCriterion("rule_desc <>", value, "ruleDesc");
+        public Criteria andAttrKeyNotEqualTo(String value) {
+            addCriterion("attr_key <>", value, "attrKey");
             return (Criteria) this;
         }
 
-        public Criteria andRuleDescGreaterThan(String value) {
-            addCriterion("rule_desc >", value, "ruleDesc");
+        public Criteria andAttrKeyGreaterThan(String value) {
+            addCriterion("attr_key >", value, "attrKey");
             return (Criteria) this;
         }
 
-        public Criteria andRuleDescGreaterThanOrEqualTo(String value) {
-            addCriterion("rule_desc >=", value, "ruleDesc");
+        public Criteria andAttrKeyGreaterThanOrEqualTo(String value) {
+            addCriterion("attr_key >=", value, "attrKey");
             return (Criteria) this;
         }
 
-        public Criteria andRuleDescLessThan(String value) {
-            addCriterion("rule_desc <", value, "ruleDesc");
+        public Criteria andAttrKeyLessThan(String value) {
+            addCriterion("attr_key <", value, "attrKey");
             return (Criteria) this;
         }
 
-        public Criteria andRuleDescLessThanOrEqualTo(String value) {
-            addCriterion("rule_desc <=", value, "ruleDesc");
+        public Criteria andAttrKeyLessThanOrEqualTo(String value) {
+            addCriterion("attr_key <=", value, "attrKey");
             return (Criteria) this;
         }
 
-        public Criteria andRuleDescLike(String value) {
-            addCriterion("rule_desc like", value, "ruleDesc");
+        public Criteria andAttrKeyLike(String value) {
+            addCriterion("attr_key like", value, "attrKey");
             return (Criteria) this;
         }
 
-        public Criteria andRuleDescNotLike(String value) {
-            addCriterion("rule_desc not like", value, "ruleDesc");
+        public Criteria andAttrKeyNotLike(String value) {
+            addCriterion("attr_key not like", value, "attrKey");
             return (Criteria) this;
         }
 
-        public Criteria andRuleDescIn(List<String> values) {
-            addCriterion("rule_desc in", values, "ruleDesc");
+        public Criteria andAttrKeyIn(List<String> values) {
+            addCriterion("attr_key in", values, "attrKey");
             return (Criteria) this;
         }
 
-        public Criteria andRuleDescNotIn(List<String> values) {
-            addCriterion("rule_desc not in", values, "ruleDesc");
+        public Criteria andAttrKeyNotIn(List<String> values) {
+            addCriterion("attr_key not in", values, "attrKey");
             return (Criteria) this;
         }
 
-        public Criteria andRuleDescBetween(String value1, String value2) {
-            addCriterion("rule_desc between", value1, value2, "ruleDesc");
+        public Criteria andAttrKeyBetween(String value1, String value2) {
+            addCriterion("attr_key between", value1, value2, "attrKey");
             return (Criteria) this;
         }
 
-        public Criteria andRuleDescNotBetween(String value1, String value2) {
-            addCriterion("rule_desc not between", value1, value2, "ruleDesc");
+        public Criteria andAttrKeyNotBetween(String value1, String value2) {
+            addCriterion("attr_key not between", value1, value2, "attrKey");
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyIsNull() {
-            addCriterion("rule_set_key is null");
+        public Criteria andConditionOperatorIsNull() {
+            addCriterion("condition_operator is null");
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyIsNotNull() {
-            addCriterion("rule_set_key is not null");
+        public Criteria andConditionOperatorIsNotNull() {
+            addCriterion("condition_operator is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyEqualTo(String value) {
-            addCriterion("rule_set_key =", value, "ruleSetKey");
+        public Criteria andConditionOperatorEqualTo(String value) {
+            addCriterion("condition_operator =", value, "conditionOperator");
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyNotEqualTo(String value) {
-            addCriterion("rule_set_key <>", value, "ruleSetKey");
+        public Criteria andConditionOperatorNotEqualTo(String value) {
+            addCriterion("condition_operator <>", value, "conditionOperator");
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyGreaterThan(String value) {
-            addCriterion("rule_set_key >", value, "ruleSetKey");
+        public Criteria andConditionOperatorGreaterThan(String value) {
+            addCriterion("condition_operator >", value, "conditionOperator");
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyGreaterThanOrEqualTo(String value) {
-            addCriterion("rule_set_key >=", value, "ruleSetKey");
+        public Criteria andConditionOperatorGreaterThanOrEqualTo(String value) {
+            addCriterion("condition_operator >=", value, "conditionOperator");
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyLessThan(String value) {
-            addCriterion("rule_set_key <", value, "ruleSetKey");
+        public Criteria andConditionOperatorLessThan(String value) {
+            addCriterion("condition_operator <", value, "conditionOperator");
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyLessThanOrEqualTo(String value) {
-            addCriterion("rule_set_key <=", value, "ruleSetKey");
+        public Criteria andConditionOperatorLessThanOrEqualTo(String value) {
+            addCriterion("condition_operator <=", value, "conditionOperator");
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyLike(String value) {
-            addCriterion("rule_set_key like", value, "ruleSetKey");
+        public Criteria andConditionOperatorLike(String value) {
+            addCriterion("condition_operator like", value, "conditionOperator");
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyNotLike(String value) {
-            addCriterion("rule_set_key not like", value, "ruleSetKey");
+        public Criteria andConditionOperatorNotLike(String value) {
+            addCriterion("condition_operator not like", value, "conditionOperator");
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyIn(List<String> values) {
-            addCriterion("rule_set_key in", values, "ruleSetKey");
+        public Criteria andConditionOperatorIn(List<String> values) {
+            addCriterion("condition_operator in", values, "conditionOperator");
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyNotIn(List<String> values) {
-            addCriterion("rule_set_key not in", values, "ruleSetKey");
+        public Criteria andConditionOperatorNotIn(List<String> values) {
+            addCriterion("condition_operator not in", values, "conditionOperator");
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyBetween(String value1, String value2) {
-            addCriterion("rule_set_key between", value1, value2, "ruleSetKey");
+        public Criteria andConditionOperatorBetween(String value1, String value2) {
+            addCriterion("condition_operator between", value1, value2, "conditionOperator");
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyNotBetween(String value1, String value2) {
-            addCriterion("rule_set_key not between", value1, value2, "ruleSetKey");
+        public Criteria andConditionOperatorNotBetween(String value1, String value2) {
+            addCriterion("condition_operator not between", value1, value2, "conditionOperator");
             return (Criteria) this;
         }
 
-        public Criteria andRuleAttrIsNull() {
-            addCriterion("rule_attr is null");
+        public Criteria andConditionValueIsNull() {
+            addCriterion("condition_value is null");
             return (Criteria) this;
         }
 
-        public Criteria andRuleAttrIsNotNull() {
-            addCriterion("rule_attr is not null");
+        public Criteria andConditionValueIsNotNull() {
+            addCriterion("condition_value is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRuleAttrEqualTo(String value) {
-            addCriterion("rule_attr =", value, "ruleAttr");
+        public Criteria andConditionValueEqualTo(String value) {
+            addCriterion("condition_value =", value, "conditionValue");
             return (Criteria) this;
         }
 
-        public Criteria andRuleAttrNotEqualTo(String value) {
-            addCriterion("rule_attr <>", value, "ruleAttr");
+        public Criteria andConditionValueNotEqualTo(String value) {
+            addCriterion("condition_value <>", value, "conditionValue");
             return (Criteria) this;
         }
 
-        public Criteria andRuleAttrGreaterThan(String value) {
-            addCriterion("rule_attr >", value, "ruleAttr");
+        public Criteria andConditionValueGreaterThan(String value) {
+            addCriterion("condition_value >", value, "conditionValue");
             return (Criteria) this;
         }
 
-        public Criteria andRuleAttrGreaterThanOrEqualTo(String value) {
-            addCriterion("rule_attr >=", value, "ruleAttr");
+        public Criteria andConditionValueGreaterThanOrEqualTo(String value) {
+            addCriterion("condition_value >=", value, "conditionValue");
             return (Criteria) this;
         }
 
-        public Criteria andRuleAttrLessThan(String value) {
-            addCriterion("rule_attr <", value, "ruleAttr");
+        public Criteria andConditionValueLessThan(String value) {
+            addCriterion("condition_value <", value, "conditionValue");
             return (Criteria) this;
         }
 
-        public Criteria andRuleAttrLessThanOrEqualTo(String value) {
-            addCriterion("rule_attr <=", value, "ruleAttr");
+        public Criteria andConditionValueLessThanOrEqualTo(String value) {
+            addCriterion("condition_value <=", value, "conditionValue");
             return (Criteria) this;
         }
 
-        public Criteria andRuleAttrLike(String value) {
-            addCriterion("rule_attr like", value, "ruleAttr");
+        public Criteria andConditionValueLike(String value) {
+            addCriterion("condition_value like", value, "conditionValue");
             return (Criteria) this;
         }
 
-        public Criteria andRuleAttrNotLike(String value) {
-            addCriterion("rule_attr not like", value, "ruleAttr");
+        public Criteria andConditionValueNotLike(String value) {
+            addCriterion("condition_value not like", value, "conditionValue");
             return (Criteria) this;
         }
 
-        public Criteria andRuleAttrIn(List<String> values) {
-            addCriterion("rule_attr in", values, "ruleAttr");
+        public Criteria andConditionValueIn(List<String> values) {
+            addCriterion("condition_value in", values, "conditionValue");
             return (Criteria) this;
         }
 
-        public Criteria andRuleAttrNotIn(List<String> values) {
-            addCriterion("rule_attr not in", values, "ruleAttr");
+        public Criteria andConditionValueNotIn(List<String> values) {
+            addCriterion("condition_value not in", values, "conditionValue");
             return (Criteria) this;
         }
 
-        public Criteria andRuleAttrBetween(String value1, String value2) {
-            addCriterion("rule_attr between", value1, value2, "ruleAttr");
+        public Criteria andConditionValueBetween(String value1, String value2) {
+            addCriterion("condition_value between", value1, value2, "conditionValue");
             return (Criteria) this;
         }
 
-        public Criteria andRuleAttrNotBetween(String value1, String value2) {
-            addCriterion("rule_attr not between", value1, value2, "ruleAttr");
+        public Criteria andConditionValueNotBetween(String value1, String value2) {
+            addCriterion("condition_value not between", value1, value2, "conditionValue");
             return (Criteria) this;
         }
 
-        public Criteria andRuleLhsIsNull() {
-            addCriterion("rule_lhs is null");
+        public Criteria andConditionOrderIsNull() {
+            addCriterion("condition_order is null");
             return (Criteria) this;
         }
 
-        public Criteria andRuleLhsIsNotNull() {
-            addCriterion("rule_lhs is not null");
+        public Criteria andConditionOrderIsNotNull() {
+            addCriterion("condition_order is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRuleLhsEqualTo(String value) {
-            addCriterion("rule_lhs =", value, "ruleLhs");
+        public Criteria andConditionOrderEqualTo(Integer value) {
+            addCriterion("condition_order =", value, "conditionOrder");
             return (Criteria) this;
         }
 
-        public Criteria andRuleLhsNotEqualTo(String value) {
-            addCriterion("rule_lhs <>", value, "ruleLhs");
+        public Criteria andConditionOrderNotEqualTo(Integer value) {
+            addCriterion("condition_order <>", value, "conditionOrder");
             return (Criteria) this;
         }
 
-        public Criteria andRuleLhsGreaterThan(String value) {
-            addCriterion("rule_lhs >", value, "ruleLhs");
+        public Criteria andConditionOrderGreaterThan(Integer value) {
+            addCriterion("condition_order >", value, "conditionOrder");
             return (Criteria) this;
         }
 
-        public Criteria andRuleLhsGreaterThanOrEqualTo(String value) {
-            addCriterion("rule_lhs >=", value, "ruleLhs");
+        public Criteria andConditionOrderGreaterThanOrEqualTo(Integer value) {
+            addCriterion("condition_order >=", value, "conditionOrder");
             return (Criteria) this;
         }
 
-        public Criteria andRuleLhsLessThan(String value) {
-            addCriterion("rule_lhs <", value, "ruleLhs");
+        public Criteria andConditionOrderLessThan(Integer value) {
+            addCriterion("condition_order <", value, "conditionOrder");
             return (Criteria) this;
         }
 
-        public Criteria andRuleLhsLessThanOrEqualTo(String value) {
-            addCriterion("rule_lhs <=", value, "ruleLhs");
+        public Criteria andConditionOrderLessThanOrEqualTo(Integer value) {
+            addCriterion("condition_order <=", value, "conditionOrder");
             return (Criteria) this;
         }
 
-        public Criteria andRuleLhsLike(String value) {
-            addCriterion("rule_lhs like", value, "ruleLhs");
+        public Criteria andConditionOrderIn(List<Integer> values) {
+            addCriterion("condition_order in", values, "conditionOrder");
             return (Criteria) this;
         }
 
-        public Criteria andRuleLhsNotLike(String value) {
-            addCriterion("rule_lhs not like", value, "ruleLhs");
+        public Criteria andConditionOrderNotIn(List<Integer> values) {
+            addCriterion("condition_order not in", values, "conditionOrder");
             return (Criteria) this;
         }
 
-        public Criteria andRuleLhsIn(List<String> values) {
-            addCriterion("rule_lhs in", values, "ruleLhs");
+        public Criteria andConditionOrderBetween(Integer value1, Integer value2) {
+            addCriterion("condition_order between", value1, value2, "conditionOrder");
             return (Criteria) this;
         }
 
-        public Criteria andRuleLhsNotIn(List<String> values) {
-            addCriterion("rule_lhs not in", values, "ruleLhs");
+        public Criteria andConditionOrderNotBetween(Integer value1, Integer value2) {
+            addCriterion("condition_order not between", value1, value2, "conditionOrder");
             return (Criteria) this;
         }
 
-        public Criteria andRuleLhsBetween(String value1, String value2) {
-            addCriterion("rule_lhs between", value1, value2, "ruleLhs");
+        public Criteria andLogicalOperatorIsNull() {
+            addCriterion("logical_operator is null");
             return (Criteria) this;
         }
 
-        public Criteria andRuleLhsNotBetween(String value1, String value2) {
-            addCriterion("rule_lhs not between", value1, value2, "ruleLhs");
+        public Criteria andLogicalOperatorIsNotNull() {
+            addCriterion("logical_operator is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRuleRhsIsNull() {
-            addCriterion("rule_rhs is null");
+        public Criteria andLogicalOperatorEqualTo(String value) {
+            addCriterion("logical_operator =", value, "logicalOperator");
             return (Criteria) this;
         }
 
-        public Criteria andRuleRhsIsNotNull() {
-            addCriterion("rule_rhs is not null");
+        public Criteria andLogicalOperatorNotEqualTo(String value) {
+            addCriterion("logical_operator <>", value, "logicalOperator");
             return (Criteria) this;
         }
 
-        public Criteria andRuleRhsEqualTo(String value) {
-            addCriterion("rule_rhs =", value, "ruleRhs");
+        public Criteria andLogicalOperatorGreaterThan(String value) {
+            addCriterion("logical_operator >", value, "logicalOperator");
             return (Criteria) this;
         }
 
-        public Criteria andRuleRhsNotEqualTo(String value) {
-            addCriterion("rule_rhs <>", value, "ruleRhs");
+        public Criteria andLogicalOperatorGreaterThanOrEqualTo(String value) {
+            addCriterion("logical_operator >=", value, "logicalOperator");
             return (Criteria) this;
         }
 
-        public Criteria andRuleRhsGreaterThan(String value) {
-            addCriterion("rule_rhs >", value, "ruleRhs");
+        public Criteria andLogicalOperatorLessThan(String value) {
+            addCriterion("logical_operator <", value, "logicalOperator");
             return (Criteria) this;
         }
 
-        public Criteria andRuleRhsGreaterThanOrEqualTo(String value) {
-            addCriterion("rule_rhs >=", value, "ruleRhs");
+        public Criteria andLogicalOperatorLessThanOrEqualTo(String value) {
+            addCriterion("logical_operator <=", value, "logicalOperator");
             return (Criteria) this;
         }
 
-        public Criteria andRuleRhsLessThan(String value) {
-            addCriterion("rule_rhs <", value, "ruleRhs");
+        public Criteria andLogicalOperatorLike(String value) {
+            addCriterion("logical_operator like", value, "logicalOperator");
             return (Criteria) this;
         }
 
-        public Criteria andRuleRhsLessThanOrEqualTo(String value) {
-            addCriterion("rule_rhs <=", value, "ruleRhs");
+        public Criteria andLogicalOperatorNotLike(String value) {
+            addCriterion("logical_operator not like", value, "logicalOperator");
             return (Criteria) this;
         }
 
-        public Criteria andRuleRhsLike(String value) {
-            addCriterion("rule_rhs like", value, "ruleRhs");
+        public Criteria andLogicalOperatorIn(List<String> values) {
+            addCriterion("logical_operator in", values, "logicalOperator");
             return (Criteria) this;
         }
 
-        public Criteria andRuleRhsNotLike(String value) {
-            addCriterion("rule_rhs not like", value, "ruleRhs");
+        public Criteria andLogicalOperatorNotIn(List<String> values) {
+            addCriterion("logical_operator not in", values, "logicalOperator");
             return (Criteria) this;
         }
 
-        public Criteria andRuleRhsIn(List<String> values) {
-            addCriterion("rule_rhs in", values, "ruleRhs");
+        public Criteria andLogicalOperatorBetween(String value1, String value2) {
+            addCriterion("logical_operator between", value1, value2, "logicalOperator");
             return (Criteria) this;
         }
 
-        public Criteria andRuleRhsNotIn(List<String> values) {
-            addCriterion("rule_rhs not in", values, "ruleRhs");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleRhsBetween(String value1, String value2) {
-            addCriterion("rule_rhs between", value1, value2, "ruleRhs");
-            return (Criteria) this;
-        }
-
-        public Criteria andRuleRhsNotBetween(String value1, String value2) {
-            addCriterion("rule_rhs not between", value1, value2, "ruleRhs");
+        public Criteria andLogicalOperatorNotBetween(String value1, String value2) {
+            addCriterion("logical_operator not between", value1, value2, "logicalOperator");
             return (Criteria) this;
         }
 
@@ -805,14 +795,14 @@ public class RuleExample {
     }
 
     public static class Criteria extends GeneratedCriteria {
-        private RuleExample example;
+        private RuleConditionExample example;
 
-        protected Criteria(RuleExample example) {
+        protected Criteria(RuleConditionExample example) {
             super();
             this.example = example;
         }
 
-        public RuleExample example() {
+        public RuleConditionExample example() {
             return this.example;
         }
 
@@ -937,6 +927,6 @@ public class RuleExample {
     }
 
     public interface IExampleWhen {
-        void example(com.weweibuy.brms.model.example.RuleExample example);
+        void example(com.weweibuy.brms.model.example.RuleConditionExample example);
     }
 }
