@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weweibuy.brms.mapper.ModelAttrMapper">
+  <resultMap id="BaseResultMap" type="com.weweibuy.brms.model.po.ModelAttr">
+    <result column="id" jdbcType="BIGINT" property="id" />
+    <result column="model_key" jdbcType="VARCHAR" property="modelKey" />
+    <result column="attr_key" jdbcType="VARCHAR" property="attrKey" />
+    <result column="attr_name" jdbcType="VARCHAR" property="attrName" />
+    <result column="attr_desc" jdbcType="VARCHAR" property="attrDesc" />
+    <result column="attr_type" jdbcType="VARCHAR" property="attrType" />
+    <result column="attr_value_source" jdbcType="VARCHAR" property="attrValueSource" />
+    <result column="is_delete" jdbcType="TINYINT" property="deleted" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, model_key, attr_key, attr_name, attr_desc, attr_type, attr_value_source, is_delete, 
+    create_time, update_time
+  </sql>
+  <select id="selectByExample" parameterType="com.weweibuy.brms.model.example.ModelAttrExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from brms_model_attr
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExampleForUpdate" parameterType="com.weweibuy.brms.model.example.ModelAttrExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from brms_model_attr
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+     for update
+  </select>
+  <delete id="deleteByExample" parameterType="com.weweibuy.brms.model.example.ModelAttrExample">
+    delete from brms_model_attr
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.weweibuy.brms.model.po.ModelAttr">
+    insert into brms_model_attr (id, model_key, attr_key, 
+      attr_name, attr_desc, attr_type, 
+      attr_value_source, is_delete, create_time, 
+      update_time)
+    values (#{id,jdbcType=BIGINT}, #{modelKey,jdbcType=VARCHAR}, #{attrKey,jdbcType=VARCHAR}, 
+      #{attrName,jdbcType=VARCHAR}, #{attrDesc,jdbcType=VARCHAR}, #{attrType,jdbcType=VARCHAR}, 
+      #{attrValueSource,jdbcType=VARCHAR}, #{deleted,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.weweibuy.brms.model.po.ModelAttr">
+    insert into brms_model_attr
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="modelKey != null">
+        model_key,
+      </if>
+      <if test="attrKey != null">
+        attr_key,
+      </if>
+      <if test="attrName != null">
+        attr_name,
+      </if>
+      <if test="attrDesc != null">
+        attr_desc,
+      </if>
+      <if test="attrType != null">
+        attr_type,
+      </if>
+      <if test="attrValueSource != null">
+        attr_value_source,
+      </if>
+      <if test="deleted != null">
+        is_delete,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="modelKey != null">
+        #{modelKey,jdbcType=VARCHAR},
+      </if>
+      <if test="attrKey != null">
+        #{attrKey,jdbcType=VARCHAR},
+      </if>
+      <if test="attrName != null">
+        #{attrName,jdbcType=VARCHAR},
+      </if>
+      <if test="attrDesc != null">
+        #{attrDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="attrType != null">
+        #{attrType,jdbcType=VARCHAR},
+      </if>
+      <if test="attrValueSource != null">
+        #{attrValueSource,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.weweibuy.brms.model.example.ModelAttrExample" resultType="java.lang.Long">
+    select count(*) from brms_model_attr
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update brms_model_attr
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.modelKey != null">
+        model_key = #{record.modelKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attrKey != null">
+        attr_key = #{record.attrKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attrName != null">
+        attr_name = #{record.attrName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attrDesc != null">
+        attr_desc = #{record.attrDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attrType != null">
+        attr_type = #{record.attrType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attrValueSource != null">
+        attr_value_source = #{record.attrValueSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deleted != null">
+        is_delete = #{record.deleted,jdbcType=TINYINT},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update brms_model_attr
+    set id = #{record.id,jdbcType=BIGINT},
+      model_key = #{record.modelKey,jdbcType=VARCHAR},
+      attr_key = #{record.attrKey,jdbcType=VARCHAR},
+      attr_name = #{record.attrName,jdbcType=VARCHAR},
+      attr_desc = #{record.attrDesc,jdbcType=VARCHAR},
+      attr_type = #{record.attrType,jdbcType=VARCHAR},
+      attr_value_source = #{record.attrValueSource,jdbcType=VARCHAR},
+      is_delete = #{record.deleted,jdbcType=TINYINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <select id="selectOneByExample" parameterType="com.weweibuy.brms.model.example.ModelAttrExample" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from brms_model_attr
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    limit 1
+  </select>
+  <select id="selectOneByExampleForUpdate" parameterType="com.weweibuy.brms.model.example.ModelAttrExample" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from brms_model_attr
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    limit 1
+     for update
+  </select>
+</mapper>

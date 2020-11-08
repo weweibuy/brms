@@ -1,0 +1,19 @@
+server:
+  port: 8060
+
+
+spring:
+  application:
+    name: upms
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://106.12.208.53:3306/webuy_brms?useUnicode=true&characterEncoding=UTF-8&allowMutiQueries=true&serverTimezone=Asia/Shanghai
+    username: user01
+    password: ak402507979
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+mybatis:
+  mapper-locations: classpath*:config/mybatis/mapper/**/*.xml

@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weweibuy.brms.mapper.RuleMapper">
+  <resultMap id="BaseResultMap" type="com.weweibuy.brms.model.po.Rule">
+    <result column="id" jdbcType="BIGINT" property="id" />
+    <result column="rule_key" jdbcType="VARCHAR" property="ruleKey" />
+    <result column="rule_desc" jdbcType="VARCHAR" property="ruleDesc" />
+    <result column="rule_attr" jdbcType="VARCHAR" property="ruleAttr" />
+    <result column="rule_lhs" jdbcType="VARCHAR" property="ruleLhs" />
+    <result column="rule_rhs" jdbcType="VARCHAR" property="ruleRhs" />
+    <result column="is_delete" jdbcType="TINYINT" property="deleted" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, rule_key, rule_desc, rule_attr, rule_lhs, rule_rhs, is_delete, create_time, update_time
+  </sql>
+  <select id="selectByExample" parameterType="com.weweibuy.brms.model.example.RuleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from brms_rule
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExampleForUpdate" parameterType="com.weweibuy.brms.model.example.RuleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from brms_rule
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+     for update
+  </select>
+  <delete id="deleteByExample" parameterType="com.weweibuy.brms.model.example.RuleExample">
+    delete from brms_rule
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.weweibuy.brms.model.po.Rule">
+    insert into brms_rule (id, rule_key, rule_desc, 
+      rule_attr, rule_lhs, rule_rhs, 
+      is_delete, create_time, update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{ruleKey,jdbcType=VARCHAR}, #{ruleDesc,jdbcType=VARCHAR}, 
+      #{ruleAttr,jdbcType=VARCHAR}, #{ruleLhs,jdbcType=VARCHAR}, #{ruleRhs,jdbcType=VARCHAR}, 
+      #{deleted,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.weweibuy.brms.model.po.Rule">
+    insert into brms_rule
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="ruleKey != null">
+        rule_key,
+      </if>
+      <if test="ruleDesc != null">
+        rule_desc,
+      </if>
+      <if test="ruleAttr != null">
+        rule_attr,
+      </if>
+      <if test="ruleLhs != null">
+        rule_lhs,
+      </if>
+      <if test="ruleRhs != null">
+        rule_rhs,
+      </if>
+      <if test="deleted != null">
+        is_delete,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="ruleKey != null">
+        #{ruleKey,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleDesc != null">
+        #{ruleDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleAttr != null">
+        #{ruleAttr,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleLhs != null">
+        #{ruleLhs,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleRhs != null">
+        #{ruleRhs,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.weweibuy.brms.model.example.RuleExample" resultType="java.lang.Long">
+    select count(*) from brms_rule
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update brms_rule
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.ruleKey != null">
+        rule_key = #{record.ruleKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ruleDesc != null">
+        rule_desc = #{record.ruleDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ruleAttr != null">
+        rule_attr = #{record.ruleAttr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ruleLhs != null">
+        rule_lhs = #{record.ruleLhs,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ruleRhs != null">
+        rule_rhs = #{record.ruleRhs,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deleted != null">
+        is_delete = #{record.deleted,jdbcType=TINYINT},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update brms_rule
+    set id = #{record.id,jdbcType=BIGINT},
+      rule_key = #{record.ruleKey,jdbcType=VARCHAR},
+      rule_desc = #{record.ruleDesc,jdbcType=VARCHAR},
+      rule_attr = #{record.ruleAttr,jdbcType=VARCHAR},
+      rule_lhs = #{record.ruleLhs,jdbcType=VARCHAR},
+      rule_rhs = #{record.ruleRhs,jdbcType=VARCHAR},
+      is_delete = #{record.deleted,jdbcType=TINYINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <select id="selectOneByExample" parameterType="com.weweibuy.brms.model.example.RuleExample" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from brms_rule
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    limit 1
+  </select>
+  <select id="selectOneByExampleForUpdate" parameterType="com.weweibuy.brms.model.example.RuleExample" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from brms_rule
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    limit 1
+     for update
+  </select>
+</mapper>
