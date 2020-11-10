@@ -1,9 +1,13 @@
 package com.weweibuy.brms.service;
 
-import com.weweibuy.brms.manager.RuleBuildManager;
+import com.weweibuy.brms.model.constant.RuleBuildConstant;
+import com.weweibuy.brms.support.KieBaseHolder;
 import lombok.RequiredArgsConstructor;
+import org.kie.api.KieBase;
+import org.kie.api.runtime.KieSession;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -16,7 +20,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class RuleExecService {
 
-    private final RuleBuildManager ruleBuildManager;
+    private final KieBaseHolder kieBaseHolder;
 
     /**
      * 执行规则
@@ -26,7 +30,13 @@ public class RuleExecService {
      * @return
      */
     public Map execRule(String ruleSetKey, Map model) {
-        return null;
+        KieBase kieBase = kieBaseHolder.findKieBase(ruleSetKey);
+        KieSession kieSession = kieBase.newKieSession();
+        Map<Object, Object> result = new HashMap<>();
+        kieSession.setGlobal(RuleBuildConstant.RESULT_MODEL, result);
+        kieSession.insert(model);
+        kieSession.fireAllRules();
+        return result;
     }
 
 }

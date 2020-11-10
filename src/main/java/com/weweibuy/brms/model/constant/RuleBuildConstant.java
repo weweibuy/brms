@@ -6,8 +6,14 @@ package com.weweibuy.brms.model.constant;
  **/
 public interface RuleBuildConstant {
 
-    String MAP_CLAZZ = "java.util.Map;";
+    String MAP_CLAZZ = "java.util.Map";
 
     String CONDITION_MODEL = "$model:Map";
+
+    String RESULT_MODEL = "resultModel";
+
+    String RESULT_MODEL_PUT = "resultModel.put($1, $2);";
+
+
 
 }
