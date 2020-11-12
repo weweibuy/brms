@@ -16,11 +16,6 @@ public class ModelAttr {
     private String modelKey;
 
     /**
-     * 属性key
-     */
-    private String attrKey;
-
-    /**
      * 属性名称
      */
     private String attrName;

@@ -1,7 +1,8 @@
 package com.weweibuy.brms.model.po;
 
-import java.time.LocalDateTime;
 import lombok.Data;
+
+import java.time.LocalDateTime;
 
 @Data
 public class RuleCondition {
@@ -16,9 +17,9 @@ public class RuleCondition {
     private String ruleKey;
 
     /**
-     * 属性key
+     * 属性名称
      */
-    private String attrKey;
+    private String attrName;
 
     /**
      * 条件符
@@ -31,14 +32,14 @@ public class RuleCondition {
     private String conditionValue;
 
     /**
-     * 排序
-     */
-    private Integer conditionOrder;
-
-    /**
      * 逻辑运算符(与下一个条件的逻辑运算符;取值: &&,|| )
      */
     private String logicalOperator;
+
+    /**
+     * 排序(多个条件通过order排序,值越小越靠前,并通过 logical_operator 字段进行连接)
+     */
+    private Integer conditionOrder;
 
     /**
      * 是否删除

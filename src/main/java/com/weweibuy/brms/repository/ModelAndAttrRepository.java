@@ -41,10 +41,11 @@ public class ModelAndAttrRepository {
     }
 
 
-    public Optional<ModelAttr> selectModelAttr(String attrKey) {
+    public Optional<ModelAttr> selectModelAttr(String modelKey, String attrName) {
         return Optional.ofNullable(modelAttrMapper.selectOneByExample(ModelAttrExample.newAndCreateCriteria()
                 .andDeletedEqualTo(false)
-                .andAttrKeyEqualTo(attrKey)
+                .andModelKeyEqualTo(modelKey)
+                .andAttrNameEqualTo(attrName)
                 .example()));
     }
 

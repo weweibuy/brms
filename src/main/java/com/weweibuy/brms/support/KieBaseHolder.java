@@ -25,6 +25,11 @@ public class KieBaseHolder {
         return kieBaseMap.computeIfAbsent(key, this::buildKieBase);
     }
 
+    public void remove(String key) {
+        kieBaseMap.remove(key);
+    }
+
+
     private KieBase buildKieBase(String key) {
         KieHelper kieHelper = new KieHelper();
         kieHelper.addContent(ruleBuildManager.buildRuleStr(key), ResourceType.DRL);

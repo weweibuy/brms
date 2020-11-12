@@ -21,9 +21,9 @@ public class RuleAction {
     private String modelKey;
 
     /**
-     * 属性key
+     * 属性名称
      */
-    private String attrKey;
+    private String attrName;
 
     /**
      * 动作值

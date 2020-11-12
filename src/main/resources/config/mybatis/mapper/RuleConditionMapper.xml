@@ -4,11 +4,11 @@
   <resultMap id="BaseResultMap" type="com.weweibuy.brms.model.po.RuleCondition">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="rule_key" jdbcType="VARCHAR" property="ruleKey" />
-    <result column="attr_key" jdbcType="VARCHAR" property="attrKey" />
+    <result column="attr_name" jdbcType="VARCHAR" property="attrName" />
     <result column="condition_operator" jdbcType="VARCHAR" property="conditionOperator" />
     <result column="condition_value" jdbcType="VARCHAR" property="conditionValue" />
-    <result column="condition_order" jdbcType="INTEGER" property="conditionOrder" />
     <result column="logical_operator" jdbcType="VARCHAR" property="logicalOperator" />
+    <result column="condition_order" jdbcType="INTEGER" property="conditionOrder" />
     <result column="is_delete" jdbcType="TINYINT" property="deleted" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
@@ -72,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, rule_key, attr_key, condition_operator, condition_value, condition_order, logical_operator, 
+    id, rule_key, attr_name, condition_operator, condition_value, logical_operator, condition_order, 
     is_delete, create_time, update_time
   </sql>
   <select id="selectByExample" parameterType="com.weweibuy.brms.model.example.RuleConditionExample" resultMap="BaseResultMap">
@@ -121,13 +121,13 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.weweibuy.brms.model.po.RuleCondition">
-    insert into brms_rule_condition (id, rule_key, attr_key, 
-      condition_operator, condition_value, condition_order, 
-      logical_operator, is_delete, create_time, 
+    insert into brms_rule_condition (id, rule_key, attr_name, 
+      condition_operator, condition_value, logical_operator, 
+      condition_order, is_delete, create_time, 
       update_time)
-    values (#{id,jdbcType=BIGINT}, #{ruleKey,jdbcType=VARCHAR}, #{attrKey,jdbcType=VARCHAR}, 
-      #{conditionOperator,jdbcType=VARCHAR}, #{conditionValue,jdbcType=VARCHAR}, #{conditionOrder,jdbcType=INTEGER}, 
-      #{logicalOperator,jdbcType=VARCHAR}, #{deleted,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=BIGINT}, #{ruleKey,jdbcType=VARCHAR}, #{attrName,jdbcType=VARCHAR}, 
+      #{conditionOperator,jdbcType=VARCHAR}, #{conditionValue,jdbcType=VARCHAR}, #{logicalOperator,jdbcType=VARCHAR}, 
+      #{conditionOrder,jdbcType=INTEGER}, #{deleted,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.weweibuy.brms.model.po.RuleCondition">
@@ -139,8 +139,8 @@
       <if test="ruleKey != null">
         rule_key,
       </if>
-      <if test="attrKey != null">
-        attr_key,
+      <if test="attrName != null">
+        attr_name,
       </if>
       <if test="conditionOperator != null">
         condition_operator,
@@ -148,11 +148,11 @@
       <if test="conditionValue != null">
         condition_value,
       </if>
-      <if test="conditionOrder != null">
-        condition_order,
-      </if>
       <if test="logicalOperator != null">
         logical_operator,
+      </if>
+      <if test="conditionOrder != null">
+        condition_order,
       </if>
       <if test="deleted != null">
         is_delete,
@@ -171,8 +171,8 @@
       <if test="ruleKey != null">
         #{ruleKey,jdbcType=VARCHAR},
       </if>
-      <if test="attrKey != null">
-        #{attrKey,jdbcType=VARCHAR},
+      <if test="attrName != null">
+        #{attrName,jdbcType=VARCHAR},
       </if>
       <if test="conditionOperator != null">
         #{conditionOperator,jdbcType=VARCHAR},
@@ -180,11 +180,11 @@
       <if test="conditionValue != null">
         #{conditionValue,jdbcType=VARCHAR},
       </if>
-      <if test="conditionOrder != null">
-        #{conditionOrder,jdbcType=INTEGER},
-      </if>
       <if test="logicalOperator != null">
         #{logicalOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="conditionOrder != null">
+        #{conditionOrder,jdbcType=INTEGER},
       </if>
       <if test="deleted != null">
         #{deleted,jdbcType=TINYINT},
@@ -212,8 +212,8 @@
       <if test="record.ruleKey != null">
         rule_key = #{record.ruleKey,jdbcType=VARCHAR},
       </if>
-      <if test="record.attrKey != null">
-        attr_key = #{record.attrKey,jdbcType=VARCHAR},
+      <if test="record.attrName != null">
+        attr_name = #{record.attrName,jdbcType=VARCHAR},
       </if>
       <if test="record.conditionOperator != null">
         condition_operator = #{record.conditionOperator,jdbcType=VARCHAR},
@@ -221,11 +221,11 @@
       <if test="record.conditionValue != null">
         condition_value = #{record.conditionValue,jdbcType=VARCHAR},
       </if>
-      <if test="record.conditionOrder != null">
-        condition_order = #{record.conditionOrder,jdbcType=INTEGER},
-      </if>
       <if test="record.logicalOperator != null">
         logical_operator = #{record.logicalOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.conditionOrder != null">
+        condition_order = #{record.conditionOrder,jdbcType=INTEGER},
       </if>
       <if test="record.deleted != null">
         is_delete = #{record.deleted,jdbcType=TINYINT},
@@ -245,11 +245,11 @@
     update brms_rule_condition
     set id = #{record.id,jdbcType=BIGINT},
       rule_key = #{record.ruleKey,jdbcType=VARCHAR},
-      attr_key = #{record.attrKey,jdbcType=VARCHAR},
+      attr_name = #{record.attrName,jdbcType=VARCHAR},
       condition_operator = #{record.conditionOperator,jdbcType=VARCHAR},
       condition_value = #{record.conditionValue,jdbcType=VARCHAR},
-      condition_order = #{record.conditionOrder,jdbcType=INTEGER},
       logical_operator = #{record.logicalOperator,jdbcType=VARCHAR},
+      condition_order = #{record.conditionOrder,jdbcType=INTEGER},
       is_delete = #{record.deleted,jdbcType=TINYINT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
@@ -263,8 +263,8 @@
       <if test="ruleKey != null">
         rule_key = #{ruleKey,jdbcType=VARCHAR},
       </if>
-      <if test="attrKey != null">
-        attr_key = #{attrKey,jdbcType=VARCHAR},
+      <if test="attrName != null">
+        attr_name = #{attrName,jdbcType=VARCHAR},
       </if>
       <if test="conditionOperator != null">
         condition_operator = #{conditionOperator,jdbcType=VARCHAR},
@@ -272,11 +272,11 @@
       <if test="conditionValue != null">
         condition_value = #{conditionValue,jdbcType=VARCHAR},
       </if>
-      <if test="conditionOrder != null">
-        condition_order = #{conditionOrder,jdbcType=INTEGER},
-      </if>
       <if test="logicalOperator != null">
         logical_operator = #{logicalOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="conditionOrder != null">
+        condition_order = #{conditionOrder,jdbcType=INTEGER},
       </if>
       <if test="deleted != null">
         is_delete = #{deleted,jdbcType=TINYINT},
@@ -293,11 +293,11 @@
   <update id="updateByPrimaryKey" parameterType="com.weweibuy.brms.model.po.RuleCondition">
     update brms_rule_condition
     set rule_key = #{ruleKey,jdbcType=VARCHAR},
-      attr_key = #{attrKey,jdbcType=VARCHAR},
+      attr_name = #{attrName,jdbcType=VARCHAR},
       condition_operator = #{conditionOperator,jdbcType=VARCHAR},
       condition_value = #{conditionValue,jdbcType=VARCHAR},
-      condition_order = #{conditionOrder,jdbcType=INTEGER},
       logical_operator = #{logicalOperator,jdbcType=VARCHAR},
+      condition_order = #{conditionOrder,jdbcType=INTEGER},
       is_delete = #{deleted,jdbcType=TINYINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}

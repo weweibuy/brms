@@ -343,73 +343,73 @@ public class RuleActionExample {
             return (Criteria) this;
         }
 
-        public Criteria andAttrKeyIsNull() {
-            addCriterion("attr_key is null");
+        public Criteria andAttrNameIsNull() {
+            addCriterion("attr_name is null");
             return (Criteria) this;
         }
 
-        public Criteria andAttrKeyIsNotNull() {
-            addCriterion("attr_key is not null");
+        public Criteria andAttrNameIsNotNull() {
+            addCriterion("attr_name is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAttrKeyEqualTo(String value) {
-            addCriterion("attr_key =", value, "attrKey");
+        public Criteria andAttrNameEqualTo(String value) {
+            addCriterion("attr_name =", value, "attrName");
             return (Criteria) this;
         }
 
-        public Criteria andAttrKeyNotEqualTo(String value) {
-            addCriterion("attr_key <>", value, "attrKey");
+        public Criteria andAttrNameNotEqualTo(String value) {
+            addCriterion("attr_name <>", value, "attrName");
             return (Criteria) this;
         }
 
-        public Criteria andAttrKeyGreaterThan(String value) {
-            addCriterion("attr_key >", value, "attrKey");
+        public Criteria andAttrNameGreaterThan(String value) {
+            addCriterion("attr_name >", value, "attrName");
             return (Criteria) this;
         }
 
-        public Criteria andAttrKeyGreaterThanOrEqualTo(String value) {
-            addCriterion("attr_key >=", value, "attrKey");
+        public Criteria andAttrNameGreaterThanOrEqualTo(String value) {
+            addCriterion("attr_name >=", value, "attrName");
             return (Criteria) this;
         }
 
-        public Criteria andAttrKeyLessThan(String value) {
-            addCriterion("attr_key <", value, "attrKey");
+        public Criteria andAttrNameLessThan(String value) {
+            addCriterion("attr_name <", value, "attrName");
             return (Criteria) this;
         }
 
-        public Criteria andAttrKeyLessThanOrEqualTo(String value) {
-            addCriterion("attr_key <=", value, "attrKey");
+        public Criteria andAttrNameLessThanOrEqualTo(String value) {
+            addCriterion("attr_name <=", value, "attrName");
             return (Criteria) this;
         }
 
-        public Criteria andAttrKeyLike(String value) {
-            addCriterion("attr_key like", value, "attrKey");
+        public Criteria andAttrNameLike(String value) {
+            addCriterion("attr_name like", value, "attrName");
             return (Criteria) this;
         }
 
-        public Criteria andAttrKeyNotLike(String value) {
-            addCriterion("attr_key not like", value, "attrKey");
+        public Criteria andAttrNameNotLike(String value) {
+            addCriterion("attr_name not like", value, "attrName");
             return (Criteria) this;
         }
 
-        public Criteria andAttrKeyIn(List<String> values) {
-            addCriterion("attr_key in", values, "attrKey");
+        public Criteria andAttrNameIn(List<String> values) {
+            addCriterion("attr_name in", values, "attrName");
             return (Criteria) this;
         }
 
-        public Criteria andAttrKeyNotIn(List<String> values) {
-            addCriterion("attr_key not in", values, "attrKey");
+        public Criteria andAttrNameNotIn(List<String> values) {
+            addCriterion("attr_name not in", values, "attrName");
             return (Criteria) this;
         }
 
-        public Criteria andAttrKeyBetween(String value1, String value2) {
-            addCriterion("attr_key between", value1, value2, "attrKey");
+        public Criteria andAttrNameBetween(String value1, String value2) {
+            addCriterion("attr_name between", value1, value2, "attrName");
             return (Criteria) this;
         }
 
-        public Criteria andAttrKeyNotBetween(String value1, String value2) {
-            addCriterion("attr_key not between", value1, value2, "attrKey");
+        public Criteria andAttrNameNotBetween(String value1, String value2) {
+            addCriterion("attr_name not between", value1, value2, "attrName");
             return (Criteria) this;
         }
 

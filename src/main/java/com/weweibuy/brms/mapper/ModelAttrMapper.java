@@ -2,10 +2,9 @@ package com.weweibuy.brms.mapper;
 
 import com.weweibuy.brms.model.example.ModelAttrExample;
 import com.weweibuy.brms.model.po.ModelAttr;
+import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-
-import java.util.List;
 
 @Mapper
 public interface ModelAttrMapper {

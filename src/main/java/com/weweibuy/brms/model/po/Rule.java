@@ -11,7 +11,7 @@ public class Rule {
     private Long id;
 
     /**
-     * 规则
+     * 规则key
      */
     private String ruleKey;
 
@@ -26,19 +26,34 @@ public class Rule {
     private String ruleSetKey;
 
     /**
-     * 规则属性
+     * activation-group
      */
-    private String ruleAttr;
+    private String activationGroup;
 
     /**
-     * 规则lhs
+     * agenda-group
      */
-    private String ruleLhs;
+    private String agendaGroup;
 
     /**
-     * 规则rhs
+     * no-loop(false 或 true)
      */
-    private String ruleRhs;
+    private String noLoop;
+
+    /**
+     * date-effective(格式yyyy-MM-DD HH:mm:ss)
+     */
+    private String dateEffective;
+
+    /**
+     * date-expires(格式yyyy-MM-DD HH:mm:ss)
+     */
+    private String dateExpires;
+
+    /**
+     * salience(优先级,值越大优先级越高)
+     */
+    private Integer salience;
 
     /**
      * 是否删除

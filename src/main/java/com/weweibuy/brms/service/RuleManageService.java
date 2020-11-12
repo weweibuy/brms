@@ -1,6 +1,7 @@
 package com.weweibuy.brms.service;
 
 import com.weweibuy.brms.manager.RuleBuildManager;
+import com.weweibuy.brms.support.KieBaseHolder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -10,12 +11,19 @@ import org.springframework.stereotype.Service;
  **/
 @Service
 @RequiredArgsConstructor
-public class RuleQueryService {
+public class RuleManageService {
 
     private final RuleBuildManager ruleBuildManager;
+
+    private final KieBaseHolder kieBaseHolder;
 
 
     public String compile(String ruleSetKey) {
         return ruleBuildManager.buildRuleStr(ruleSetKey);
+    }
+
+    public void reload(String ruleSetKey) {
+        kieBaseHolder.remove(ruleSetKey);
+        kieBaseHolder.findKieBase(ruleSetKey);
     }
 }

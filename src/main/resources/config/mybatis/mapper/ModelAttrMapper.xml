@@ -4,7 +4,6 @@
   <resultMap id="BaseResultMap" type="com.weweibuy.brms.model.po.ModelAttr">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="model_key" jdbcType="VARCHAR" property="modelKey" />
-    <result column="attr_key" jdbcType="VARCHAR" property="attrKey" />
     <result column="attr_name" jdbcType="VARCHAR" property="attrName" />
     <result column="attr_desc" jdbcType="VARCHAR" property="attrDesc" />
     <result column="attr_type" jdbcType="VARCHAR" property="attrType" />
@@ -72,8 +71,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, model_key, attr_key, attr_name, attr_desc, attr_type, attr_value_source, is_delete, 
-    create_time, update_time
+    id, model_key, attr_name, attr_desc, attr_type, attr_value_source, is_delete, create_time, 
+    update_time
   </sql>
   <select id="selectByExample" parameterType="com.weweibuy.brms.model.example.ModelAttrExample" resultMap="BaseResultMap">
     select
@@ -121,14 +120,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.weweibuy.brms.model.po.ModelAttr">
-    insert into brms_model_attr (id, model_key, attr_key, 
-      attr_name, attr_desc, attr_type, 
-      attr_value_source, is_delete, create_time, 
-      update_time)
-    values (#{id,jdbcType=BIGINT}, #{modelKey,jdbcType=VARCHAR}, #{attrKey,jdbcType=VARCHAR}, 
-      #{attrName,jdbcType=VARCHAR}, #{attrDesc,jdbcType=VARCHAR}, #{attrType,jdbcType=VARCHAR}, 
-      #{attrValueSource,jdbcType=VARCHAR}, #{deleted,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+    insert into brms_model_attr (id, model_key, attr_name, 
+      attr_desc, attr_type, attr_value_source, 
+      is_delete, create_time, update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{modelKey,jdbcType=VARCHAR}, #{attrName,jdbcType=VARCHAR}, 
+      #{attrDesc,jdbcType=VARCHAR}, #{attrType,jdbcType=VARCHAR}, #{attrValueSource,jdbcType=VARCHAR}, 
+      #{deleted,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.weweibuy.brms.model.po.ModelAttr">
     insert into brms_model_attr
@@ -138,9 +137,6 @@
       </if>
       <if test="modelKey != null">
         model_key,
-      </if>
-      <if test="attrKey != null">
-        attr_key,
       </if>
       <if test="attrName != null">
         attr_name,
@@ -170,9 +166,6 @@
       </if>
       <if test="modelKey != null">
         #{modelKey,jdbcType=VARCHAR},
-      </if>
-      <if test="attrKey != null">
-        #{attrKey,jdbcType=VARCHAR},
       </if>
       <if test="attrName != null">
         #{attrName,jdbcType=VARCHAR},
@@ -212,9 +205,6 @@
       <if test="record.modelKey != null">
         model_key = #{record.modelKey,jdbcType=VARCHAR},
       </if>
-      <if test="record.attrKey != null">
-        attr_key = #{record.attrKey,jdbcType=VARCHAR},
-      </if>
       <if test="record.attrName != null">
         attr_name = #{record.attrName,jdbcType=VARCHAR},
       </if>
@@ -245,7 +235,6 @@
     update brms_model_attr
     set id = #{record.id,jdbcType=BIGINT},
       model_key = #{record.modelKey,jdbcType=VARCHAR},
-      attr_key = #{record.attrKey,jdbcType=VARCHAR},
       attr_name = #{record.attrName,jdbcType=VARCHAR},
       attr_desc = #{record.attrDesc,jdbcType=VARCHAR},
       attr_type = #{record.attrType,jdbcType=VARCHAR},
@@ -262,9 +251,6 @@
     <set>
       <if test="modelKey != null">
         model_key = #{modelKey,jdbcType=VARCHAR},
-      </if>
-      <if test="attrKey != null">
-        attr_key = #{attrKey,jdbcType=VARCHAR},
       </if>
       <if test="attrName != null">
         attr_name = #{attrName,jdbcType=VARCHAR},
@@ -293,7 +279,6 @@
   <update id="updateByPrimaryKey" parameterType="com.weweibuy.brms.model.po.ModelAttr">
     update brms_model_attr
     set model_key = #{modelKey,jdbcType=VARCHAR},
-      attr_key = #{attrKey,jdbcType=VARCHAR},
       attr_name = #{attrName,jdbcType=VARCHAR},
       attr_desc = #{attrDesc,jdbcType=VARCHAR},
       attr_type = #{attrType,jdbcType=VARCHAR},

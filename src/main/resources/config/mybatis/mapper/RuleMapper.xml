@@ -6,9 +6,12 @@
     <result column="rule_key" jdbcType="VARCHAR" property="ruleKey" />
     <result column="rule_desc" jdbcType="VARCHAR" property="ruleDesc" />
     <result column="rule_set_key" jdbcType="VARCHAR" property="ruleSetKey" />
-    <result column="rule_attr" jdbcType="VARCHAR" property="ruleAttr" />
-    <result column="rule_lhs" jdbcType="VARCHAR" property="ruleLhs" />
-    <result column="rule_rhs" jdbcType="VARCHAR" property="ruleRhs" />
+    <result column="activation_group" jdbcType="VARCHAR" property="activationGroup" />
+    <result column="agenda_group" jdbcType="VARCHAR" property="agendaGroup" />
+    <result column="no_loop" jdbcType="VARCHAR" property="noLoop" />
+    <result column="date_effective" jdbcType="VARCHAR" property="dateEffective" />
+    <result column="date_expires" jdbcType="VARCHAR" property="dateExpires" />
+    <result column="salience" jdbcType="INTEGER" property="salience" />
     <result column="is_delete" jdbcType="TINYINT" property="deleted" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
@@ -72,8 +75,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, rule_key, rule_desc, rule_set_key, rule_attr, rule_lhs, rule_rhs, is_delete, 
-    create_time, update_time
+    id, rule_key, rule_desc, rule_set_key, activation_group, agenda_group, no_loop, date_effective, 
+    date_expires, salience, is_delete, create_time, update_time
   </sql>
   <select id="selectByExample" parameterType="com.weweibuy.brms.model.example.RuleExample" resultMap="BaseResultMap">
     select
@@ -122,12 +125,14 @@
   </delete>
   <insert id="insert" parameterType="com.weweibuy.brms.model.po.Rule">
     insert into brms_rule (id, rule_key, rule_desc, 
-      rule_set_key, rule_attr, rule_lhs, 
-      rule_rhs, is_delete, create_time, 
+      rule_set_key, activation_group, agenda_group, 
+      no_loop, date_effective, date_expires, 
+      salience, is_delete, create_time, 
       update_time)
     values (#{id,jdbcType=BIGINT}, #{ruleKey,jdbcType=VARCHAR}, #{ruleDesc,jdbcType=VARCHAR}, 
-      #{ruleSetKey,jdbcType=VARCHAR}, #{ruleAttr,jdbcType=VARCHAR}, #{ruleLhs,jdbcType=VARCHAR}, 
-      #{ruleRhs,jdbcType=VARCHAR}, #{deleted,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{ruleSetKey,jdbcType=VARCHAR}, #{activationGroup,jdbcType=VARCHAR}, #{agendaGroup,jdbcType=VARCHAR}, 
+      #{noLoop,jdbcType=VARCHAR}, #{dateEffective,jdbcType=VARCHAR}, #{dateExpires,jdbcType=VARCHAR}, 
+      #{salience,jdbcType=INTEGER}, #{deleted,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.weweibuy.brms.model.po.Rule">
@@ -145,14 +150,23 @@
       <if test="ruleSetKey != null">
         rule_set_key,
       </if>
-      <if test="ruleAttr != null">
-        rule_attr,
+      <if test="activationGroup != null">
+        activation_group,
       </if>
-      <if test="ruleLhs != null">
-        rule_lhs,
+      <if test="agendaGroup != null">
+        agenda_group,
       </if>
-      <if test="ruleRhs != null">
-        rule_rhs,
+      <if test="noLoop != null">
+        no_loop,
+      </if>
+      <if test="dateEffective != null">
+        date_effective,
+      </if>
+      <if test="dateExpires != null">
+        date_expires,
+      </if>
+      <if test="salience != null">
+        salience,
       </if>
       <if test="deleted != null">
         is_delete,
@@ -177,14 +191,23 @@
       <if test="ruleSetKey != null">
         #{ruleSetKey,jdbcType=VARCHAR},
       </if>
-      <if test="ruleAttr != null">
-        #{ruleAttr,jdbcType=VARCHAR},
+      <if test="activationGroup != null">
+        #{activationGroup,jdbcType=VARCHAR},
       </if>
-      <if test="ruleLhs != null">
-        #{ruleLhs,jdbcType=VARCHAR},
+      <if test="agendaGroup != null">
+        #{agendaGroup,jdbcType=VARCHAR},
       </if>
-      <if test="ruleRhs != null">
-        #{ruleRhs,jdbcType=VARCHAR},
+      <if test="noLoop != null">
+        #{noLoop,jdbcType=VARCHAR},
+      </if>
+      <if test="dateEffective != null">
+        #{dateEffective,jdbcType=VARCHAR},
+      </if>
+      <if test="dateExpires != null">
+        #{dateExpires,jdbcType=VARCHAR},
+      </if>
+      <if test="salience != null">
+        #{salience,jdbcType=INTEGER},
       </if>
       <if test="deleted != null">
         #{deleted,jdbcType=TINYINT},
@@ -218,14 +241,23 @@
       <if test="record.ruleSetKey != null">
         rule_set_key = #{record.ruleSetKey,jdbcType=VARCHAR},
       </if>
-      <if test="record.ruleAttr != null">
-        rule_attr = #{record.ruleAttr,jdbcType=VARCHAR},
+      <if test="record.activationGroup != null">
+        activation_group = #{record.activationGroup,jdbcType=VARCHAR},
       </if>
-      <if test="record.ruleLhs != null">
-        rule_lhs = #{record.ruleLhs,jdbcType=VARCHAR},
+      <if test="record.agendaGroup != null">
+        agenda_group = #{record.agendaGroup,jdbcType=VARCHAR},
       </if>
-      <if test="record.ruleRhs != null">
-        rule_rhs = #{record.ruleRhs,jdbcType=VARCHAR},
+      <if test="record.noLoop != null">
+        no_loop = #{record.noLoop,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dateEffective != null">
+        date_effective = #{record.dateEffective,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dateExpires != null">
+        date_expires = #{record.dateExpires,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salience != null">
+        salience = #{record.salience,jdbcType=INTEGER},
       </if>
       <if test="record.deleted != null">
         is_delete = #{record.deleted,jdbcType=TINYINT},
@@ -247,9 +279,12 @@
       rule_key = #{record.ruleKey,jdbcType=VARCHAR},
       rule_desc = #{record.ruleDesc,jdbcType=VARCHAR},
       rule_set_key = #{record.ruleSetKey,jdbcType=VARCHAR},
-      rule_attr = #{record.ruleAttr,jdbcType=VARCHAR},
-      rule_lhs = #{record.ruleLhs,jdbcType=VARCHAR},
-      rule_rhs = #{record.ruleRhs,jdbcType=VARCHAR},
+      activation_group = #{record.activationGroup,jdbcType=VARCHAR},
+      agenda_group = #{record.agendaGroup,jdbcType=VARCHAR},
+      no_loop = #{record.noLoop,jdbcType=VARCHAR},
+      date_effective = #{record.dateEffective,jdbcType=VARCHAR},
+      date_expires = #{record.dateExpires,jdbcType=VARCHAR},
+      salience = #{record.salience,jdbcType=INTEGER},
       is_delete = #{record.deleted,jdbcType=TINYINT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
@@ -269,14 +304,23 @@
       <if test="ruleSetKey != null">
         rule_set_key = #{ruleSetKey,jdbcType=VARCHAR},
       </if>
-      <if test="ruleAttr != null">
-        rule_attr = #{ruleAttr,jdbcType=VARCHAR},
+      <if test="activationGroup != null">
+        activation_group = #{activationGroup,jdbcType=VARCHAR},
       </if>
-      <if test="ruleLhs != null">
-        rule_lhs = #{ruleLhs,jdbcType=VARCHAR},
+      <if test="agendaGroup != null">
+        agenda_group = #{agendaGroup,jdbcType=VARCHAR},
       </if>
-      <if test="ruleRhs != null">
-        rule_rhs = #{ruleRhs,jdbcType=VARCHAR},
+      <if test="noLoop != null">
+        no_loop = #{noLoop,jdbcType=VARCHAR},
+      </if>
+      <if test="dateEffective != null">
+        date_effective = #{dateEffective,jdbcType=VARCHAR},
+      </if>
+      <if test="dateExpires != null">
+        date_expires = #{dateExpires,jdbcType=VARCHAR},
+      </if>
+      <if test="salience != null">
+        salience = #{salience,jdbcType=INTEGER},
       </if>
       <if test="deleted != null">
         is_delete = #{deleted,jdbcType=TINYINT},
@@ -295,9 +339,12 @@
     set rule_key = #{ruleKey,jdbcType=VARCHAR},
       rule_desc = #{ruleDesc,jdbcType=VARCHAR},
       rule_set_key = #{ruleSetKey,jdbcType=VARCHAR},
-      rule_attr = #{ruleAttr,jdbcType=VARCHAR},
-      rule_lhs = #{ruleLhs,jdbcType=VARCHAR},
-      rule_rhs = #{ruleRhs,jdbcType=VARCHAR},
+      activation_group = #{activationGroup,jdbcType=VARCHAR},
+      agenda_group = #{agendaGroup,jdbcType=VARCHAR},
+      no_loop = #{noLoop,jdbcType=VARCHAR},
+      date_effective = #{dateEffective,jdbcType=VARCHAR},
+      date_expires = #{dateExpires,jdbcType=VARCHAR},
+      salience = #{salience,jdbcType=INTEGER},
       is_delete = #{deleted,jdbcType=TINYINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}

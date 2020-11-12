@@ -5,7 +5,7 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="rule_key" jdbcType="VARCHAR" property="ruleKey" />
     <result column="model_key" jdbcType="VARCHAR" property="modelKey" />
-    <result column="attr_key" jdbcType="VARCHAR" property="attrKey" />
+    <result column="attr_name" jdbcType="VARCHAR" property="attrName" />
     <result column="action_value" jdbcType="VARCHAR" property="actionValue" />
     <result column="is_delete" jdbcType="TINYINT" property="deleted" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -70,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, rule_key, model_key, attr_key, action_value, is_delete, create_time, update_time
+    id, rule_key, model_key, attr_name, action_value, is_delete, create_time, update_time
   </sql>
   <select id="selectByExample" parameterType="com.weweibuy.brms.model.example.RuleActionExample" resultMap="BaseResultMap">
     select
@@ -119,10 +119,10 @@
   </delete>
   <insert id="insert" parameterType="com.weweibuy.brms.model.po.RuleAction">
     insert into brms_rule_action (id, rule_key, model_key, 
-      attr_key, action_value, is_delete, 
+      attr_name, action_value, is_delete, 
       create_time, update_time)
     values (#{id,jdbcType=BIGINT}, #{ruleKey,jdbcType=VARCHAR}, #{modelKey,jdbcType=VARCHAR}, 
-      #{attrKey,jdbcType=VARCHAR}, #{actionValue,jdbcType=VARCHAR}, #{deleted,jdbcType=TINYINT}, 
+      #{attrName,jdbcType=VARCHAR}, #{actionValue,jdbcType=VARCHAR}, #{deleted,jdbcType=TINYINT}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.weweibuy.brms.model.po.RuleAction">
@@ -137,8 +137,8 @@
       <if test="modelKey != null">
         model_key,
       </if>
-      <if test="attrKey != null">
-        attr_key,
+      <if test="attrName != null">
+        attr_name,
       </if>
       <if test="actionValue != null">
         action_value,
@@ -163,8 +163,8 @@
       <if test="modelKey != null">
         #{modelKey,jdbcType=VARCHAR},
       </if>
-      <if test="attrKey != null">
-        #{attrKey,jdbcType=VARCHAR},
+      <if test="attrName != null">
+        #{attrName,jdbcType=VARCHAR},
       </if>
       <if test="actionValue != null">
         #{actionValue,jdbcType=VARCHAR},
@@ -198,8 +198,8 @@
       <if test="record.modelKey != null">
         model_key = #{record.modelKey,jdbcType=VARCHAR},
       </if>
-      <if test="record.attrKey != null">
-        attr_key = #{record.attrKey,jdbcType=VARCHAR},
+      <if test="record.attrName != null">
+        attr_name = #{record.attrName,jdbcType=VARCHAR},
       </if>
       <if test="record.actionValue != null">
         action_value = #{record.actionValue,jdbcType=VARCHAR},
@@ -223,7 +223,7 @@
     set id = #{record.id,jdbcType=BIGINT},
       rule_key = #{record.ruleKey,jdbcType=VARCHAR},
       model_key = #{record.modelKey,jdbcType=VARCHAR},
-      attr_key = #{record.attrKey,jdbcType=VARCHAR},
+      attr_name = #{record.attrName,jdbcType=VARCHAR},
       action_value = #{record.actionValue,jdbcType=VARCHAR},
       is_delete = #{record.deleted,jdbcType=TINYINT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -241,8 +241,8 @@
       <if test="modelKey != null">
         model_key = #{modelKey,jdbcType=VARCHAR},
       </if>
-      <if test="attrKey != null">
-        attr_key = #{attrKey,jdbcType=VARCHAR},
+      <if test="attrName != null">
+        attr_name = #{attrName,jdbcType=VARCHAR},
       </if>
       <if test="actionValue != null">
         action_value = #{actionValue,jdbcType=VARCHAR},
@@ -263,7 +263,7 @@
     update brms_rule_action
     set rule_key = #{ruleKey,jdbcType=VARCHAR},
       model_key = #{modelKey,jdbcType=VARCHAR},
-      attr_key = #{attrKey,jdbcType=VARCHAR},
+      attr_name = #{attrName,jdbcType=VARCHAR},
       action_value = #{actionValue,jdbcType=VARCHAR},
       is_delete = #{deleted,jdbcType=TINYINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
