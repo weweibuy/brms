@@ -50,7 +50,7 @@ create table brms_rule
    no_loop              varchar(5) not null default '' comment 'no-loop(false 或 true)',
    date_effective       varchar(20) not null default '' comment 'date-effective(格式yyyy-MM-DD HH:mm:ss)',
    date_expires         varchar(20) not null default '' comment 'date-expires(格式yyyy-MM-DD HH:mm:ss)',
-   salience             int unsigned not null default 0 comment 'salience(优先级,值越大优先级越高)',
+   salience             int unsigned comment 'salience(优先级,值越大优先级越高)',
    is_delete            tinyint not null default 0 comment '是否删除',
    create_time          timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
    update_time          timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '更新时间',

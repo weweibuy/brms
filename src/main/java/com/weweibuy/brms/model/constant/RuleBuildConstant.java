@@ -8,6 +8,8 @@ public interface RuleBuildConstant {
 
     String MAP_CLAZZ = "java.util.Map";
 
+    String COLLECTION_UTILS = "com.weweibuy.brms.utils.DroolsCollectionUtils";
+
     String CONDITION_MODEL = "$model:Map";
 
     String RESULT_MODEL = "resultModel";

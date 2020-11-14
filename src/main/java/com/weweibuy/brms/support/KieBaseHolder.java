@@ -26,7 +26,8 @@ public class KieBaseHolder {
     }
 
     public void remove(String key) {
-        kieBaseMap.remove(key);
+        KieBase remove = kieBaseMap.remove(key);
+        remove.removeKiePackage(key);
     }
 
 

@@ -11,8 +11,11 @@ public enum ModelAttrTypeEum {
     STRING,
     NUMBER,
     BOOLEAN,
-    DATE,
-    COLLECTION,;
+    DATE_DAY,
+    DATE_SECOND,
+    COLLECTION_NUMBER,
+    COLLECTION_STRING,
+    ;
 
 
 }
