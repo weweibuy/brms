@@ -104,5 +104,9 @@
             <columnOverride column="is_delete"  property="deleted"  javaType="Boolean"/>
         </table>
 
+        <table tableName="brms_rule_hit_log" domainObjectName="RuleHitLog" >
+            <columnOverride column="is_delete"  property="deleted"  javaType="Boolean"/>
+        </table>
+
     </context>
 </generatorConfiguration>

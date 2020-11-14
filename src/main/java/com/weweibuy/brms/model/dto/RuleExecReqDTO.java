@@ -17,6 +17,8 @@ public class RuleExecReqDTO {
     @NotBlank
     private String ruleSetKey;
 
+    private String agendaGroup;
+
     @NotNull
     @NotEmpty
     private Map model;

@@ -107,4 +107,20 @@ create table brms_rule_action
 )ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COMMENT='规则动作表(RHS)';
 
 
+create table brms_rule_hit_log
+(
+   id                   bigint unsigned not null auto_increment comment 'id自增1',
+   request_no           varchar(30) not null comment '流水号',
+   rule_set_key         varchar(50) not null comment '规则集key(package)',
+   agenda_group         varchar(50) not null default '' comment '议程组',
+   rule_key             varchar(50) not null comment '规则key',
+   input_model          varchar(4000) not null default '' comment '输入模型(Json)',
+   output_model         varchar(4000) not null default '' comment '输出模型(Json)',
+   is_delete            tinyint not null default 0 comment '是否删除',
+   create_time          timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   update_time          timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '更新时间',
+   primary key (id),
+   index idx_request_no(request_no(13))
+)ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COMMENT='规则命中日志表';
+
 

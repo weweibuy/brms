@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weweibuy.brms.mapper.RuleHitLogMapper">
+  <resultMap id="BaseResultMap" type="com.weweibuy.brms.model.po.RuleHitLog">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="request_no" jdbcType="VARCHAR" property="requestNo" />
+    <result column="rule_set_key" jdbcType="VARCHAR" property="ruleSetKey" />
+    <result column="agenda_group" jdbcType="VARCHAR" property="agendaGroup" />
+    <result column="rule_key" jdbcType="VARCHAR" property="ruleKey" />
+    <result column="input_model" jdbcType="VARCHAR" property="inputModel" />
+    <result column="output_model" jdbcType="VARCHAR" property="outputModel" />
+    <result column="is_delete" jdbcType="TINYINT" property="deleted" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, request_no, rule_set_key, agenda_group, rule_key, input_model, output_model, 
+    is_delete, create_time, update_time
+  </sql>
+  <select id="selectByExample" parameterType="com.weweibuy.brms.model.example.RuleHitLogExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from brms_rule_hit_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExampleForUpdate" parameterType="com.weweibuy.brms.model.example.RuleHitLogExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from brms_rule_hit_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+     for update
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from brms_rule_hit_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from brms_rule_hit_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.weweibuy.brms.model.example.RuleHitLogExample">
+    delete from brms_rule_hit_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.weweibuy.brms.model.po.RuleHitLog">
+    insert into brms_rule_hit_log (id, request_no, rule_set_key, 
+      agenda_group, rule_key, input_model, 
+      output_model, is_delete, create_time, 
+      update_time)
+    values (#{id,jdbcType=BIGINT}, #{requestNo,jdbcType=VARCHAR}, #{ruleSetKey,jdbcType=VARCHAR}, 
+      #{agendaGroup,jdbcType=VARCHAR}, #{ruleKey,jdbcType=VARCHAR}, #{inputModel,jdbcType=VARCHAR}, 
+      #{outputModel,jdbcType=VARCHAR}, #{deleted,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.weweibuy.brms.model.po.RuleHitLog">
+    insert into brms_rule_hit_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="requestNo != null">
+        request_no,
+      </if>
+      <if test="ruleSetKey != null">
+        rule_set_key,
+      </if>
+      <if test="agendaGroup != null">
+        agenda_group,
+      </if>
+      <if test="ruleKey != null">
+        rule_key,
+      </if>
+      <if test="inputModel != null">
+        input_model,
+      </if>
+      <if test="outputModel != null">
+        output_model,
+      </if>
+      <if test="deleted != null">
+        is_delete,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="requestNo != null">
+        #{requestNo,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleSetKey != null">
+        #{ruleSetKey,jdbcType=VARCHAR},
+      </if>
+      <if test="agendaGroup != null">
+        #{agendaGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleKey != null">
+        #{ruleKey,jdbcType=VARCHAR},
+      </if>
+      <if test="inputModel != null">
+        #{inputModel,jdbcType=VARCHAR},
+      </if>
+      <if test="outputModel != null">
+        #{outputModel,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.weweibuy.brms.model.example.RuleHitLogExample" resultType="java.lang.Long">
+    select count(*) from brms_rule_hit_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update brms_rule_hit_log
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.requestNo != null">
+        request_no = #{record.requestNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ruleSetKey != null">
+        rule_set_key = #{record.ruleSetKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.agendaGroup != null">
+        agenda_group = #{record.agendaGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ruleKey != null">
+        rule_key = #{record.ruleKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inputModel != null">
+        input_model = #{record.inputModel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outputModel != null">
+        output_model = #{record.outputModel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deleted != null">
+        is_delete = #{record.deleted,jdbcType=TINYINT},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update brms_rule_hit_log
+    set id = #{record.id,jdbcType=BIGINT},
+      request_no = #{record.requestNo,jdbcType=VARCHAR},
+      rule_set_key = #{record.ruleSetKey,jdbcType=VARCHAR},
+      agenda_group = #{record.agendaGroup,jdbcType=VARCHAR},
+      rule_key = #{record.ruleKey,jdbcType=VARCHAR},
+      input_model = #{record.inputModel,jdbcType=VARCHAR},
+      output_model = #{record.outputModel,jdbcType=VARCHAR},
+      is_delete = #{record.deleted,jdbcType=TINYINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.weweibuy.brms.model.po.RuleHitLog">
+    update brms_rule_hit_log
+    <set>
+      <if test="requestNo != null">
+        request_no = #{requestNo,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleSetKey != null">
+        rule_set_key = #{ruleSetKey,jdbcType=VARCHAR},
+      </if>
+      <if test="agendaGroup != null">
+        agenda_group = #{agendaGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleKey != null">
+        rule_key = #{ruleKey,jdbcType=VARCHAR},
+      </if>
+      <if test="inputModel != null">
+        input_model = #{inputModel,jdbcType=VARCHAR},
+      </if>
+      <if test="outputModel != null">
+        output_model = #{outputModel,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null">
+        is_delete = #{deleted,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.weweibuy.brms.model.po.RuleHitLog">
+    update brms_rule_hit_log
+    set request_no = #{requestNo,jdbcType=VARCHAR},
+      rule_set_key = #{ruleSetKey,jdbcType=VARCHAR},
+      agenda_group = #{agendaGroup,jdbcType=VARCHAR},
+      rule_key = #{ruleKey,jdbcType=VARCHAR},
+      input_model = #{inputModel,jdbcType=VARCHAR},
+      output_model = #{outputModel,jdbcType=VARCHAR},
+      is_delete = #{deleted,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectOneByExample" parameterType="com.weweibuy.brms.model.example.RuleHitLogExample" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from brms_rule_hit_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    limit 1
+  </select>
+  <select id="selectOneByExampleForUpdate" parameterType="com.weweibuy.brms.model.example.RuleHitLogExample" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from brms_rule_hit_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    limit 1
+     for update
+  </select>
+</mapper>

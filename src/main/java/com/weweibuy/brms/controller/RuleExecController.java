@@ -26,7 +26,7 @@ public class RuleExecController {
 
     @PostMapping("/exec")
     public Map execRule(@RequestBody @Valid RuleExecReqDTO reqDTO) {
-        return ruleExecService.execRule(reqDTO.getRuleSetKey(), reqDTO.getModel());
+        return ruleExecService.execRule(reqDTO.getRuleSetKey(), reqDTO.getAgendaGroup(), reqDTO.getModel());
     }
 
 

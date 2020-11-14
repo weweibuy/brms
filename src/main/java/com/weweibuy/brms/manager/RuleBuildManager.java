@@ -104,7 +104,7 @@ public class RuleBuildManager {
             dRule.setAgendaGroup(rule.getAgendaGroup());
         }
         if (StringUtils.isNotBlank(rule.getActivationGroup())) {
-            dRule.setActivationGroup(rule.getAgendaGroup());
+            dRule.setActivationGroup(rule.getActivationGroup());
         }
         if (StringUtils.isNotBlank(rule.getNoLoop())) {
             dRule.setNoLoop(Boolean.valueOf(rule.getNoLoop()));
