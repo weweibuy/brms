@@ -10,7 +10,17 @@ public enum ModelAttrValueSourceEum {
 
     INPUT,
     DICT,
-    ADDRESS,
-    ;
+    /**
+     * 一级地址
+     */
+    ADDRESS_1,
+    /**
+     * 二级地址
+     */
+    ADDRESS_2,
+    /**
+     * 三级地址
+     */
+    ADDRESS_3,;
 
 }

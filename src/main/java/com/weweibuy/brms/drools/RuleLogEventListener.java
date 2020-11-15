@@ -5,6 +5,7 @@ import com.weweibuy.brms.model.event.RuleHitLogEvent;
 import com.weweibuy.framework.common.core.concurrent.LogExceptionThreadFactory;
 import com.weweibuy.framework.common.core.utils.IdWorker;
 import com.weweibuy.framework.common.core.utils.JackJsonUtils;
+import com.weweibuy.framework.common.log.support.LogTraceContext;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.drools.core.common.DefaultAgenda;
@@ -67,7 +68,7 @@ public class RuleLogEventListener extends DefaultAgendaEventListener {
                     .agendaGroup(agendaGroupName)
                     .inputModel(inputModel)
                     .outputModel(outputModel)
-                    .requestNo(IdWorker.nextStringId())
+                    .requestNo(LogTraceContext.getTraceCode().orElse(IdWorker.nextStringId()))
                     .build();
             pushHitEvent(logEvent);
         } catch (Exception e) {
