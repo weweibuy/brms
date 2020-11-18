@@ -23,11 +23,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-/**
- * @author <a href="mailto:hongwen0928@outlook.com">Karas</a>
- * @date 2020/9/9
- * @since 7.37.0.Final
- */
 @Slf4j
 @Component
 @RequiredArgsConstructor
