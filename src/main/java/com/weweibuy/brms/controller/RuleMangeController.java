@@ -1,12 +1,12 @@
 package com.weweibuy.brms.controller;
 
+import com.weweibuy.brms.model.dto.BaseRuleActionReqDTO;
 import com.weweibuy.brms.service.RuleManageService;
 import com.weweibuy.framework.common.core.model.dto.CommonCodeResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 /**
  * @author durenhao
@@ -20,14 +20,21 @@ public class RuleMangeController {
     private final RuleManageService ruleManageService;
 
     @GetMapping("/compile")
-    public String compile(String ruleSetKey) {
-        return ruleManageService.compile(ruleSetKey);
+    public String compile(String namespace, String ruleSetKey) {
+        return ruleManageService.compile(namespace, ruleSetKey);
     }
 
     @PostMapping("/reload")
-    public CommonCodeResponse reload(String ruleSetKey) {
-        ruleManageService.reload(ruleSetKey);
+    public CommonCodeResponse reload(@RequestBody @Valid BaseRuleActionReqDTO actionReqDTO) {
+        ruleManageService.reload(actionReqDTO.getNamespace(), actionReqDTO.getRuleSetKey());
         return CommonCodeResponse.success();
     }
+
+    @PostMapping("/remove")
+    public CommonCodeResponse remove(@RequestBody @Valid BaseRuleActionReqDTO actionReqDTO) {
+        ruleManageService.remove(actionReqDTO.getNamespace(), actionReqDTO.getRuleSetKey());
+        return CommonCodeResponse.success();
+    }
+
 
 }

@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.weweibuy.brms.mapper.RuleSetMapper">
-  <resultMap id="BaseResultMap" type="com.weweibuy.brms.model.po.RuleSet">
+<mapper namespace="com.weweibuy.brms.mapper.RuleNamespaceMapper">
+  <resultMap id="BaseResultMap" type="com.weweibuy.brms.model.po.RuleNamespace">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="namespace" jdbcType="VARCHAR" property="namespace" />
-    <result column="rule_set_key" jdbcType="VARCHAR" property="ruleSetKey" />
-    <result column="rule_set_name" jdbcType="VARCHAR" property="ruleSetName" />
+    <result column="namespace_desc" jdbcType="VARCHAR" property="namespaceDesc" />
     <result column="is_delete" jdbcType="BIT" property="deleted" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
@@ -69,15 +68,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, namespace, rule_set_key, rule_set_name, is_delete, create_time, update_time
+    id, namespace, namespace_desc, is_delete, create_time, update_time
   </sql>
-  <select id="selectByExample" parameterType="com.weweibuy.brms.model.example.RuleSetExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.weweibuy.brms.model.example.RuleNamespaceExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from brms_rule_set
+    from brms_rule_namespace
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -85,13 +84,13 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExampleForUpdate" parameterType="com.weweibuy.brms.model.example.RuleSetExample" resultMap="BaseResultMap">
+  <select id="selectByExampleForUpdate" parameterType="com.weweibuy.brms.model.example.RuleNamespaceExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from brms_rule_set
+    from brms_rule_namespace
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -103,29 +102,29 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from brms_rule_set
+    from brms_rule_namespace
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from brms_rule_set
+    delete from brms_rule_namespace
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.weweibuy.brms.model.example.RuleSetExample">
-    delete from brms_rule_set
+  <delete id="deleteByExample" parameterType="com.weweibuy.brms.model.example.RuleNamespaceExample">
+    delete from brms_rule_namespace
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.weweibuy.brms.model.po.RuleSet">
-    insert into brms_rule_set (id, namespace, rule_set_key, 
-      rule_set_name, is_delete, create_time, 
-      update_time)
-    values (#{id,jdbcType=BIGINT}, #{namespace,jdbcType=VARCHAR}, #{ruleSetKey,jdbcType=VARCHAR}, 
-      #{ruleSetName,jdbcType=VARCHAR}, #{deleted,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+  <insert id="insert" parameterType="com.weweibuy.brms.model.po.RuleNamespace">
+    insert into brms_rule_namespace (id, namespace, namespace_desc, 
+      is_delete, create_time, update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{namespace,jdbcType=VARCHAR}, #{namespaceDesc,jdbcType=VARCHAR}, 
+      #{deleted,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.weweibuy.brms.model.po.RuleSet">
-    insert into brms_rule_set
+  <insert id="insertSelective" parameterType="com.weweibuy.brms.model.po.RuleNamespace">
+    insert into brms_rule_namespace
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -133,11 +132,8 @@
       <if test="namespace != null">
         namespace,
       </if>
-      <if test="ruleSetKey != null">
-        rule_set_key,
-      </if>
-      <if test="ruleSetName != null">
-        rule_set_name,
+      <if test="namespaceDesc != null">
+        namespace_desc,
       </if>
       <if test="deleted != null">
         is_delete,
@@ -156,11 +152,8 @@
       <if test="namespace != null">
         #{namespace,jdbcType=VARCHAR},
       </if>
-      <if test="ruleSetKey != null">
-        #{ruleSetKey,jdbcType=VARCHAR},
-      </if>
-      <if test="ruleSetName != null">
-        #{ruleSetName,jdbcType=VARCHAR},
+      <if test="namespaceDesc != null">
+        #{namespaceDesc,jdbcType=VARCHAR},
       </if>
       <if test="deleted != null">
         #{deleted,jdbcType=BIT},
@@ -173,14 +166,14 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.weweibuy.brms.model.example.RuleSetExample" resultType="java.lang.Long">
-    select count(*) from brms_rule_set
+  <select id="countByExample" parameterType="com.weweibuy.brms.model.example.RuleNamespaceExample" resultType="java.lang.Long">
+    select count(*) from brms_rule_namespace
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update brms_rule_set
+    update brms_rule_namespace
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
@@ -188,11 +181,8 @@
       <if test="record.namespace != null">
         namespace = #{record.namespace,jdbcType=VARCHAR},
       </if>
-      <if test="record.ruleSetKey != null">
-        rule_set_key = #{record.ruleSetKey,jdbcType=VARCHAR},
-      </if>
-      <if test="record.ruleSetName != null">
-        rule_set_name = #{record.ruleSetName,jdbcType=VARCHAR},
+      <if test="record.namespaceDesc != null">
+        namespace_desc = #{record.namespaceDesc,jdbcType=VARCHAR},
       </if>
       <if test="record.deleted != null">
         is_delete = #{record.deleted,jdbcType=BIT},
@@ -209,11 +199,10 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update brms_rule_set
+    update brms_rule_namespace
     set id = #{record.id,jdbcType=BIGINT},
       namespace = #{record.namespace,jdbcType=VARCHAR},
-      rule_set_key = #{record.ruleSetKey,jdbcType=VARCHAR},
-      rule_set_name = #{record.ruleSetName,jdbcType=VARCHAR},
+      namespace_desc = #{record.namespaceDesc,jdbcType=VARCHAR},
       is_delete = #{record.deleted,jdbcType=BIT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
@@ -221,17 +210,14 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.weweibuy.brms.model.po.RuleSet">
-    update brms_rule_set
+  <update id="updateByPrimaryKeySelective" parameterType="com.weweibuy.brms.model.po.RuleNamespace">
+    update brms_rule_namespace
     <set>
       <if test="namespace != null">
         namespace = #{namespace,jdbcType=VARCHAR},
       </if>
-      <if test="ruleSetKey != null">
-        rule_set_key = #{ruleSetKey,jdbcType=VARCHAR},
-      </if>
-      <if test="ruleSetName != null">
-        rule_set_name = #{ruleSetName,jdbcType=VARCHAR},
+      <if test="namespaceDesc != null">
+        namespace_desc = #{namespaceDesc,jdbcType=VARCHAR},
       </if>
       <if test="deleted != null">
         is_delete = #{deleted,jdbcType=BIT},
@@ -245,20 +231,19 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.weweibuy.brms.model.po.RuleSet">
-    update brms_rule_set
+  <update id="updateByPrimaryKey" parameterType="com.weweibuy.brms.model.po.RuleNamespace">
+    update brms_rule_namespace
     set namespace = #{namespace,jdbcType=VARCHAR},
-      rule_set_key = #{ruleSetKey,jdbcType=VARCHAR},
-      rule_set_name = #{ruleSetName,jdbcType=VARCHAR},
+      namespace_desc = #{namespaceDesc,jdbcType=VARCHAR},
       is_delete = #{deleted,jdbcType=BIT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <select id="selectOneByExample" parameterType="com.weweibuy.brms.model.example.RuleSetExample" resultMap="BaseResultMap">
+  <select id="selectOneByExample" parameterType="com.weweibuy.brms.model.example.RuleNamespaceExample" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from brms_rule_set
+    from brms_rule_namespace
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -267,10 +252,10 @@
     </if>
     limit 1
   </select>
-  <select id="selectOneByExampleForUpdate" parameterType="com.weweibuy.brms.model.example.RuleSetExample" resultMap="BaseResultMap">
+  <select id="selectOneByExampleForUpdate" parameterType="com.weweibuy.brms.model.example.RuleNamespaceExample" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from brms_rule_set
+    from brms_rule_namespace
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>

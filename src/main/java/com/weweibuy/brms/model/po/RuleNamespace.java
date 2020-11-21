@@ -4,16 +4,11 @@ import java.time.LocalDateTime;
 import lombok.Data;
 
 @Data
-public class RuleHitLog {
+public class RuleNamespace {
     /**
      * id自增1
      */
     private Long id;
-
-    /**
-     * 流水号
-     */
-    private String requestNo;
 
     /**
      * 名称空间
@@ -21,29 +16,9 @@ public class RuleHitLog {
     private String namespace;
 
     /**
-     * 规则集key(package)
+     * 名称空间描述
      */
-    private String ruleSetKey;
-
-    /**
-     * 议程组
-     */
-    private String agendaGroup;
-
-    /**
-     * 规则key
-     */
-    private String ruleKey;
-
-    /**
-     * 输入模型(Json)
-     */
-    private String inputModel;
-
-    /**
-     * 输出模型(Json)
-     */
-    private String outputModel;
+    private String namespaceDesc;
 
     /**
      * 是否删除

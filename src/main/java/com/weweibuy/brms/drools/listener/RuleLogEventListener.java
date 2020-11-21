@@ -1,4 +1,4 @@
-package com.weweibuy.brms.drools;
+package com.weweibuy.brms.drools.listener;
 
 import com.weweibuy.brms.model.constant.RuleBuildConstant;
 import com.weweibuy.brms.model.event.RuleHitLogEvent;

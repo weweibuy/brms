@@ -273,6 +273,76 @@ public class RuleHitLogExample {
             return (Criteria) this;
         }
 
+        public Criteria andNamespaceIsNull() {
+            addCriterion("namespace is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNamespaceIsNotNull() {
+            addCriterion("namespace is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNamespaceEqualTo(String value) {
+            addCriterion("namespace =", value, "namespace");
+            return (Criteria) this;
+        }
+
+        public Criteria andNamespaceNotEqualTo(String value) {
+            addCriterion("namespace <>", value, "namespace");
+            return (Criteria) this;
+        }
+
+        public Criteria andNamespaceGreaterThan(String value) {
+            addCriterion("namespace >", value, "namespace");
+            return (Criteria) this;
+        }
+
+        public Criteria andNamespaceGreaterThanOrEqualTo(String value) {
+            addCriterion("namespace >=", value, "namespace");
+            return (Criteria) this;
+        }
+
+        public Criteria andNamespaceLessThan(String value) {
+            addCriterion("namespace <", value, "namespace");
+            return (Criteria) this;
+        }
+
+        public Criteria andNamespaceLessThanOrEqualTo(String value) {
+            addCriterion("namespace <=", value, "namespace");
+            return (Criteria) this;
+        }
+
+        public Criteria andNamespaceLike(String value) {
+            addCriterion("namespace like", value, "namespace");
+            return (Criteria) this;
+        }
+
+        public Criteria andNamespaceNotLike(String value) {
+            addCriterion("namespace not like", value, "namespace");
+            return (Criteria) this;
+        }
+
+        public Criteria andNamespaceIn(List<String> values) {
+            addCriterion("namespace in", values, "namespace");
+            return (Criteria) this;
+        }
+
+        public Criteria andNamespaceNotIn(List<String> values) {
+            addCriterion("namespace not in", values, "namespace");
+            return (Criteria) this;
+        }
+
+        public Criteria andNamespaceBetween(String value1, String value2) {
+            addCriterion("namespace between", value1, value2, "namespace");
+            return (Criteria) this;
+        }
+
+        public Criteria andNamespaceNotBetween(String value1, String value2) {
+            addCriterion("namespace not between", value1, value2, "namespace");
+            return (Criteria) this;
+        }
+
         public Criteria andRuleSetKeyIsNull() {
             addCriterion("rule_set_key is null");
             return (Criteria) this;

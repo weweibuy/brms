@@ -4,14 +4,14 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RuleSetModelExample {
+public class RuleNamespaceExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public RuleSetModelExample() {
+    public RuleNamespaceExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -45,12 +45,12 @@ public class RuleSetModelExample {
         return criteria;
     }
 
-    public RuleSetModelExample orderBy(String orderByClause) {
+    public RuleNamespaceExample orderBy(String orderByClause) {
         this.setOrderByClause(orderByClause);
         return this;
     }
 
-    public RuleSetModelExample orderBy(String ... orderByClauses) {
+    public RuleNamespaceExample orderBy(String ... orderByClauses) {
         StringBuffer sb = new StringBuffer();
         for (int i = 0; i < orderByClauses.length; i++) {
             sb.append(orderByClauses[i]);
@@ -82,18 +82,18 @@ public class RuleSetModelExample {
     }
 
     public static Criteria newAndCreateCriteria() {
-        RuleSetModelExample example = new RuleSetModelExample();
+        RuleNamespaceExample example = new RuleNamespaceExample();
         return example.createCriteria();
     }
 
-    public RuleSetModelExample when(boolean condition, IExampleWhen then) {
+    public RuleNamespaceExample when(boolean condition, IExampleWhen then) {
         if (condition) {
             then.example(this);
         }
         return this;
     }
 
-    public RuleSetModelExample when(boolean condition, IExampleWhen then, IExampleWhen otherwise) {
+    public RuleNamespaceExample when(boolean condition, IExampleWhen then, IExampleWhen otherwise) {
         if (condition) {
             then.example(this);
         } else {
@@ -203,76 +203,6 @@ public class RuleSetModelExample {
             return (Criteria) this;
         }
 
-        public Criteria andModelKeyIsNull() {
-            addCriterion("model_key is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andModelKeyIsNotNull() {
-            addCriterion("model_key is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andModelKeyEqualTo(String value) {
-            addCriterion("model_key =", value, "modelKey");
-            return (Criteria) this;
-        }
-
-        public Criteria andModelKeyNotEqualTo(String value) {
-            addCriterion("model_key <>", value, "modelKey");
-            return (Criteria) this;
-        }
-
-        public Criteria andModelKeyGreaterThan(String value) {
-            addCriterion("model_key >", value, "modelKey");
-            return (Criteria) this;
-        }
-
-        public Criteria andModelKeyGreaterThanOrEqualTo(String value) {
-            addCriterion("model_key >=", value, "modelKey");
-            return (Criteria) this;
-        }
-
-        public Criteria andModelKeyLessThan(String value) {
-            addCriterion("model_key <", value, "modelKey");
-            return (Criteria) this;
-        }
-
-        public Criteria andModelKeyLessThanOrEqualTo(String value) {
-            addCriterion("model_key <=", value, "modelKey");
-            return (Criteria) this;
-        }
-
-        public Criteria andModelKeyLike(String value) {
-            addCriterion("model_key like", value, "modelKey");
-            return (Criteria) this;
-        }
-
-        public Criteria andModelKeyNotLike(String value) {
-            addCriterion("model_key not like", value, "modelKey");
-            return (Criteria) this;
-        }
-
-        public Criteria andModelKeyIn(List<String> values) {
-            addCriterion("model_key in", values, "modelKey");
-            return (Criteria) this;
-        }
-
-        public Criteria andModelKeyNotIn(List<String> values) {
-            addCriterion("model_key not in", values, "modelKey");
-            return (Criteria) this;
-        }
-
-        public Criteria andModelKeyBetween(String value1, String value2) {
-            addCriterion("model_key between", value1, value2, "modelKey");
-            return (Criteria) this;
-        }
-
-        public Criteria andModelKeyNotBetween(String value1, String value2) {
-            addCriterion("model_key not between", value1, value2, "modelKey");
-            return (Criteria) this;
-        }
-
         public Criteria andNamespaceIsNull() {
             addCriterion("namespace is null");
             return (Criteria) this;
@@ -343,73 +273,73 @@ public class RuleSetModelExample {
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyIsNull() {
-            addCriterion("rule_set_key is null");
+        public Criteria andNamespaceDescIsNull() {
+            addCriterion("namespace_desc is null");
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyIsNotNull() {
-            addCriterion("rule_set_key is not null");
+        public Criteria andNamespaceDescIsNotNull() {
+            addCriterion("namespace_desc is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyEqualTo(String value) {
-            addCriterion("rule_set_key =", value, "ruleSetKey");
+        public Criteria andNamespaceDescEqualTo(String value) {
+            addCriterion("namespace_desc =", value, "namespaceDesc");
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyNotEqualTo(String value) {
-            addCriterion("rule_set_key <>", value, "ruleSetKey");
+        public Criteria andNamespaceDescNotEqualTo(String value) {
+            addCriterion("namespace_desc <>", value, "namespaceDesc");
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyGreaterThan(String value) {
-            addCriterion("rule_set_key >", value, "ruleSetKey");
+        public Criteria andNamespaceDescGreaterThan(String value) {
+            addCriterion("namespace_desc >", value, "namespaceDesc");
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyGreaterThanOrEqualTo(String value) {
-            addCriterion("rule_set_key >=", value, "ruleSetKey");
+        public Criteria andNamespaceDescGreaterThanOrEqualTo(String value) {
+            addCriterion("namespace_desc >=", value, "namespaceDesc");
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyLessThan(String value) {
-            addCriterion("rule_set_key <", value, "ruleSetKey");
+        public Criteria andNamespaceDescLessThan(String value) {
+            addCriterion("namespace_desc <", value, "namespaceDesc");
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyLessThanOrEqualTo(String value) {
-            addCriterion("rule_set_key <=", value, "ruleSetKey");
+        public Criteria andNamespaceDescLessThanOrEqualTo(String value) {
+            addCriterion("namespace_desc <=", value, "namespaceDesc");
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyLike(String value) {
-            addCriterion("rule_set_key like", value, "ruleSetKey");
+        public Criteria andNamespaceDescLike(String value) {
+            addCriterion("namespace_desc like", value, "namespaceDesc");
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyNotLike(String value) {
-            addCriterion("rule_set_key not like", value, "ruleSetKey");
+        public Criteria andNamespaceDescNotLike(String value) {
+            addCriterion("namespace_desc not like", value, "namespaceDesc");
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyIn(List<String> values) {
-            addCriterion("rule_set_key in", values, "ruleSetKey");
+        public Criteria andNamespaceDescIn(List<String> values) {
+            addCriterion("namespace_desc in", values, "namespaceDesc");
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyNotIn(List<String> values) {
-            addCriterion("rule_set_key not in", values, "ruleSetKey");
+        public Criteria andNamespaceDescNotIn(List<String> values) {
+            addCriterion("namespace_desc not in", values, "namespaceDesc");
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyBetween(String value1, String value2) {
-            addCriterion("rule_set_key between", value1, value2, "ruleSetKey");
+        public Criteria andNamespaceDescBetween(String value1, String value2) {
+            addCriterion("namespace_desc between", value1, value2, "namespaceDesc");
             return (Criteria) this;
         }
 
-        public Criteria andRuleSetKeyNotBetween(String value1, String value2) {
-            addCriterion("rule_set_key not between", value1, value2, "ruleSetKey");
+        public Criteria andNamespaceDescNotBetween(String value1, String value2) {
+            addCriterion("namespace_desc not between", value1, value2, "namespaceDesc");
             return (Criteria) this;
         }
 
@@ -595,14 +525,14 @@ public class RuleSetModelExample {
     }
 
     public static class Criteria extends GeneratedCriteria {
-        private RuleSetModelExample example;
+        private RuleNamespaceExample example;
 
-        protected Criteria(RuleSetModelExample example) {
+        protected Criteria(RuleNamespaceExample example) {
             super();
             this.example = example;
         }
 
-        public RuleSetModelExample example() {
+        public RuleNamespaceExample example() {
             return this.example;
         }
 
@@ -727,6 +657,6 @@ public class RuleSetModelExample {
     }
 
     public interface IExampleWhen {
-        void example(com.weweibuy.brms.model.example.RuleSetModelExample example);
+        void example(com.weweibuy.brms.model.example.RuleNamespaceExample example);
     }
 }

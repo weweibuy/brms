@@ -18,12 +18,16 @@ public class RuleManageService {
     private final KieBaseHolder kieBaseHolder;
 
 
-    public String compile(String ruleSetKey) {
-        return ruleBuildManager.buildRuleStr(ruleSetKey);
+    public String compile(String namespace, String ruleSetKey) {
+        return ruleBuildManager.buildNamespaceRules(namespace, ruleSetKey);
     }
 
-    public void reload(String ruleSetKey) {
-        kieBaseHolder.remove(ruleSetKey);
-        kieBaseHolder.findKieBase(ruleSetKey);
+    public void reload(String namespace, String ruleSetKey) {
+        kieBaseHolder.removePackage(namespace, ruleSetKey);
+        kieBaseHolder.addPackage(namespace, ruleSetKey);
+    }
+
+    public void remove(String namespace, String ruleSetKey) {
+        kieBaseHolder.removePackage(namespace, ruleSetKey);
     }
 }

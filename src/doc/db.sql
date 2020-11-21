@@ -1,14 +1,28 @@
 
-create table brms_rule_set
+
+create table brms_rule_namespace
 (
    id                   bigint unsigned not null auto_increment comment 'id自增1',
-   rule_set_key         varchar(50) not null comment '规则集key(package)',
-   rule_set_name        varchar(200) not null default '' comment '规则集名称',
-   is_delete            tinyint not null default 0 comment '是否删除',
+   namespace            varchar(50) not null comment '名称空间',
+   namespace_desc       varchar(200) not null default '' comment '名称空间描述',
+   is_delete            tinyint(1) unsigned not null default 0 comment '是否删除',
    create_time          timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
    update_time          timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '更新时间',
    primary key (id),
-   unique key uk_rule_set_key (rule_set_key)
+   unique key uk_namespace (namespace)
+)ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COMMENT='规则名称空间表';
+
+create table brms_rule_set
+(
+   id                   bigint unsigned not null auto_increment comment 'id自增1',
+   namespace            varchar(50) not null comment '名称空间',
+   rule_set_key         varchar(50) not null comment '规则集key(package)',
+   rule_set_name        varchar(200) not null default '' comment '规则集名称',
+   is_delete            tinyint(1) unsigned not null default 0 comment '是否删除',
+   create_time          timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   update_time          timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '更新时间',
+   primary key (id),
+   unique key uk_namespace_rule_set_key (namespace, rule_set_key)
 )ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COMMENT='规则集表';
 
 
@@ -17,11 +31,13 @@ create table brms_rule_set_model
 (
    id                   bigint unsigned not null auto_increment comment 'id自增1',
    model_key            varchar(50) not null comment '模型key',
+   namespace            varchar(50) not null comment '名称空间',
    rule_set_key         varchar(50) not null comment '规则集key(package)',
-   is_delete            tinyint not null default 0 comment '是否删除',
+   is_delete            tinyint(1) unsigned not null default 0 comment '是否删除',
    create_time          timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
    update_time          timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '更新时间',
-   primary key (id)
+   primary key (id),
+   index idx_namespace_rule_set_key(namespace(15),rule_set_key(15))
 )ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COMMENT='规则模型关联表';
 
 
@@ -30,7 +46,7 @@ create table brms_model
    id                   bigint unsigned not null auto_increment comment 'id自增1',
    model_key            varchar(50) not null comment '模型key',
    model_desc           varchar(200) not null default '' comment '模型描述',
-   is_delete            tinyint not null default 0 comment '是否删除',
+   is_delete            tinyint(1) unsigned not null default 0 comment '是否删除',
    create_time          timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
    update_time          timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '更新时间',
    primary key (id),
@@ -51,7 +67,7 @@ create table brms_rule
    date_effective       varchar(20) not null default '' comment 'date-effective(格式yyyy-MM-DD HH:mm:ss)',
    date_expires         varchar(20) not null default '' comment 'date-expires(格式yyyy-MM-DD HH:mm:ss)',
    salience             int unsigned comment 'salience(优先级,值越大优先级越高)',
-   is_delete            tinyint not null default 0 comment '是否删除',
+   is_delete            tinyint(1) unsigned not null default 0 comment '是否删除',
    create_time          timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
    update_time          timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '更新时间',
    primary key (id),
@@ -67,7 +83,7 @@ create table brms_model_attr
    attr_desc            varchar(200) not null default '' comment '属性描述',
    attr_type            varchar(20) not null comment '属性类型(STRING,NUMBER,BOOLEAN,DATE,COLLECTION)',
    attr_value_source    varchar(20) comment '属性值来源(INPUT,DICT,ADDRESS)',
-   is_delete            tinyint not null default 0 comment '是否删除',
+   is_delete            tinyint(1) unsigned not null default 0 comment '是否删除',
    create_time          timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
    update_time          timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '更新时间',
    primary key (id),
@@ -84,7 +100,7 @@ create table brms_rule_condition
    condition_value      varchar(1000) not null comment '条件值',
    logical_operator     varchar(2) not null default '' comment '逻辑运算符(与下一个条件的逻辑运算符;取值: &&,|| )',
    condition_order      int not null default 0 comment '排序(多个条件通过order排序,值越小越靠前,并通过 logical_operator 字段进行连接)',
-   is_delete            tinyint unsigned not null default 0 comment '是否删除',
+   is_delete            tinyint(1) unsigned not null default 0 comment '是否删除',
    create_time          timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
    update_time          timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '更新时间',
    primary key (id),
@@ -99,7 +115,7 @@ create table brms_rule_action
    model_key            varchar(50) not null comment '模型key',
    attr_name            varchar(50) not null comment '属性名称',
    action_value         varchar(1000) not null comment '动作值',
-   is_delete            tinyint not null default 0 comment '是否删除',
+   is_delete            tinyint(1) unsigned not null default 0 comment '是否删除',
    create_time          timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
    update_time          timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '更新时间',
    primary key (id),
@@ -111,16 +127,22 @@ create table brms_rule_hit_log
 (
    id                   bigint unsigned not null auto_increment comment 'id自增1',
    request_no           varchar(30) not null comment '流水号',
+   namespace            varchar(50) not null comment '名称空间',
    rule_set_key         varchar(50) not null comment '规则集key(package)',
    agenda_group         varchar(50) not null default '' comment '议程组',
    rule_key             varchar(50) not null comment '规则key',
    input_model          varchar(4000) not null default '' comment '输入模型(Json)',
    output_model         varchar(4000) not null default '' comment '输出模型(Json)',
-   is_delete            tinyint not null default 0 comment '是否删除',
+   is_delete            tinyint(1) unsigned not null default 0 comment '是否删除',
    create_time          timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
    update_time          timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '更新时间',
    primary key (id),
    index idx_request_no(request_no(13))
 )ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COMMENT='规则命中日志表';
+
+
+
+
+
 
 

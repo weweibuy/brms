@@ -11,6 +11,11 @@ public class RuleSet {
     private Long id;
 
     /**
+     * 名称空间
+     */
+    private String namespace;
+
+    /**
      * 规则集key(package)
      */
     private String ruleSetKey;

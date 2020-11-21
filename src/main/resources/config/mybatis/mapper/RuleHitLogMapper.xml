@@ -4,12 +4,13 @@
   <resultMap id="BaseResultMap" type="com.weweibuy.brms.model.po.RuleHitLog">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="request_no" jdbcType="VARCHAR" property="requestNo" />
+    <result column="namespace" jdbcType="VARCHAR" property="namespace" />
     <result column="rule_set_key" jdbcType="VARCHAR" property="ruleSetKey" />
     <result column="agenda_group" jdbcType="VARCHAR" property="agendaGroup" />
     <result column="rule_key" jdbcType="VARCHAR" property="ruleKey" />
     <result column="input_model" jdbcType="VARCHAR" property="inputModel" />
     <result column="output_model" jdbcType="VARCHAR" property="outputModel" />
-    <result column="is_delete" jdbcType="TINYINT" property="deleted" />
+    <result column="is_delete" jdbcType="BIT" property="deleted" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
@@ -72,7 +73,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, request_no, rule_set_key, agenda_group, rule_key, input_model, output_model, 
+    id, request_no, namespace, rule_set_key, agenda_group, rule_key, input_model, output_model, 
     is_delete, create_time, update_time
   </sql>
   <select id="selectByExample" parameterType="com.weweibuy.brms.model.example.RuleHitLogExample" resultMap="BaseResultMap">
@@ -121,14 +122,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.weweibuy.brms.model.po.RuleHitLog">
-    insert into brms_rule_hit_log (id, request_no, rule_set_key, 
-      agenda_group, rule_key, input_model, 
-      output_model, is_delete, create_time, 
-      update_time)
-    values (#{id,jdbcType=BIGINT}, #{requestNo,jdbcType=VARCHAR}, #{ruleSetKey,jdbcType=VARCHAR}, 
-      #{agendaGroup,jdbcType=VARCHAR}, #{ruleKey,jdbcType=VARCHAR}, #{inputModel,jdbcType=VARCHAR}, 
-      #{outputModel,jdbcType=VARCHAR}, #{deleted,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+    insert into brms_rule_hit_log (id, request_no, namespace, 
+      rule_set_key, agenda_group, rule_key, 
+      input_model, output_model, is_delete, 
+      create_time, update_time)
+    values (#{id,jdbcType=BIGINT}, #{requestNo,jdbcType=VARCHAR}, #{namespace,jdbcType=VARCHAR}, 
+      #{ruleSetKey,jdbcType=VARCHAR}, #{agendaGroup,jdbcType=VARCHAR}, #{ruleKey,jdbcType=VARCHAR}, 
+      #{inputModel,jdbcType=VARCHAR}, #{outputModel,jdbcType=VARCHAR}, #{deleted,jdbcType=BIT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.weweibuy.brms.model.po.RuleHitLog">
     insert into brms_rule_hit_log
@@ -138,6 +139,9 @@
       </if>
       <if test="requestNo != null">
         request_no,
+      </if>
+      <if test="namespace != null">
+        namespace,
       </if>
       <if test="ruleSetKey != null">
         rule_set_key,
@@ -171,6 +175,9 @@
       <if test="requestNo != null">
         #{requestNo,jdbcType=VARCHAR},
       </if>
+      <if test="namespace != null">
+        #{namespace,jdbcType=VARCHAR},
+      </if>
       <if test="ruleSetKey != null">
         #{ruleSetKey,jdbcType=VARCHAR},
       </if>
@@ -187,7 +194,7 @@
         #{outputModel,jdbcType=VARCHAR},
       </if>
       <if test="deleted != null">
-        #{deleted,jdbcType=TINYINT},
+        #{deleted,jdbcType=BIT},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -212,6 +219,9 @@
       <if test="record.requestNo != null">
         request_no = #{record.requestNo,jdbcType=VARCHAR},
       </if>
+      <if test="record.namespace != null">
+        namespace = #{record.namespace,jdbcType=VARCHAR},
+      </if>
       <if test="record.ruleSetKey != null">
         rule_set_key = #{record.ruleSetKey,jdbcType=VARCHAR},
       </if>
@@ -228,7 +238,7 @@
         output_model = #{record.outputModel,jdbcType=VARCHAR},
       </if>
       <if test="record.deleted != null">
-        is_delete = #{record.deleted,jdbcType=TINYINT},
+        is_delete = #{record.deleted,jdbcType=BIT},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -245,12 +255,13 @@
     update brms_rule_hit_log
     set id = #{record.id,jdbcType=BIGINT},
       request_no = #{record.requestNo,jdbcType=VARCHAR},
+      namespace = #{record.namespace,jdbcType=VARCHAR},
       rule_set_key = #{record.ruleSetKey,jdbcType=VARCHAR},
       agenda_group = #{record.agendaGroup,jdbcType=VARCHAR},
       rule_key = #{record.ruleKey,jdbcType=VARCHAR},
       input_model = #{record.inputModel,jdbcType=VARCHAR},
       output_model = #{record.outputModel,jdbcType=VARCHAR},
-      is_delete = #{record.deleted,jdbcType=TINYINT},
+      is_delete = #{record.deleted,jdbcType=BIT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
@@ -262,6 +273,9 @@
     <set>
       <if test="requestNo != null">
         request_no = #{requestNo,jdbcType=VARCHAR},
+      </if>
+      <if test="namespace != null">
+        namespace = #{namespace,jdbcType=VARCHAR},
       </if>
       <if test="ruleSetKey != null">
         rule_set_key = #{ruleSetKey,jdbcType=VARCHAR},
@@ -279,7 +293,7 @@
         output_model = #{outputModel,jdbcType=VARCHAR},
       </if>
       <if test="deleted != null">
-        is_delete = #{deleted,jdbcType=TINYINT},
+        is_delete = #{deleted,jdbcType=BIT},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -293,12 +307,13 @@
   <update id="updateByPrimaryKey" parameterType="com.weweibuy.brms.model.po.RuleHitLog">
     update brms_rule_hit_log
     set request_no = #{requestNo,jdbcType=VARCHAR},
+      namespace = #{namespace,jdbcType=VARCHAR},
       rule_set_key = #{ruleSetKey,jdbcType=VARCHAR},
       agenda_group = #{agendaGroup,jdbcType=VARCHAR},
       rule_key = #{ruleKey,jdbcType=VARCHAR},
       input_model = #{inputModel,jdbcType=VARCHAR},
       output_model = #{outputModel,jdbcType=VARCHAR},
-      is_delete = #{deleted,jdbcType=TINYINT},
+      is_delete = #{deleted,jdbcType=BIT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}

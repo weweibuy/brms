@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @author durenhao
@@ -38,14 +39,25 @@ public class RuleBuildManager {
     private final ActionBuilder actionBuilder;
 
 
+    public List<String> buildNamespaceRules(String namespace) {
+        return ruleAndSetRepository.selectRuleSet(namespace).stream()
+                .map(this::buildRuleStr)
+                .collect(Collectors.toList());
+    }
+
+    public String buildNamespaceRules(String namespace, String ruleSetKey) {
+        return ruleAndSetRepository.selectRuleSet(namespace, ruleSetKey)
+                .map(this::buildRuleStr)
+                .orElseThrow(() -> Exceptions.business(String.format("名称空间: %s, 规则集:%s, 对应的规则不存在", namespace, ruleSetKey)));
+    }
+
+
     /**
-     * @param ruleSetKey
+     * @param ruleSet
      * @return
      */
-    public String buildRuleStr(String ruleSetKey) {
-        RuleSet ruleSet = ruleAndSetRepository.selectRuleSet(ruleSetKey)
-                .orElseThrow(() -> Exceptions.business(String.format("规则集: %s不存在", ruleSetKey)));
-
+    public String buildRuleStr(RuleSet ruleSet) {
+        String ruleSetKey = ruleSet.getRuleSetKey();
         RuleSetModel ruleSetModel = ruleSetModelRepository.selectRuleSetModel(ruleSetKey)
                 .orElseThrow(() -> Exceptions.business(String.format("规则集: %s对应的模型不存在", ruleSetKey)));
         String modelKey = ruleSetModel.getModelKey();

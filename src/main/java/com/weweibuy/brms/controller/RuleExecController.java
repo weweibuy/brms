@@ -2,6 +2,7 @@ package com.weweibuy.brms.controller;
 
 import com.weweibuy.brms.model.dto.RuleExecReqDTO;
 import com.weweibuy.brms.service.RuleExecService;
+import com.weweibuy.framework.common.core.model.dto.CommonDataResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,8 +26,9 @@ public class RuleExecController {
     private final RuleExecService ruleExecService;
 
     @PostMapping("/exec")
-    public Map execRule(@RequestBody @Valid RuleExecReqDTO reqDTO) {
-        return ruleExecService.execRule(reqDTO.getRuleSetKey(), reqDTO.getAgendaGroup(), reqDTO.getModel());
+    public CommonDataResponse<Map> execRule(@RequestBody @Valid RuleExecReqDTO reqDTO) {
+        return CommonDataResponse.success(ruleExecService.execRule(reqDTO.getNamespace(),
+                reqDTO.getRuleSetKey(), reqDTO.getRuleNameList(), reqDTO.getAgendaGroup(), reqDTO.getModel()));
     }
 
 

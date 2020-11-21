@@ -108,5 +108,9 @@
             <columnOverride column="is_delete"  property="deleted"  javaType="Boolean"/>
         </table>
 
+        <table tableName="brms_rule_namespace" domainObjectName="RuleNamespace" >
+            <columnOverride column="is_delete"  property="deleted"  javaType="Boolean"/>
+        </table>
+
     </context>
 </generatorConfiguration>
