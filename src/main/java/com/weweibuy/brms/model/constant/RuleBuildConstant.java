@@ -16,6 +16,8 @@ public interface RuleBuildConstant {
 
     String RESULT_MODEL_PUT = "resultModel.put($1, $2);";
 
+    String RULE_HIT_FLAG_NAME = "_hit";
+
 
 
 }

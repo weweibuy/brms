@@ -19,6 +19,7 @@ import org.kie.api.runtime.rule.FactHandle;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
+import java.util.Map;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -53,6 +54,8 @@ public class RuleLogEventListener extends DefaultAgendaEventListener {
             }
             String packageName = rule.getPackageName();
             String name = rule.getName();
+            Map<String, Object> resultMap = (Map) global;
+            resultMap.put(RuleBuildConstant.RULE_HIT_FLAG_NAME, true);
             String outputModel = JackJsonUtils.write(global);
             log.info("规则集 {}, 命中规则: {}, 议程组: {}, 请求模型: {}, 响应模型: {}",
                     packageName, name, agendaGroupName,

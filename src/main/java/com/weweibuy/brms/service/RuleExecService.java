@@ -2,6 +2,7 @@ package com.weweibuy.brms.service;
 
 import com.weweibuy.brms.drools.RuleLogEventListener;
 import com.weweibuy.brms.model.constant.RuleBuildConstant;
+import com.weweibuy.brms.model.dto.RuleExecReqDTO;
 import com.weweibuy.brms.support.KieBaseHolder;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;
@@ -11,6 +12,7 @@ import org.kie.api.runtime.KieSession;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -31,18 +33,39 @@ public class RuleExecService {
     /**
      * 执行规则
      *
+     * @param reqDTO
+     * @return
+     */
+    public Map<String, Object> execRule(RuleExecReqDTO reqDTO) {
+        List<RuleExecReqDTO.RuleSetKeyReqDTO> ruleSet = reqDTO.getRuleSet();
+        Map<String, Object> resultMap = reqDTO.getModel();
+        for (RuleExecReqDTO.RuleSetKeyReqDTO ruleSetKeyReqDTO : ruleSet) {
+            resultMap = execRule(ruleSetKeyReqDTO.getRuleSetKey(), ruleSetKeyReqDTO.getRuleNameList(),
+                    ruleSetKeyReqDTO.getAgendaGroup(), resultMap);
+            if (!(Boolean) resultMap.get(RuleBuildConstant.RULE_HIT_FLAG_NAME)) {
+                break;
+            }
+        }
+        return resultMap;
+    }
+
+
+    /**
+     * 执行规则
+     *
      * @param ruleSetKey
      * @param ruleNameList
      * @param agendaGroup
      * @param model
      * @return
      */
-    public Map<String, Object> execRule(String ruleSetKey, Set<String> ruleNameList, String agendaGroup, Map model) {
+    public Map<String, Object> execRule(String ruleSetKey, Set<String> ruleNameList, String agendaGroup, Map<String, Object> model) {
         KieBase kieBase = kieBaseHolder.findKieBase(ruleSetKey);
         KieSession kieSession = kieBase.newKieSession();
         try {
             kieSession.addEventListener(ruleLogEventListener);
             Map<String, Object> result = new HashMap<>();
+            result.put(RuleBuildConstant.RULE_HIT_FLAG_NAME, false);
             kieSession.setGlobal(RuleBuildConstant.RESULT_MODEL, result);
             if (StringUtils.isNotBlank(agendaGroup)) {
                 kieSession.getAgenda().getAgendaGroup(agendaGroup).setFocus();
