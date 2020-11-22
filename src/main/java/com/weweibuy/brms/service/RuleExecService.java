@@ -4,6 +4,7 @@ import com.weweibuy.brms.drools.RuleLogEventListener;
 import com.weweibuy.brms.model.constant.RuleBuildConstant;
 import com.weweibuy.brms.support.KieBaseHolder;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.kie.api.KieBase;
 import org.kie.api.runtime.KieSession;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 规则执行服务
@@ -30,22 +32,31 @@ public class RuleExecService {
      * 执行规则
      *
      * @param ruleSetKey
+     * @param ruleNameList
      * @param agendaGroup
      * @param model
      * @return
      */
-    public Map execRule(String ruleSetKey, String agendaGroup, Map model) {
+    public Map<String, Object> execRule(String ruleSetKey, Set<String> ruleNameList, String agendaGroup, Map model) {
         KieBase kieBase = kieBaseHolder.findKieBase(ruleSetKey);
         KieSession kieSession = kieBase.newKieSession();
-        kieSession.addEventListener(ruleLogEventListener);
-        Map<Object, Object> result = new HashMap<>();
-        kieSession.setGlobal(RuleBuildConstant.RESULT_MODEL, result);
-        if (StringUtils.isNotBlank(agendaGroup)) {
-            kieSession.getAgenda().getAgendaGroup(agendaGroup).setFocus();
+        try {
+            kieSession.addEventListener(ruleLogEventListener);
+            Map<String, Object> result = new HashMap<>();
+            kieSession.setGlobal(RuleBuildConstant.RESULT_MODEL, result);
+            if (StringUtils.isNotBlank(agendaGroup)) {
+                kieSession.getAgenda().getAgendaGroup(agendaGroup).setFocus();
+            }
+            kieSession.insert(model);
+            if (CollectionUtils.isNotEmpty(ruleNameList)) {
+                kieSession.fireAllRules(match -> ruleNameList.contains(match.getRule().getName()));
+            } else {
+                kieSession.fireAllRules();
+            }
+            return result;
+        } finally {
+            kieSession.dispose();
         }
-        kieSession.insert(model);
-        kieSession.fireAllRules();
-        return result;
     }
 
 }
