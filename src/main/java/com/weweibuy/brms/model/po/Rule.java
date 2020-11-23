@@ -1,7 +1,8 @@
 package com.weweibuy.brms.model.po;
 
-import java.time.LocalDateTime;
 import lombok.Data;
+
+import java.time.LocalDateTime;
 
 @Data
 public class Rule {
@@ -24,6 +25,26 @@ public class Rule {
      * 规则集key(package)
      */
     private String ruleSetKey;
+
+    /**
+     * 规则录入方式(CODING:编码式录入; SELECT:选择式录入 )
+     */
+    private String ruleEnterType;
+
+    /**
+     * 规则condition代码(CODING方式)
+     */
+    private String ruleConditionText;
+
+    /**
+     * 规则action代码(CODING方式)
+     */
+    private String ruleActionText;
+
+    /**
+     * 规则import内容代码(CODING方式)
+     */
+    private String ruleImportText;
 
     /**
      * activation-group

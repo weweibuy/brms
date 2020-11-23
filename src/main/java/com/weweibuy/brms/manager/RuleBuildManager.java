@@ -1,6 +1,7 @@
 package com.weweibuy.brms.manager;
 
 import com.weweibuy.brms.model.constant.RuleBuildConstant;
+import com.weweibuy.brms.model.eum.RuleEnterTypeEum;
 import com.weweibuy.brms.model.po.Rule;
 import com.weweibuy.brms.model.po.*;
 import com.weweibuy.brms.repository.ConditionAndActionRepository;
@@ -16,8 +17,11 @@ import org.drools.template.model.*;
 import org.drools.template.model.Package;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author durenhao
@@ -39,6 +43,8 @@ public class RuleBuildManager {
 
 
     /**
+     * 构建规则集 string
+     *
      * @param ruleSetKey
      * @return
      */
@@ -70,15 +76,83 @@ public class RuleBuildManager {
         return out.getDRL();
     }
 
-
+    /**
+     * 构建规则
+     *
+     * @param rulePackage
+     * @param rule
+     * @param modelKey
+     * @return
+     */
     public org.drools.template.model.Rule buildDRule(Package rulePackage, Rule rule, String modelKey) {
+
+        String ruleEnterType = rule.getRuleEnterType();
+        RuleEnterTypeEum ruleEnterTypeEum = RuleEnterTypeEum.valueOf(ruleEnterType);
+
+        switch (ruleEnterTypeEum) {
+            case CODING:
+                return buildCodingTypeDRule(rulePackage, rule, modelKey);
+            case SELECT:
+                return buildSelectTypeDRule(rulePackage, rule, modelKey);
+            default:
+                throw Exceptions.business("未知的规则录入类型" + ruleEnterTypeEum);
+        }
+
+    }
+
+    /**
+     * 代码模式
+     *
+     * @param rulePackage
+     * @param rule
+     * @param modelKey
+     * @return
+     */
+    public org.drools.template.model.Rule buildCodingTypeDRule(Package rulePackage, Rule rule, String modelKey) {
+        org.drools.template.model.Rule dRule = newDRuleWithProperties(rule);
+        Condition condition = new Condition();
+        condition.setSnippet(rule.getRuleConditionText());
+        Consequence consequence = new Consequence();
+        consequence.setSnippet(rule.getRuleActionText());
+        dRule.addCondition(condition);
+        dRule.addConsequence(consequence);
+        String ruleImportText = rule.getRuleImportText();
+        List<Import> imports = rulePackage.getImports();
+        if (StringUtils.isNotBlank(ruleImportText)) {
+            Set<String> importClazzSet = imports.stream()
+                    .map(Import::getClassName)
+                    .collect(Collectors.toSet());
+            String[] strings = ruleImportText.split(";");
+            Arrays.stream(strings)
+                    .map(String::trim)
+                    .filter(str -> !importClazzSet.contains(str))
+                    .map(str -> {
+                        try {
+                            Class.forName(str);
+                        } catch (ClassNotFoundException e) {
+                            throw Exceptions.business("导入类: " + str + "不存在");
+                        }
+                        Import anImport = new Import();
+                        anImport.setClassName(str);
+                        return anImport;
+                    })
+                    .forEach(rulePackage::addImport);
+        }
+        return dRule;
+    }
+
+    /**
+     * 选择输入模式
+     *
+     * @param rulePackage
+     * @param rule
+     * @param modelKey
+     * @return
+     */
+    public org.drools.template.model.Rule buildSelectTypeDRule(Package rulePackage, Rule rule, String modelKey) {
         List<RuleCondition> ruleConditionList = conditionAndActionRepository.selectRuleCondition(rule.getRuleKey());
         List<RuleAction> ruleActionList = conditionAndActionRepository.selectRuleAction(rule.getRuleKey());
-
-        org.drools.template.model.Rule dRule = new org.drools.template.model.Rule(
-                rule.getRuleKey(), null, rule.getId().intValue());
-
-        ruleProperties(rule, dRule);
+        org.drools.template.model.Rule dRule = newDRuleWithProperties(rule);
 
         if (CollectionUtils.isNotEmpty(ruleConditionList)) {
             Condition condition = buildCondition(rulePackage, ruleConditionList, modelKey);
@@ -90,6 +164,16 @@ public class RuleBuildManager {
                 .forEach(dRule::addConsequence);
         return dRule;
     }
+
+
+    private org.drools.template.model.Rule newDRuleWithProperties(Rule rule) {
+        org.drools.template.model.Rule dRule = new org.drools.template.model.Rule(
+                rule.getRuleKey(), null, rule.getId().intValue());
+
+        ruleProperties(rule, dRule);
+        return dRule;
+    }
+
 
     public Condition buildCondition(Package rulePackage, List<RuleCondition> ruleConditionList, String modelKey) {
         return multipleConditionBuilder.buildCondition(rulePackage, ruleConditionList, modelKey);

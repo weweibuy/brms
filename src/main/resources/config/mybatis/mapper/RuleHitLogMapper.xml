@@ -9,7 +9,7 @@
     <result column="rule_key" jdbcType="VARCHAR" property="ruleKey" />
     <result column="input_model" jdbcType="VARCHAR" property="inputModel" />
     <result column="output_model" jdbcType="VARCHAR" property="outputModel" />
-    <result column="is_delete" jdbcType="TINYINT" property="deleted" />
+    <result column="is_delete" jdbcType="BIT" property="deleted" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
@@ -127,7 +127,7 @@
       update_time)
     values (#{id,jdbcType=BIGINT}, #{requestNo,jdbcType=VARCHAR}, #{ruleSetKey,jdbcType=VARCHAR}, 
       #{agendaGroup,jdbcType=VARCHAR}, #{ruleKey,jdbcType=VARCHAR}, #{inputModel,jdbcType=VARCHAR}, 
-      #{outputModel,jdbcType=VARCHAR}, #{deleted,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{outputModel,jdbcType=VARCHAR}, #{deleted,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.weweibuy.brms.model.po.RuleHitLog">
@@ -187,7 +187,7 @@
         #{outputModel,jdbcType=VARCHAR},
       </if>
       <if test="deleted != null">
-        #{deleted,jdbcType=TINYINT},
+        #{deleted,jdbcType=BIT},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -228,7 +228,7 @@
         output_model = #{record.outputModel,jdbcType=VARCHAR},
       </if>
       <if test="record.deleted != null">
-        is_delete = #{record.deleted,jdbcType=TINYINT},
+        is_delete = #{record.deleted,jdbcType=BIT},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -250,7 +250,7 @@
       rule_key = #{record.ruleKey,jdbcType=VARCHAR},
       input_model = #{record.inputModel,jdbcType=VARCHAR},
       output_model = #{record.outputModel,jdbcType=VARCHAR},
-      is_delete = #{record.deleted,jdbcType=TINYINT},
+      is_delete = #{record.deleted,jdbcType=BIT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
@@ -279,7 +279,7 @@
         output_model = #{outputModel,jdbcType=VARCHAR},
       </if>
       <if test="deleted != null">
-        is_delete = #{deleted,jdbcType=TINYINT},
+        is_delete = #{deleted,jdbcType=BIT},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -298,7 +298,7 @@
       rule_key = #{ruleKey,jdbcType=VARCHAR},
       input_model = #{inputModel,jdbcType=VARCHAR},
       output_model = #{outputModel,jdbcType=VARCHAR},
-      is_delete = #{deleted,jdbcType=TINYINT},
+      is_delete = #{deleted,jdbcType=BIT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}

@@ -413,6 +413,286 @@ public class RuleExample {
             return (Criteria) this;
         }
 
+        public Criteria andRuleEnterTypeIsNull() {
+            addCriterion("rule_enter_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleEnterTypeIsNotNull() {
+            addCriterion("rule_enter_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleEnterTypeEqualTo(String value) {
+            addCriterion("rule_enter_type =", value, "ruleEnterType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleEnterTypeNotEqualTo(String value) {
+            addCriterion("rule_enter_type <>", value, "ruleEnterType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleEnterTypeGreaterThan(String value) {
+            addCriterion("rule_enter_type >", value, "ruleEnterType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleEnterTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("rule_enter_type >=", value, "ruleEnterType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleEnterTypeLessThan(String value) {
+            addCriterion("rule_enter_type <", value, "ruleEnterType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleEnterTypeLessThanOrEqualTo(String value) {
+            addCriterion("rule_enter_type <=", value, "ruleEnterType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleEnterTypeLike(String value) {
+            addCriterion("rule_enter_type like", value, "ruleEnterType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleEnterTypeNotLike(String value) {
+            addCriterion("rule_enter_type not like", value, "ruleEnterType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleEnterTypeIn(List<String> values) {
+            addCriterion("rule_enter_type in", values, "ruleEnterType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleEnterTypeNotIn(List<String> values) {
+            addCriterion("rule_enter_type not in", values, "ruleEnterType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleEnterTypeBetween(String value1, String value2) {
+            addCriterion("rule_enter_type between", value1, value2, "ruleEnterType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleEnterTypeNotBetween(String value1, String value2) {
+            addCriterion("rule_enter_type not between", value1, value2, "ruleEnterType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleConditionTextIsNull() {
+            addCriterion("rule_condition_text is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleConditionTextIsNotNull() {
+            addCriterion("rule_condition_text is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleConditionTextEqualTo(String value) {
+            addCriterion("rule_condition_text =", value, "ruleConditionText");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleConditionTextNotEqualTo(String value) {
+            addCriterion("rule_condition_text <>", value, "ruleConditionText");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleConditionTextGreaterThan(String value) {
+            addCriterion("rule_condition_text >", value, "ruleConditionText");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleConditionTextGreaterThanOrEqualTo(String value) {
+            addCriterion("rule_condition_text >=", value, "ruleConditionText");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleConditionTextLessThan(String value) {
+            addCriterion("rule_condition_text <", value, "ruleConditionText");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleConditionTextLessThanOrEqualTo(String value) {
+            addCriterion("rule_condition_text <=", value, "ruleConditionText");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleConditionTextLike(String value) {
+            addCriterion("rule_condition_text like", value, "ruleConditionText");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleConditionTextNotLike(String value) {
+            addCriterion("rule_condition_text not like", value, "ruleConditionText");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleConditionTextIn(List<String> values) {
+            addCriterion("rule_condition_text in", values, "ruleConditionText");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleConditionTextNotIn(List<String> values) {
+            addCriterion("rule_condition_text not in", values, "ruleConditionText");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleConditionTextBetween(String value1, String value2) {
+            addCriterion("rule_condition_text between", value1, value2, "ruleConditionText");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleConditionTextNotBetween(String value1, String value2) {
+            addCriterion("rule_condition_text not between", value1, value2, "ruleConditionText");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleActionTextIsNull() {
+            addCriterion("rule_action_text is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleActionTextIsNotNull() {
+            addCriterion("rule_action_text is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleActionTextEqualTo(String value) {
+            addCriterion("rule_action_text =", value, "ruleActionText");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleActionTextNotEqualTo(String value) {
+            addCriterion("rule_action_text <>", value, "ruleActionText");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleActionTextGreaterThan(String value) {
+            addCriterion("rule_action_text >", value, "ruleActionText");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleActionTextGreaterThanOrEqualTo(String value) {
+            addCriterion("rule_action_text >=", value, "ruleActionText");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleActionTextLessThan(String value) {
+            addCriterion("rule_action_text <", value, "ruleActionText");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleActionTextLessThanOrEqualTo(String value) {
+            addCriterion("rule_action_text <=", value, "ruleActionText");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleActionTextLike(String value) {
+            addCriterion("rule_action_text like", value, "ruleActionText");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleActionTextNotLike(String value) {
+            addCriterion("rule_action_text not like", value, "ruleActionText");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleActionTextIn(List<String> values) {
+            addCriterion("rule_action_text in", values, "ruleActionText");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleActionTextNotIn(List<String> values) {
+            addCriterion("rule_action_text not in", values, "ruleActionText");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleActionTextBetween(String value1, String value2) {
+            addCriterion("rule_action_text between", value1, value2, "ruleActionText");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleActionTextNotBetween(String value1, String value2) {
+            addCriterion("rule_action_text not between", value1, value2, "ruleActionText");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleImportTextIsNull() {
+            addCriterion("rule_import_text is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleImportTextIsNotNull() {
+            addCriterion("rule_import_text is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleImportTextEqualTo(String value) {
+            addCriterion("rule_import_text =", value, "ruleImportText");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleImportTextNotEqualTo(String value) {
+            addCriterion("rule_import_text <>", value, "ruleImportText");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleImportTextGreaterThan(String value) {
+            addCriterion("rule_import_text >", value, "ruleImportText");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleImportTextGreaterThanOrEqualTo(String value) {
+            addCriterion("rule_import_text >=", value, "ruleImportText");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleImportTextLessThan(String value) {
+            addCriterion("rule_import_text <", value, "ruleImportText");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleImportTextLessThanOrEqualTo(String value) {
+            addCriterion("rule_import_text <=", value, "ruleImportText");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleImportTextLike(String value) {
+            addCriterion("rule_import_text like", value, "ruleImportText");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleImportTextNotLike(String value) {
+            addCriterion("rule_import_text not like", value, "ruleImportText");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleImportTextIn(List<String> values) {
+            addCriterion("rule_import_text in", values, "ruleImportText");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleImportTextNotIn(List<String> values) {
+            addCriterion("rule_import_text not in", values, "ruleImportText");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleImportTextBetween(String value1, String value2) {
+            addCriterion("rule_import_text between", value1, value2, "ruleImportText");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleImportTextNotBetween(String value1, String value2) {
+            addCriterion("rule_import_text not between", value1, value2, "ruleImportText");
+            return (Criteria) this;
+        }
+
         public Criteria andActivationGroupIsNull() {
             addCriterion("activation_group is null");
             return (Criteria) this;
