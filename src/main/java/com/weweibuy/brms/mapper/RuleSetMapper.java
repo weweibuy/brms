@@ -24,6 +24,8 @@ public interface RuleSetMapper {
 
     List<RuleSet> selectByExampleForUpdate(RuleSetExample example);
 
+    List<RuleSet> selectByExampleWithLimit(@Param("example") RuleSetExample example, @Param("limit") Integer limit);
+
     List<RuleSet> selectByExample(RuleSetExample example);
 
     RuleSet selectByPrimaryKey(Long id);

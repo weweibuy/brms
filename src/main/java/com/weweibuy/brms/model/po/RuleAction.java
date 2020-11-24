@@ -16,11 +16,6 @@ public class RuleAction {
     private String ruleKey;
 
     /**
-     * 模型key
-     */
-    private String modelKey;
-
-    /**
      * 属性名称
      */
     private String attrName;

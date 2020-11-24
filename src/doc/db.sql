@@ -18,7 +18,8 @@ create table brms_rule_set_model
    id                   bigint unsigned not null auto_increment comment 'id自增1',
    model_key            varchar(50) not null comment '模型key',
    rule_set_key         varchar(50) not null comment '规则集key(package)',
-   is_delete            tinyint not null default 0 comment '是否删除',
+   model_type           varchar(6) not null comment '模型类型(INPUT:输入; OUTPUT:输出)',
+   is_delete            tinyint(1) unsigned not null default 0 comment '是否删除',
    create_time          timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
    update_time          timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '更新时间',
    primary key (id)
@@ -100,7 +101,6 @@ create table brms_rule_action
 (
    id                   bigint unsigned not null auto_increment comment 'id自增1',
    rule_key             varchar(50) not null comment '规则key',
-   model_key            varchar(50) not null comment '模型key',
    attr_name            varchar(50) not null comment '属性名称',
    action_value         varchar(1000) not null comment '动作值',
    is_delete            tinyint not null default 0 comment '是否删除',

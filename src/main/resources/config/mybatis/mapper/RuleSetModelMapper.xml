@@ -5,6 +5,7 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="model_key" jdbcType="VARCHAR" property="modelKey" />
     <result column="rule_set_key" jdbcType="VARCHAR" property="ruleSetKey" />
+    <result column="model_type" jdbcType="VARCHAR" property="modelType" />
     <result column="is_delete" jdbcType="BIT" property="deleted" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, model_key, rule_set_key, is_delete, create_time, update_time
+    id, model_key, rule_set_key, model_type, is_delete, create_time, update_time
   </sql>
   <select id="selectByExample" parameterType="com.weweibuy.brms.model.example.RuleSetModelExample" resultMap="BaseResultMap">
     select
@@ -82,6 +83,23 @@
     </if>
     <if test="orderByClause != null">
       order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExampleWithLimit" parameterType="map" resultMap="BaseResultMap">
+    select
+    <if test="example.distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from brms_rule_set_model
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null">
+      order by ${example.orderByClause}
+    </if>
+    <if test="limit != null">
+      limit #{limit}
     </if>
   </select>
   <select id="selectByExampleForUpdate" parameterType="com.weweibuy.brms.model.example.RuleSetModelExample" resultMap="BaseResultMap">
@@ -117,11 +135,11 @@
   </delete>
   <insert id="insert" parameterType="com.weweibuy.brms.model.po.RuleSetModel">
     insert into brms_rule_set_model (id, model_key, rule_set_key, 
-      is_delete, create_time, update_time
-      )
+      model_type, is_delete, create_time, 
+      update_time)
     values (#{id,jdbcType=BIGINT}, #{modelKey,jdbcType=VARCHAR}, #{ruleSetKey,jdbcType=VARCHAR}, 
-      #{deleted,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
-      )
+      #{modelType,jdbcType=VARCHAR}, #{deleted,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.weweibuy.brms.model.po.RuleSetModel">
     insert into brms_rule_set_model
@@ -134,6 +152,9 @@
       </if>
       <if test="ruleSetKey != null">
         rule_set_key,
+      </if>
+      <if test="modelType != null">
+        model_type,
       </if>
       <if test="deleted != null">
         is_delete,
@@ -154,6 +175,9 @@
       </if>
       <if test="ruleSetKey != null">
         #{ruleSetKey,jdbcType=VARCHAR},
+      </if>
+      <if test="modelType != null">
+        #{modelType,jdbcType=VARCHAR},
       </if>
       <if test="deleted != null">
         #{deleted,jdbcType=BIT},
@@ -184,6 +208,9 @@
       <if test="record.ruleSetKey != null">
         rule_set_key = #{record.ruleSetKey,jdbcType=VARCHAR},
       </if>
+      <if test="record.modelType != null">
+        model_type = #{record.modelType,jdbcType=VARCHAR},
+      </if>
       <if test="record.deleted != null">
         is_delete = #{record.deleted,jdbcType=BIT},
       </if>
@@ -203,6 +230,7 @@
     set id = #{record.id,jdbcType=BIGINT},
       model_key = #{record.modelKey,jdbcType=VARCHAR},
       rule_set_key = #{record.ruleSetKey,jdbcType=VARCHAR},
+      model_type = #{record.modelType,jdbcType=VARCHAR},
       is_delete = #{record.deleted,jdbcType=BIT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
@@ -218,6 +246,9 @@
       </if>
       <if test="ruleSetKey != null">
         rule_set_key = #{ruleSetKey,jdbcType=VARCHAR},
+      </if>
+      <if test="modelType != null">
+        model_type = #{modelType,jdbcType=VARCHAR},
       </if>
       <if test="deleted != null">
         is_delete = #{deleted,jdbcType=BIT},
@@ -235,6 +266,7 @@
     update brms_rule_set_model
     set model_key = #{modelKey,jdbcType=VARCHAR},
       rule_set_key = #{ruleSetKey,jdbcType=VARCHAR},
+      model_type = #{modelType,jdbcType=VARCHAR},
       is_delete = #{deleted,jdbcType=BIT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}

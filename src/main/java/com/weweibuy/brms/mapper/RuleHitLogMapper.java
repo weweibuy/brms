@@ -24,6 +24,8 @@ public interface RuleHitLogMapper {
 
     List<RuleHitLog> selectByExampleForUpdate(RuleHitLogExample example);
 
+    List<RuleHitLog> selectByExampleWithLimit(@Param("example") RuleHitLogExample example, @Param("limit") Integer limit);
+
     List<RuleHitLog> selectByExample(RuleHitLogExample example);
 
     RuleHitLog selectByPrimaryKey(Long id);

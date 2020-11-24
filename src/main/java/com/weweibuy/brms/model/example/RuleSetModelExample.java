@@ -343,6 +343,76 @@ public class RuleSetModelExample {
             return (Criteria) this;
         }
 
+        public Criteria andModelTypeIsNull() {
+            addCriterion("model_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andModelTypeIsNotNull() {
+            addCriterion("model_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andModelTypeEqualTo(String value) {
+            addCriterion("model_type =", value, "modelType");
+            return (Criteria) this;
+        }
+
+        public Criteria andModelTypeNotEqualTo(String value) {
+            addCriterion("model_type <>", value, "modelType");
+            return (Criteria) this;
+        }
+
+        public Criteria andModelTypeGreaterThan(String value) {
+            addCriterion("model_type >", value, "modelType");
+            return (Criteria) this;
+        }
+
+        public Criteria andModelTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("model_type >=", value, "modelType");
+            return (Criteria) this;
+        }
+
+        public Criteria andModelTypeLessThan(String value) {
+            addCriterion("model_type <", value, "modelType");
+            return (Criteria) this;
+        }
+
+        public Criteria andModelTypeLessThanOrEqualTo(String value) {
+            addCriterion("model_type <=", value, "modelType");
+            return (Criteria) this;
+        }
+
+        public Criteria andModelTypeLike(String value) {
+            addCriterion("model_type like", value, "modelType");
+            return (Criteria) this;
+        }
+
+        public Criteria andModelTypeNotLike(String value) {
+            addCriterion("model_type not like", value, "modelType");
+            return (Criteria) this;
+        }
+
+        public Criteria andModelTypeIn(List<String> values) {
+            addCriterion("model_type in", values, "modelType");
+            return (Criteria) this;
+        }
+
+        public Criteria andModelTypeNotIn(List<String> values) {
+            addCriterion("model_type not in", values, "modelType");
+            return (Criteria) this;
+        }
+
+        public Criteria andModelTypeBetween(String value1, String value2) {
+            addCriterion("model_type between", value1, value2, "modelType");
+            return (Criteria) this;
+        }
+
+        public Criteria andModelTypeNotBetween(String value1, String value2) {
+            addCriterion("model_type not between", value1, value2, "modelType");
+            return (Criteria) this;
+        }
+
         public Criteria andDeletedIsNull() {
             addCriterion("is_delete is null");
             return (Criteria) this;

@@ -6,7 +6,7 @@ import com.weweibuy.brms.model.po.RuleSetModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import java.util.List;
 
 /**
  * @author durenhao
@@ -19,11 +19,11 @@ public class RuleSetModelRepository {
     private final RuleSetModelMapper ruleSetModelMapper;
 
 
-    public Optional<RuleSetModel> selectRuleSetModel(String ruleSetKey) {
-        return Optional.ofNullable(ruleSetModelMapper.selectOneByExample(RuleSetModelExample.newAndCreateCriteria()
+    public List<RuleSetModel> selectRuleSetModel(String ruleSetKey) {
+        return ruleSetModelMapper.selectByExample(RuleSetModelExample.newAndCreateCriteria()
                 .andDeletedEqualTo(false)
                 .andRuleSetKeyEqualTo(ruleSetKey)
-                .example()));
+                .example());
     }
 
 

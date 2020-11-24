@@ -1,5 +1,6 @@
 package com.weweibuy.brms.model.dto;
 
+import com.weweibuy.brms.model.eum.MultipleRuleSetExecModelStrategyEum;
 import lombok.Data;
 
 import javax.validation.Valid;
@@ -27,6 +28,11 @@ public class RuleExecReqDTO {
      */
     @NotEmpty(message = "请求模型不能为空集合")
     private Map<String, Object> model;
+
+    /**
+     * 模型策略模式  模式 USE_ACTION_MODEL
+     */
+    private MultipleRuleSetExecModelStrategyEum modelStrategy;
 
     @Data
     public static class RuleSetKeyReqDTO {

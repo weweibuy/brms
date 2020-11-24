@@ -1,6 +1,7 @@
 package com.weweibuy.brms.manager;
 
 import com.weweibuy.brms.model.constant.RuleBuildConstant;
+import com.weweibuy.brms.model.eum.ModelTypeEum;
 import com.weweibuy.brms.model.eum.RuleEnterTypeEum;
 import com.weweibuy.brms.model.po.Rule;
 import com.weweibuy.brms.model.po.*;
@@ -52,9 +53,20 @@ public class RuleBuildManager {
         RuleSet ruleSet = ruleAndSetRepository.selectRuleSet(ruleSetKey)
                 .orElseThrow(() -> Exceptions.business(String.format("规则集: %s不存在", ruleSetKey)));
 
-        RuleSetModel ruleSetModel = ruleSetModelRepository.selectRuleSetModel(ruleSetKey)
-                .orElseThrow(() -> Exceptions.business(String.format("规则集: %s对应的模型不存在", ruleSetKey)));
-        String modelKey = ruleSetModel.getModelKey();
+        List<RuleSetModel> ruleSetModel = ruleSetModelRepository.selectRuleSetModel(ruleSetKey);
+        RuleSetModel inputRuleSetModel = ruleSetModel.stream()
+                .filter(rm -> ModelTypeEum.INPUT.toString().equals(rm.getModelType()))
+                .findFirst()
+                .orElseThrow(() -> Exceptions.business(String.format("规则集: %s对应的输入模型不存在", ruleSetKey)));
+
+
+        RuleSetModel outputRuleSetModel = ruleSetModel.stream()
+                .filter(rm -> ModelTypeEum.OUTPUT.toString().equals(rm.getModelType()))
+                .findFirst()
+                .orElseThrow(() -> Exceptions.business(String.format("规则集: %s对应的输出模型不存在", ruleSetKey)));
+
+        String inputModelKey = inputRuleSetModel.getModelKey();
+        String outputModelKey = outputRuleSetModel.getModelKey();
 
         Package rulePackage = new Package(ruleSetKey);
 
@@ -68,7 +80,7 @@ public class RuleBuildManager {
         rulePackage.addVariable(global);
 
         ruleAndSetRepository.selectRule(ruleSetKey).stream()
-                .map(rule -> buildDRule(rulePackage, rule, modelKey))
+                .map(rule -> buildDRule(rulePackage, rule, inputModelKey, outputModelKey))
                 .forEach(rulePackage::addRule);
 
         DRLOutput out = new DRLOutput();
@@ -81,19 +93,20 @@ public class RuleBuildManager {
      *
      * @param rulePackage
      * @param rule
-     * @param modelKey
+     * @param inputModelKey
+     * @param outputModelKey
      * @return
      */
-    public org.drools.template.model.Rule buildDRule(Package rulePackage, Rule rule, String modelKey) {
+    public org.drools.template.model.Rule buildDRule(Package rulePackage, Rule rule, String inputModelKey, String outputModelKey) {
 
         String ruleEnterType = rule.getRuleEnterType();
         RuleEnterTypeEum ruleEnterTypeEum = RuleEnterTypeEum.valueOf(ruleEnterType);
 
         switch (ruleEnterTypeEum) {
             case CODING:
-                return buildCodingTypeDRule(rulePackage, rule, modelKey);
+                return buildCodingTypeDRule(rulePackage, rule, inputModelKey);
             case SELECT:
-                return buildSelectTypeDRule(rulePackage, rule, modelKey);
+                return buildSelectTypeDRule(rulePackage, rule, inputModelKey, outputModelKey);
             default:
                 throw Exceptions.business("未知的规则录入类型" + ruleEnterTypeEum);
         }
@@ -124,14 +137,10 @@ public class RuleBuildManager {
                     .collect(Collectors.toSet());
             String[] strings = ruleImportText.split(";");
             Arrays.stream(strings)
+                    .filter(StringUtils::isNotBlank)
                     .map(String::trim)
                     .filter(str -> !importClazzSet.contains(str))
                     .map(str -> {
-                        try {
-                            Class.forName(str);
-                        } catch (ClassNotFoundException e) {
-                            throw Exceptions.business("导入类: " + str + "不存在");
-                        }
                         Import anImport = new Import();
                         anImport.setClassName(str);
                         return anImport;
@@ -146,21 +155,22 @@ public class RuleBuildManager {
      *
      * @param rulePackage
      * @param rule
-     * @param modelKey
+     * @param inputModelKey
+     * @param outputModelKey
      * @return
      */
-    public org.drools.template.model.Rule buildSelectTypeDRule(Package rulePackage, Rule rule, String modelKey) {
+    public org.drools.template.model.Rule buildSelectTypeDRule(Package rulePackage, Rule rule, String inputModelKey, String outputModelKey) {
         List<RuleCondition> ruleConditionList = conditionAndActionRepository.selectRuleCondition(rule.getRuleKey());
         List<RuleAction> ruleActionList = conditionAndActionRepository.selectRuleAction(rule.getRuleKey());
         org.drools.template.model.Rule dRule = newDRuleWithProperties(rule);
 
         if (CollectionUtils.isNotEmpty(ruleConditionList)) {
-            Condition condition = buildCondition(rulePackage, ruleConditionList, modelKey);
+            Condition condition = buildCondition(rulePackage, ruleConditionList, inputModelKey);
             dRule.addCondition(condition);
         }
 
         ruleActionList.stream()
-                .map(r -> buildRuleAction(rulePackage, r))
+                .map(r -> buildRuleAction(rulePackage, outputModelKey, r))
                 .forEach(dRule::addConsequence);
         return dRule;
     }
@@ -179,8 +189,8 @@ public class RuleBuildManager {
         return multipleConditionBuilder.buildCondition(rulePackage, ruleConditionList, modelKey);
     }
 
-    public Consequence buildRuleAction(Package rulePackage, RuleAction ruleAction) {
-        return actionBuilder.buildRuleAction(rulePackage, ruleAction);
+    public Consequence buildRuleAction(Package rulePackage, String outputModelKey, RuleAction ruleAction) {
+        return actionBuilder.buildRuleAction(rulePackage, outputModelKey, ruleAction);
     }
 
     private void ruleProperties(Rule rule, org.drools.template.model.Rule dRule) {

@@ -27,13 +27,13 @@ public class ActionBuilder {
 
     private final ModelAndAttrRepository modelAndAttrRepository;
 
-    public Consequence buildRuleAction(Package rulePackage, RuleAction ruleAction) {
+    public Consequence buildRuleAction(Package rulePackage, String outputModelKey, RuleAction ruleAction) {
         RhsBuilder rhsBuilder = new RhsBuilder(ActionType.Code.ACTION, 0, 0, null);
         Consequence consequence = new Consequence();
         String attrKey = ruleAction.getAttrName();
         String resultModelPut = RuleBuildConstant.RESULT_MODEL_PUT;
         rhsBuilder.addTemplate(0, 0, resultModelPut);
-        String paramStr = paramStr(rulePackage, ruleAction.getModelKey(), attrKey, ruleAction.getActionValue());
+        String paramStr = paramStr(rulePackage, outputModelKey, attrKey, ruleAction.getActionValue());
         rhsBuilder.addCellValue(0, 0, DrlBuildSupport.formatString(attrKey) + "," + paramStr);
         consequence.setSnippet(rhsBuilder.getResult());
         return consequence;

@@ -24,6 +24,8 @@ public interface RuleActionMapper {
 
     List<RuleAction> selectByExampleForUpdate(RuleActionExample example);
 
+    List<RuleAction> selectByExampleWithLimit(@Param("example") RuleActionExample example, @Param("limit") Integer limit);
+
     List<RuleAction> selectByExample(RuleActionExample example);
 
     RuleAction selectByPrimaryKey(Long id);

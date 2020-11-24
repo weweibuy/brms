@@ -24,6 +24,8 @@ public interface ModelAttrMapper {
 
     List<ModelAttr> selectByExampleForUpdate(ModelAttrExample example);
 
+    List<ModelAttr> selectByExampleWithLimit(@Param("example") ModelAttrExample example, @Param("limit") Integer limit);
+
     List<ModelAttr> selectByExample(ModelAttrExample example);
 
     ModelAttr selectByPrimaryKey(Long id);

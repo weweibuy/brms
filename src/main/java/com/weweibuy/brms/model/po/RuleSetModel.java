@@ -21,6 +21,11 @@ public class RuleSetModel {
     private String ruleSetKey;
 
     /**
+     * 模型类型(INPUT:输入; OUTPUT:输出)
+     */
+    private String modelType;
+
+    /**
      * 是否删除
      */
     private Boolean deleted;

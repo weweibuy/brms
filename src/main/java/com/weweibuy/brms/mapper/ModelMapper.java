@@ -24,6 +24,8 @@ public interface ModelMapper {
 
     List<Model> selectByExampleForUpdate(ModelExample example);
 
+    List<Model> selectByExampleWithLimit(@Param("example") ModelExample example, @Param("limit") Integer limit);
+
     List<Model> selectByExample(ModelExample example);
 
     Model selectByPrimaryKey(Long id);

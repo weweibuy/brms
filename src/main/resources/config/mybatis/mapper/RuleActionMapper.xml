@@ -4,7 +4,6 @@
   <resultMap id="BaseResultMap" type="com.weweibuy.brms.model.po.RuleAction">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="rule_key" jdbcType="VARCHAR" property="ruleKey" />
-    <result column="model_key" jdbcType="VARCHAR" property="modelKey" />
     <result column="attr_name" jdbcType="VARCHAR" property="attrName" />
     <result column="action_value" jdbcType="VARCHAR" property="actionValue" />
     <result column="is_delete" jdbcType="TINYINT" property="deleted" />
@@ -70,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, rule_key, model_key, attr_name, action_value, is_delete, create_time, update_time
+    id, rule_key, attr_name, action_value, is_delete, create_time, update_time
   </sql>
   <select id="selectByExample" parameterType="com.weweibuy.brms.model.example.RuleActionExample" resultMap="BaseResultMap">
     select
@@ -84,6 +83,23 @@
     </if>
     <if test="orderByClause != null">
       order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExampleWithLimit" parameterType="map" resultMap="BaseResultMap">
+    select
+    <if test="example.distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from brms_rule_action
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null">
+      order by ${example.orderByClause}
+    </if>
+    <if test="limit != null">
+      limit #{limit}
     </if>
   </select>
   <select id="selectByExampleForUpdate" parameterType="com.weweibuy.brms.model.example.RuleActionExample" resultMap="BaseResultMap">
@@ -118,12 +134,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.weweibuy.brms.model.po.RuleAction">
-    insert into brms_rule_action (id, rule_key, model_key, 
-      attr_name, action_value, is_delete, 
-      create_time, update_time)
-    values (#{id,jdbcType=BIGINT}, #{ruleKey,jdbcType=VARCHAR}, #{modelKey,jdbcType=VARCHAR}, 
-      #{attrName,jdbcType=VARCHAR}, #{actionValue,jdbcType=VARCHAR}, #{deleted,jdbcType=TINYINT}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+    insert into brms_rule_action (id, rule_key, attr_name, 
+      action_value, is_delete, create_time, 
+      update_time)
+    values (#{id,jdbcType=BIGINT}, #{ruleKey,jdbcType=VARCHAR}, #{attrName,jdbcType=VARCHAR}, 
+      #{actionValue,jdbcType=VARCHAR}, #{deleted,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.weweibuy.brms.model.po.RuleAction">
     insert into brms_rule_action
@@ -133,9 +149,6 @@
       </if>
       <if test="ruleKey != null">
         rule_key,
-      </if>
-      <if test="modelKey != null">
-        model_key,
       </if>
       <if test="attrName != null">
         attr_name,
@@ -159,9 +172,6 @@
       </if>
       <if test="ruleKey != null">
         #{ruleKey,jdbcType=VARCHAR},
-      </if>
-      <if test="modelKey != null">
-        #{modelKey,jdbcType=VARCHAR},
       </if>
       <if test="attrName != null">
         #{attrName,jdbcType=VARCHAR},
@@ -195,9 +205,6 @@
       <if test="record.ruleKey != null">
         rule_key = #{record.ruleKey,jdbcType=VARCHAR},
       </if>
-      <if test="record.modelKey != null">
-        model_key = #{record.modelKey,jdbcType=VARCHAR},
-      </if>
       <if test="record.attrName != null">
         attr_name = #{record.attrName,jdbcType=VARCHAR},
       </if>
@@ -222,7 +229,6 @@
     update brms_rule_action
     set id = #{record.id,jdbcType=BIGINT},
       rule_key = #{record.ruleKey,jdbcType=VARCHAR},
-      model_key = #{record.modelKey,jdbcType=VARCHAR},
       attr_name = #{record.attrName,jdbcType=VARCHAR},
       action_value = #{record.actionValue,jdbcType=VARCHAR},
       is_delete = #{record.deleted,jdbcType=TINYINT},
@@ -237,9 +243,6 @@
     <set>
       <if test="ruleKey != null">
         rule_key = #{ruleKey,jdbcType=VARCHAR},
-      </if>
-      <if test="modelKey != null">
-        model_key = #{modelKey,jdbcType=VARCHAR},
       </if>
       <if test="attrName != null">
         attr_name = #{attrName,jdbcType=VARCHAR},
@@ -262,7 +265,6 @@
   <update id="updateByPrimaryKey" parameterType="com.weweibuy.brms.model.po.RuleAction">
     update brms_rule_action
     set rule_key = #{ruleKey,jdbcType=VARCHAR},
-      model_key = #{modelKey,jdbcType=VARCHAR},
       attr_name = #{attrName,jdbcType=VARCHAR},
       action_value = #{actionValue,jdbcType=VARCHAR},
       is_delete = #{deleted,jdbcType=TINYINT},

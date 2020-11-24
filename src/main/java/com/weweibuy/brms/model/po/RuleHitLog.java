@@ -1,8 +1,7 @@
 package com.weweibuy.brms.model.po;
 
-import lombok.Data;
-
 import java.time.LocalDateTime;
+import lombok.Data;
 
 @Data
 public class RuleHitLog {

@@ -24,6 +24,8 @@ public interface RuleConditionMapper {
 
     List<RuleCondition> selectByExampleForUpdate(RuleConditionExample example);
 
+    List<RuleCondition> selectByExampleWithLimit(@Param("example") RuleConditionExample example, @Param("limit") Integer limit);
+
     List<RuleCondition> selectByExample(RuleConditionExample example);
 
     RuleCondition selectByPrimaryKey(Long id);

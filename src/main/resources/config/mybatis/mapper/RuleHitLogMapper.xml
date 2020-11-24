@@ -89,6 +89,23 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByExampleWithLimit" parameterType="map" resultMap="BaseResultMap">
+    select
+    <if test="example.distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from brms_rule_hit_log
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null">
+      order by ${example.orderByClause}
+    </if>
+    <if test="limit != null">
+      limit #{limit}
+    </if>
+  </select>
   <select id="selectByExampleForUpdate" parameterType="com.weweibuy.brms.model.example.RuleHitLogExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
