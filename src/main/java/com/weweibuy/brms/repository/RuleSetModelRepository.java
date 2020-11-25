@@ -1,30 +1,34 @@
 package com.weweibuy.brms.repository;
 
-import com.weweibuy.brms.mapper.RuleSetModelMapper;
-import com.weweibuy.brms.model.example.RuleSetModelExample;
+import com.weweibuy.brms.model.eum.ModelTypeEum;
 import com.weweibuy.brms.model.po.RuleSetModel;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
+ * 规则集模型
+ *
  * @author durenhao
- * @date 2020/11/8 21:35
+ * @date 2020/11/25 20:40
  **/
-@Repository
-@RequiredArgsConstructor
-public class RuleSetModelRepository {
+public interface RuleSetModelRepository {
 
-    private final RuleSetModelMapper ruleSetModelMapper;
+    /**
+     * 查询模型
+     *
+     * @param ruleSetKey
+     * @return
+     */
+    List<RuleSetModel> selectRuleSetModel(String ruleSetKey);
 
-
-    public List<RuleSetModel> selectRuleSetModel(String ruleSetKey) {
-        return ruleSetModelMapper.selectByExample(RuleSetModelExample.newAndCreateCriteria()
-                .andDeletedEqualTo(false)
-                .andRuleSetKeyEqualTo(ruleSetKey)
-                .example());
-    }
-
+    /**
+     * 查询模型
+     *
+     * @param ruleSetKey
+     * @param modelType
+     * @return
+     */
+    Optional<RuleSetModel> selectRuleSetModel(String ruleSetKey, ModelTypeEum modelType);
 
 }

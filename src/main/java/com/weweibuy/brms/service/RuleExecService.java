@@ -1,9 +1,15 @@
 package com.weweibuy.brms.service;
 
 import com.weweibuy.brms.drools.RuleLogEventListener;
+import com.weweibuy.brms.manager.RuleQueryManager;
 import com.weweibuy.brms.model.constant.RuleBuildConstant;
 import com.weweibuy.brms.model.dto.RuleExecReqDTO;
+import com.weweibuy.brms.model.eum.ModelTypeEum;
+import com.weweibuy.brms.model.eum.MultipleRuleSetExecModelStrategyEum;
+import com.weweibuy.brms.model.po.ModelAttr;
 import com.weweibuy.brms.support.KieBaseHolder;
+import com.weweibuy.brms.support.RuleModelHelper;
+import com.weweibuy.framework.common.core.exception.Exceptions;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -30,6 +36,8 @@ public class RuleExecService {
 
     private final RuleLogEventListener ruleLogEventListener;
 
+    private final RuleQueryManager ruleQueryManager;
+
     /**
      * 执行规则
      *
@@ -38,8 +46,15 @@ public class RuleExecService {
      */
     public Map<String, Object> execRule(RuleExecReqDTO reqDTO) {
         List<RuleExecReqDTO.RuleSetKeyReqDTO> ruleSet = reqDTO.getRuleSet();
+        MultipleRuleSetExecModelStrategyEum modelStrategy = reqDTO.getModelStrategy();
+
         Map<String, Object> resultMap = reqDTO.getModel();
         for (RuleExecReqDTO.RuleSetKeyReqDTO ruleSetKeyReqDTO : ruleSet) {
+            List<ModelAttr> modelAttrList = ruleQueryManager.queryModelAttr(ruleSetKeyReqDTO.getRuleSetKey(), ModelTypeEum.INPUT)
+                    .orElseThrow(() -> Exceptions.business("规则模型不存在"));
+            // fix 属性
+            RuleModelHelper.fixModel(resultMap, modelAttrList);
+            // 执行规则
             resultMap = execRule(ruleSetKeyReqDTO.getRuleSetKey(), ruleSetKeyReqDTO.getRuleNameList(),
                     ruleSetKeyReqDTO.getAgendaGroup(), resultMap);
             if (!(Boolean) resultMap.get(RuleBuildConstant.RULE_HIT_FLAG_NAME)) {

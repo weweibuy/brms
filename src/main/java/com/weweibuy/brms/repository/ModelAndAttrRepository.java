@@ -1,52 +1,45 @@
 package com.weweibuy.brms.repository;
 
-import com.weweibuy.brms.mapper.ModelAttrMapper;
-import com.weweibuy.brms.mapper.ModelMapper;
-import com.weweibuy.brms.model.example.ModelAttrExample;
-import com.weweibuy.brms.model.example.ModelExample;
 import com.weweibuy.brms.model.po.Model;
 import com.weweibuy.brms.model.po.ModelAttr;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
 /**
+ * 模型与属性仓库
+ *
  * @author durenhao
- * @date 2020/11/8 21:35
+ * @date 2020/11/25 20:44
  **/
-@Repository
-@RequiredArgsConstructor
-public class ModelAndAttrRepository {
+public interface ModelAndAttrRepository {
 
-    private final ModelMapper modelMapper;
-
-    private final ModelAttrMapper modelAttrMapper;
-
-
-    public Optional<Model> selectModel(String modelKey) {
-        return Optional.ofNullable(modelMapper.selectOneByExample(ModelExample.newAndCreateCriteria()
-                .andDeletedEqualTo(false)
-                .andModelKeyEqualTo(modelKey)
-                .example()));
-    }
+    /**
+     * 查询模型
+     *
+     * @param modelKey
+     * @return
+     */
+    Optional<Model> selectModel(String modelKey);
 
 
-    public List<ModelAttr> selectModelAttrByModelKey(String modelKey) {
-        return modelAttrMapper.selectByExample(ModelAttrExample.newAndCreateCriteria()
-                .andDeletedEqualTo(false)
-                .andModelKeyEqualTo(modelKey)
-                .example());
-    }
+    /**
+     * 查询模型属性
+     *
+     * @param modelKey
+     * @return
+     */
+    List<ModelAttr> selectModelAttrByModelKey(String modelKey);
 
 
-    public Optional<ModelAttr> selectModelAttr(String modelKey, String attrName) {
-        return Optional.ofNullable(modelAttrMapper.selectOneByExample(ModelAttrExample.newAndCreateCriteria()
-                .andDeletedEqualTo(false)
-                .andModelKeyEqualTo(modelKey)
-                .andAttrNameEqualTo(attrName)
-                .example()));
-    }
+    /**
+     * 查询模型属性
+     *
+     * @param modelKey
+     * @param attrName
+     * @return
+     */
+    Optional<ModelAttr> selectModelAttr(String modelKey, String attrName);
+
 
 }
