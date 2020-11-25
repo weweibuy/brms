@@ -2,8 +2,10 @@ package com.weweibuy.brms.manager;
 
 import com.weweibuy.brms.model.eum.ModelTypeEum;
 import com.weweibuy.brms.model.po.ModelAttr;
+import com.weweibuy.brms.model.po.Rule;
 import com.weweibuy.brms.model.po.RuleSetModel;
 import com.weweibuy.brms.repository.ModelAndAttrRepository;
+import com.weweibuy.brms.repository.RuleAndSetRepository;
 import com.weweibuy.brms.repository.RuleSetModelRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -25,6 +27,8 @@ public class RuleQueryManager {
 
     private final ModelAndAttrRepository modelAndAttrRepository;
 
+    private final RuleAndSetRepository ruleAndSetRepository;
+
 
     /**
      * 查询 ruleSetKey 模型属性
@@ -38,5 +42,17 @@ public class RuleQueryManager {
                 .map(RuleSetModel::getModelKey)
                 .map(modelAndAttrRepository::selectModelAttrByModelKey);
     }
+
+
+    /**
+     * 查询规则
+     *
+     * @param ruleSetKey
+     * @return
+     */
+    public List<Rule> queryRule(String ruleSetKey) {
+        return ruleAndSetRepository.selectRule(ruleSetKey);
+    }
+
 
 }
