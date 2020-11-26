@@ -38,6 +38,8 @@ public class RuleExecService {
 
     private final RuleQueryManager ruleQueryManager;
 
+    private final RuleModelHelper ruleModelHelper;
+
     /**
      * 执行规则
      *
@@ -53,7 +55,7 @@ public class RuleExecService {
             List<ModelAttr> modelAttrList = ruleQueryManager.queryModelAttr(ruleSetKeyReqDTO.getRuleSetKey(), ModelTypeEum.INPUT)
                     .orElseThrow(() -> Exceptions.business("规则模型不存在"));
             // fix 属性
-            RuleModelHelper.fixModel(resultMap, modelAttrList);
+            ruleModelHelper.fixModel(resultMap, modelAttrList);
             // 执行规则
             resultMap = execRule(ruleSetKeyReqDTO.getRuleSetKey(), ruleSetKeyReqDTO.getRuleNameList(),
                     ruleSetKeyReqDTO.getAgendaGroup(), resultMap);
