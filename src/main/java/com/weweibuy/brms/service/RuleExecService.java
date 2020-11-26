@@ -76,7 +76,8 @@ public class RuleExecService {
      * @param model
      * @return
      */
-    public Map<String, Object> execRule(String ruleSetKey, Set<String> ruleNameList, String agendaGroup, Map<String, Object> model) {
+    public Map<String, Object> execRule(String ruleSetKey, Set<String> ruleNameList, String agendaGroup,
+                                        Map<String, Object> model) {
         KieBase kieBase = kieBaseHolder.findKieBase(ruleSetKey);
         KieSession kieSession = kieBase.newKieSession();
         try {
