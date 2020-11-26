@@ -6,6 +6,7 @@ import com.weweibuy.brms.model.po.ModelAttr;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -46,10 +47,12 @@ public class RuleModelHelper {
 
 //        ruleSetKeyList.stream()
 //                .map(ruleQueryManager::queryRule)
-//                .map(rules -> rules.stream().collect(Collectors.groupingBy(Rule::getRuleSetKey, Collectors.mapping())))
-//
-//
-//        Map<String, Object> processModelMap = new HashMap<>();
+//                .map(rules -> rules.stream()
+//                        .collect(Collectors.groupingBy(Rule::getRuleSetKey,
+//                                Collectors.mapping())))
+
+
+        Map<String, Object> processModelMap = new HashMap<>();
         return null;
 
     }

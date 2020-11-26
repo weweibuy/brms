@@ -3,12 +3,14 @@ package com.weweibuy.brms;
 import com.weweibuy.framework.common.core.model.constant.CommonConstant;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 
 /**
  * @author durenhao
  * @date 2020/11/8 11:32
  **/
 @SpringBootApplication
+@EnableCaching
 public class BrmsApplication {
 
     public static void main(String[] args) {
