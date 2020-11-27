@@ -3,12 +3,15 @@ package com.weweibuy.brms.service;
 import com.weweibuy.brms.drools.RuleLogEventListener;
 import com.weweibuy.brms.manager.RuleQueryManager;
 import com.weweibuy.brms.model.constant.RuleBuildConstant;
+import com.weweibuy.brms.model.context.RuleProcessContext;
 import com.weweibuy.brms.model.dto.RuleExecReqDTO;
+import com.weweibuy.brms.model.dto.RuleExecRespDTO;
 import com.weweibuy.brms.model.eum.ModelTypeEum;
 import com.weweibuy.brms.model.eum.MultipleRuleSetExecModelStrategyEum;
 import com.weweibuy.brms.model.po.ModelAttr;
 import com.weweibuy.brms.support.KieBaseHolder;
 import com.weweibuy.brms.support.RuleModelHelper;
+import com.weweibuy.brms.support.RuleProcessContextHolder;
 import com.weweibuy.framework.common.core.exception.Exceptions;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;
@@ -46,7 +49,7 @@ public class RuleExecService {
      * @param reqDTO
      * @return
      */
-    public Map<String, Object> execRule(RuleExecReqDTO reqDTO) {
+    public Map<String, Object> doExecRule(RuleExecReqDTO reqDTO) {
         List<RuleExecReqDTO.RuleSetKeyReqDTO> ruleSet = reqDTO.getRuleSet();
         MultipleRuleSetExecModelStrategyEum modelStrategy = reqDTO.getModelStrategy();
 
@@ -57,7 +60,7 @@ public class RuleExecService {
             // fix 属性
             ruleModelHelper.fixModel(resultMap, modelAttrList);
             // 执行规则
-            resultMap = execRule(ruleSetKeyReqDTO.getRuleSetKey(), ruleSetKeyReqDTO.getRuleNameList(),
+            resultMap = doExecRule(ruleSetKeyReqDTO.getRuleSetKey(), ruleSetKeyReqDTO.getRuleNameList(),
                     ruleSetKeyReqDTO.getAgendaGroup(), resultMap);
             if (!(Boolean) resultMap.get(RuleBuildConstant.RULE_HIT_FLAG_NAME)) {
                 break;
@@ -70,14 +73,33 @@ public class RuleExecService {
     /**
      * 执行规则
      *
+     * @param reqDTO
+     * @return
+     */
+    public RuleExecRespDTO execRule(RuleExecReqDTO reqDTO) {
+        RuleProcessContext ruleProcessContext = ruleModelHelper.newProcessContext(reqDTO);
+        RuleProcessContextHolder.putContext(ruleProcessContext);
+        try {
+            Map<String, Object> execRule = doExecRule(reqDTO);
+            // ruleProcessContext
+            return RuleExecRespDTO.fromProcessContext(ruleProcessContext, execRule);
+        } finally {
+            RuleProcessContextHolder.clearContext();
+        }
+    }
+
+
+    /**
+     * 执行规则
+     *
      * @param ruleSetKey
      * @param ruleNameList
      * @param agendaGroup
      * @param model
      * @return
      */
-    public Map<String, Object> execRule(String ruleSetKey, Set<String> ruleNameList, String agendaGroup,
-                                        Map<String, Object> model) {
+    public Map<String, Object> doExecRule(String ruleSetKey, Set<String> ruleNameList, String agendaGroup,
+                                          Map<String, Object> model) {
         KieBase kieBase = kieBaseHolder.findKieBase(ruleSetKey);
         KieSession kieSession = kieBase.newKieSession();
         try {

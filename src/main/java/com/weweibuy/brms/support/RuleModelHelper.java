@@ -1,14 +1,13 @@
 package com.weweibuy.brms.support;
 
 import com.weweibuy.brms.manager.RuleQueryManager;
-import com.weweibuy.brms.model.constant.RuleModelConstant;
+import com.weweibuy.brms.model.context.RuleProcessContext;
 import com.weweibuy.brms.model.dto.RuleExecReqDTO;
 import com.weweibuy.brms.model.po.ModelAttr;
 import com.weweibuy.brms.model.po.Rule;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -40,37 +39,34 @@ public class RuleModelHelper {
                 .forEach(name -> inputModel.put(name, null));
     }
 
+    public void bingProcessContext(RuleExecReqDTO execReqDTO) {
+        RuleProcessContext ruleProcessContext = newProcessContext(execReqDTO);
+        RuleProcessContextHolder.putContext(ruleProcessContext);
+    }
 
-    public Map<String, Object> newProcessModel(RuleExecReqDTO execReqDTO) {
+
+    /**
+     * @param execReqDTO
+     * @return
+     */
+    public RuleProcessContext newProcessContext(RuleExecReqDTO execReqDTO) {
+
         List<RuleExecReqDTO.RuleSetKeyReqDTO> ruleSet = execReqDTO.getRuleSet();
         List<String> ruleSetKeyList = ruleSet.stream()
                 .map(RuleExecReqDTO.RuleSetKeyReqDTO::getRuleSetKey)
                 .collect(Collectors.toList());
 
-        List<Map<String, Object>> processRuleSetMap = ruleSetKeyList.stream()
+        List<RuleProcessContext.ProcessRuleSet> processRuleSetList = ruleSetKeyList.stream()
                 .map(rs -> {
-                    Map<String, Object> ruleSetMap = new HashMap<>();
-                    ruleSetMap.put(RuleModelConstant.PROCESS_RULE_SET_FILED_NAME, rs);
                     List<Rule> ruleList = ruleQueryManager.queryRule(rs);
-                    List<Map<String, Object>> collect = ruleList.stream()
-                            .map(rule -> {
-                                Map<String, Object> ruleMap = new HashMap<>();
-                                ruleMap.put(RuleModelConstant.PROCESS_RULE_NAME, rule.getRuleKey());
-                                ruleMap.put(RuleModelConstant.PROCESS_RULE_HIT, false);
-                                ruleMap.put(RuleModelConstant.PROCESS_RULE_AGENDA_GROUP, rule.getActivationGroup());
-                                return ruleMap;
-                            })
+                    List<RuleProcessContext.ProcessRule> processRuleList = ruleList.stream()
+                            .map(rule -> RuleProcessContext.processRule(rule, false))
                             .collect(Collectors.toList());
-                    ruleSetMap.put(RuleModelConstant.PROCESS_RULE_FILED_NAME, collect);
-                    return ruleSetMap;
+                    return RuleProcessContext.processRuleSet(rs, processRuleList);
                 })
                 .collect(Collectors.toList());
 
-        Map<String, Object> processModelMap = new HashMap<>();
-        processModelMap.put("hit", false);
-        processModelMap.put("process", processRuleSetMap);
-        processModelMap.put("model", new HashMap<String, Object>());
-        return processModelMap;
+        return RuleProcessContext.ruleProcessContext(false, processRuleSetList);
 
     }
 
