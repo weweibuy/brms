@@ -7,8 +7,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 /**
  * @author durenhao
@@ -65,9 +63,9 @@ public class RuleProcessContext {
     public static RuleProcessContext ruleProcessContext(Boolean hit, List<ProcessRuleSet> ruleSetList) {
         RuleProcessContext ruleProcessContext = new RuleProcessContext();
         ruleProcessContext.setHit(hit);
-        Map<String, ProcessRuleSet> collect = ruleSetList.stream()
-                .collect(Collectors.toMap(ProcessRuleSet::getRuleSet, Function.identity(), (o, n) -> n));
-        ruleProcessContext.setProcessRuleSetMap(collect);
+        Map<String, ProcessRuleSet> ruleSetLinkedHashMap = new LinkedHashMap<>();
+        ruleSetList.forEach(r -> ruleSetLinkedHashMap.put(r.getRuleSet(), r));
+        ruleProcessContext.setProcessRuleSetMap(ruleSetLinkedHashMap);
         return ruleProcessContext;
     }
 
