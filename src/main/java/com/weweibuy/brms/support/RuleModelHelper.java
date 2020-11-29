@@ -3,14 +3,16 @@ package com.weweibuy.brms.support;
 import com.weweibuy.brms.manager.RuleQueryManager;
 import com.weweibuy.brms.model.context.RuleProcessContext;
 import com.weweibuy.brms.model.dto.RuleExecReqDTO;
+import com.weweibuy.brms.model.eum.ModelAttrTypeEum;
 import com.weweibuy.brms.model.po.ModelAttr;
 import com.weweibuy.brms.model.po.Rule;
+import com.weweibuy.brms.repository.ModelAndAttrRepository;
+import com.weweibuy.framework.common.core.exception.Exceptions;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -23,6 +25,8 @@ public class RuleModelHelper {
 
     private final RuleQueryManager ruleQueryManager;
 
+    private final ModelAndAttrRepository modelAndAttrRepository;
+
 
     /**
      * 对不存在的属性赋空值
@@ -32,11 +36,22 @@ public class RuleModelHelper {
      * @return
      */
     public void fixModel(Map<String, Object> inputModel, List<ModelAttr> modelAttrList) {
-        Set<String> inputModelKeySet = inputModel.keySet();
         modelAttrList.stream()
-                .map(ModelAttr::getAttrName)
-                .filter(name -> !inputModelKeySet.contains(name))
-                .forEach(name -> inputModel.put(name, null));
+                .forEach(modelAttr -> {
+                    String attrName = modelAttr.getAttrName();
+                    Object nestModelObject = inputModel.get(attrName);
+                    if (nestModelObject == null) {
+                        inputModel.put(attrName, null);
+                    } else if (ModelAttrTypeEum.OBJECT.toString().equals(modelAttr.getAttrType())) {
+                        if (!(nestModelObject instanceof Map)) {
+                            throw Exceptions.business(String.format("输入模型: %s, 错误", modelAttr.getModelKey()));
+                        }
+                        Map<String, Object> nestModelMap = (Map<String, Object>) nestModelObject;
+                        String attrModelKeyRef = modelAttr.getAttrModelKeyRef();
+                        List<ModelAttr> modelAttrs = modelAndAttrRepository.selectModelAttrByModelKey(attrModelKeyRef);
+                        fixModel(nestModelMap, modelAttrs);
+                    }
+                });
     }
 
     public void bingProcessContext(RuleExecReqDTO execReqDTO) {
