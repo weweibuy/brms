@@ -1,5 +1,6 @@
 package com.weweibuy.brms.support;
 
+import com.weweibuy.brms.model.po.Model;
 import com.weweibuy.brms.model.po.ModelAttr;
 import com.weweibuy.brms.model.po.RuleCondition;
 import com.weweibuy.brms.repository.ModelAndAttrRepository;
@@ -32,8 +33,34 @@ public class MultipleConditionBuilder {
         List<String> paramList = new ArrayList<>();
         for (int i = 0; i < ruleConditionList.size(); i++) {
             RuleCondition ruleCondition = ruleConditionList.get(i);
-            ModelAttr modelAttr = modelAttr(ruleCondition, modelKey);
-            stringBuilder.append(matchAndBuild(rulePackage, ruleCondition, modelAttr, paramList, i));
+            // TODO 对象类型的支持
+            String attrName = ruleCondition.getAttrName();
+            ModelAttr modelAttr = null;
+            boolean nesting = false;
+            String[] attrArr = null;
+            if (attrName.indexOf('.') != -1) {
+                // 对象类型
+                attrArr = attrName.split("\\.");
+                if (attrArr.length == 1) {
+                    throw Exceptions.business("对象类型属性错误");
+                }
+
+                modelAttr = lastModelAttr(attrArr, modelKey, 0);
+                nesting = true;
+            } else {
+                modelAttr = modelAttr(attrName, modelKey);
+            }
+            ConditionBuildContext context = ConditionBuildContext.builder()
+                    .maxIndex(ruleConditionList.size() - 1)
+                    .conditionIndex(i)
+                    .modelAttr(modelAttr)
+                    .oriConditionAttrName(attrName)
+                    .oriConditionAttrArr(attrArr)
+                    .nesting(nesting)
+                    .paramList(paramList)
+                    .build();
+            stringBuilder.append(matchAndBuild(rulePackage, ruleCondition, context));
+
             if (StringUtils.isNotBlank(ruleCondition.getLogicalOperator()) && i < ruleConditionList.size() - 1) {
                 stringBuilder.append(" ")
                         .append(ruleCondition.getLogicalOperator())
@@ -45,18 +72,31 @@ public class MultipleConditionBuilder {
         return condition;
     }
 
-    private String matchAndBuild(Package rulePackage, RuleCondition ruleCondition, ModelAttr modelAttr, List<String> paramList, Integer index) {
+    private String matchAndBuild(Package rulePackage, RuleCondition ruleCondition, ConditionBuildContext conditionBuildContext) {
         return conditionBuilderList.stream()
-                .filter(c -> c.match(ruleCondition, modelAttr))
+                .filter(c -> c.match(ruleCondition, conditionBuildContext.getModelAttr()))
                 .findFirst()
-                .map(c -> c.buildConditionStr(rulePackage, ruleCondition, modelAttr, paramList, index))
+                .map(c -> c.buildConditionStr(rulePackage, ruleCondition, conditionBuildContext))
                 .orElseThrow(() -> Exceptions.business("无法匹配对应的规则构建器"));
     }
 
-    public ModelAttr modelAttr(RuleCondition ruleCondition, String modelKey) {
-        String attrName = ruleCondition.getAttrName();
+    public ModelAttr modelAttr(String attrName, String modelKey) {
         return modelAndAttrRepository.selectModelAttr(modelKey, attrName)
                 .orElseThrow(() -> Exceptions.business(String.format("模型: %s, 属性 %s 不存在", modelKey, attrName)));
+    }
+
+    private ModelAttr lastModelAttr(String[] split, String modelKey, int index) {
+        if (index == split.length - 1) {
+            return modelAttr(split[index], modelKey);
+        } else {
+            ModelAttr modelAttr = modelAttr(split[index], modelKey);
+            String attrModelKeyRef = modelAttr.getAttrModelKeyRef();
+            String key = modelAndAttrRepository.selectModel(attrModelKeyRef)
+                    .map(Model::getModelKey)
+                    .orElseThrow(() -> Exceptions.business(String.format("模型: %s, 不存在", attrModelKeyRef)));
+            return lastModelAttr(split, key, ++index);
+        }
+
     }
 
 

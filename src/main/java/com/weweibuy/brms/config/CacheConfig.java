@@ -19,6 +19,11 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 public class CacheConfig {
 
+    /**
+     * TODO 刷新缓存
+     *
+     * @return
+     */
     @Bean
     public CacheManager caffeineCacheManager() {
         return buildCacheManager(100, 2000, 1, TimeUnit.DAYS);

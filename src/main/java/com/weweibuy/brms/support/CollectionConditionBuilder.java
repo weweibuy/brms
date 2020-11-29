@@ -27,13 +27,16 @@ public class CollectionConditionBuilder implements ConditionBuilder {
 
 
     @Override
-    public String buildConditionStr(Package rulePackage, RuleCondition ruleCondition, ModelAttr modelAttr, List<String> paramList, Integer index) {
-
+    public String buildConditionStr(Package rulePackage, RuleCondition ruleCondition, ConditionBuildContext conditionBuildContext) {
+        ModelAttr modelAttr = conditionBuildContext.getModelAttr();
+        List<String> paramList = conditionBuildContext.getParamList();
         String attrName = modelAttr.getAttrName();
+
         String conditionOperator = ruleCondition.getConditionOperator();
         OperatorEum operatorEum = OperatorEum.operatorEum(conditionOperator)
                 .orElseThrow(() -> Exceptions.business(conditionOperator + " :对应的操作不存在"));
         String template = null;
+        int index = conditionBuildContext.getConditionIndex();
         switch (operatorEum) {
             case ALL_MEMBER_OF:
                 template = String.format("DroolsCollectionUtils.allMemberOf(%s, $%s)", attrName, index + 1);
@@ -54,6 +57,17 @@ public class CollectionConditionBuilder implements ConditionBuilder {
             default:
                 template = String.format("%s %s $%s", attrName, ruleCondition.getConditionOperator(), index + 1);
         }
+
+        if (conditionBuildContext.getNesting()) {
+            String[] oriConditionAttrArr = conditionBuildContext.getOriConditionAttrArr();
+            String nestingConditionStr = DrlBuildSupport.buildNestingConditionStr(oriConditionAttrArr);
+            // 对象类型  user.dept in $1  -->  (user != null && user.dept in $1)
+            template = String.format("%s && %s", nestingConditionStr, template);
+        }
+        if (conditionBuildContext.getMaxIndex() != 0) {
+            template = "(" + template + ")";
+        }
+
         paramList.add(paramStr(ruleCondition, modelAttr));
         return template;
     }

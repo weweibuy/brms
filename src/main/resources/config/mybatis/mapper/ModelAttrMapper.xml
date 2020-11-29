@@ -7,6 +7,7 @@
     <result column="attr_name" jdbcType="VARCHAR" property="attrName" />
     <result column="attr_desc" jdbcType="VARCHAR" property="attrDesc" />
     <result column="attr_type" jdbcType="VARCHAR" property="attrType" />
+    <result column="attr_model_key_ref" jdbcType="VARCHAR" property="attrModelKeyRef" />
     <result column="attr_value_source" jdbcType="VARCHAR" property="attrValueSource" />
     <result column="is_delete" jdbcType="TINYINT" property="deleted" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -71,8 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, model_key, attr_name, attr_desc, attr_type, attr_value_source, is_delete, create_time, 
-    update_time
+    id, model_key, attr_name, attr_desc, attr_type, attr_model_key_ref, attr_value_source, 
+    is_delete, create_time, update_time
   </sql>
   <select id="selectByExample" parameterType="com.weweibuy.brms.model.example.ModelAttrExample" resultMap="BaseResultMap">
     select
@@ -138,13 +139,13 @@
   </delete>
   <insert id="insert" parameterType="com.weweibuy.brms.model.po.ModelAttr">
     insert into brms_model_attr (id, model_key, attr_name, 
-      attr_desc, attr_type, attr_value_source, 
-      is_delete, create_time, update_time
-      )
+      attr_desc, attr_type, attr_model_key_ref, 
+      attr_value_source, is_delete, create_time, 
+      update_time)
     values (#{id,jdbcType=BIGINT}, #{modelKey,jdbcType=VARCHAR}, #{attrName,jdbcType=VARCHAR}, 
-      #{attrDesc,jdbcType=VARCHAR}, #{attrType,jdbcType=VARCHAR}, #{attrValueSource,jdbcType=VARCHAR}, 
-      #{deleted,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
-      )
+      #{attrDesc,jdbcType=VARCHAR}, #{attrType,jdbcType=VARCHAR}, #{attrModelKeyRef,jdbcType=VARCHAR}, 
+      #{attrValueSource,jdbcType=VARCHAR}, #{deleted,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.weweibuy.brms.model.po.ModelAttr">
     insert into brms_model_attr
@@ -163,6 +164,9 @@
       </if>
       <if test="attrType != null">
         attr_type,
+      </if>
+      <if test="attrModelKeyRef != null">
+        attr_model_key_ref,
       </if>
       <if test="attrValueSource != null">
         attr_value_source,
@@ -192,6 +196,9 @@
       </if>
       <if test="attrType != null">
         #{attrType,jdbcType=VARCHAR},
+      </if>
+      <if test="attrModelKeyRef != null">
+        #{attrModelKeyRef,jdbcType=VARCHAR},
       </if>
       <if test="attrValueSource != null">
         #{attrValueSource,jdbcType=VARCHAR},
@@ -231,6 +238,9 @@
       <if test="record.attrType != null">
         attr_type = #{record.attrType,jdbcType=VARCHAR},
       </if>
+      <if test="record.attrModelKeyRef != null">
+        attr_model_key_ref = #{record.attrModelKeyRef,jdbcType=VARCHAR},
+      </if>
       <if test="record.attrValueSource != null">
         attr_value_source = #{record.attrValueSource,jdbcType=VARCHAR},
       </if>
@@ -255,6 +265,7 @@
       attr_name = #{record.attrName,jdbcType=VARCHAR},
       attr_desc = #{record.attrDesc,jdbcType=VARCHAR},
       attr_type = #{record.attrType,jdbcType=VARCHAR},
+      attr_model_key_ref = #{record.attrModelKeyRef,jdbcType=VARCHAR},
       attr_value_source = #{record.attrValueSource,jdbcType=VARCHAR},
       is_delete = #{record.deleted,jdbcType=TINYINT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -278,6 +289,9 @@
       <if test="attrType != null">
         attr_type = #{attrType,jdbcType=VARCHAR},
       </if>
+      <if test="attrModelKeyRef != null">
+        attr_model_key_ref = #{attrModelKeyRef,jdbcType=VARCHAR},
+      </if>
       <if test="attrValueSource != null">
         attr_value_source = #{attrValueSource,jdbcType=VARCHAR},
       </if>
@@ -299,6 +313,7 @@
       attr_name = #{attrName,jdbcType=VARCHAR},
       attr_desc = #{attrDesc,jdbcType=VARCHAR},
       attr_type = #{attrType,jdbcType=VARCHAR},
+      attr_model_key_ref = #{attrModelKeyRef,jdbcType=VARCHAR},
       attr_value_source = #{attrValueSource,jdbcType=VARCHAR},
       is_delete = #{deleted,jdbcType=TINYINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},

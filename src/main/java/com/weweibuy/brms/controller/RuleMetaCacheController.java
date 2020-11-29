@@ -1,12 +1,12 @@
 package com.weweibuy.brms.controller;
 
 import com.github.benmanes.caffeine.cache.Cache;
+import com.weweibuy.framework.common.core.exception.Exceptions;
+import com.weweibuy.framework.common.core.model.dto.CommonCodeResponse;
 import com.weweibuy.framework.common.core.model.dto.CommonDataResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.CacheManager;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -37,6 +37,28 @@ public class RuleMetaCacheController {
             cacheKeyMap.put(name, keyList);
         }
         return CommonDataResponse.success(cacheKeyMap);
+    }
+
+
+    @DeleteMapping
+    public CommonCodeResponse evictCacheKey() {
+        Collection<String> cacheNames = ruleMetaCache.getCacheNames();
+        cacheNames.stream()
+                .map(name -> (Cache<Object, Object>) ruleMetaCache.getCache(name).getNativeCache())
+                .forEach(cache -> cache.invalidateAll());
+        return CommonDataResponse.success();
+    }
+
+    @DeleteMapping("/{name}")
+    public CommonCodeResponse evictCacheKey(@PathVariable String name) {
+        Collection<String> cacheNames = ruleMetaCache.getCacheNames();
+        if (!cacheNames.contains(name)) {
+            throw Exceptions.business("缓存: " + name + "不存在");
+        }
+
+        Cache<Object, Object> cache = (Cache<Object, Object>) ruleMetaCache.getCache(name).getNativeCache();
+        cache.invalidateAll();
+        return CommonDataResponse.success();
     }
 
 

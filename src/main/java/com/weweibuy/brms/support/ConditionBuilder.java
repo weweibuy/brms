@@ -4,8 +4,6 @@ import com.weweibuy.brms.model.po.ModelAttr;
 import com.weweibuy.brms.model.po.RuleCondition;
 import org.drools.template.model.Package;
 
-import java.util.List;
-
 /**
  * 规则条件构建
  *
@@ -28,12 +26,10 @@ public interface ConditionBuilder {
      *
      * @param rulePackage
      * @param ruleCondition
-     * @param modelAttr
-     * @param paramList
-     * @param index
+     * @param conditionBuildContext
      * @return
      */
-    String buildConditionStr(Package rulePackage, RuleCondition ruleCondition, ModelAttr modelAttr, List<String> paramList, Integer index);
+    String buildConditionStr(Package rulePackage, RuleCondition ruleCondition, ConditionBuildContext conditionBuildContext);
 
 
 

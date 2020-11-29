@@ -15,6 +15,7 @@ public enum ModelAttrTypeEum {
     DATE_SECOND,
     COLLECTION_NUMBER,
     COLLECTION_STRING,
+    OBJECT
     ;
 
 

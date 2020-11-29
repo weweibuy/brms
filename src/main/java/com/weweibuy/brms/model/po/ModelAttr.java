@@ -1,7 +1,8 @@
 package com.weweibuy.brms.model.po;
 
-import java.time.LocalDateTime;
 import lombok.Data;
+
+import java.time.LocalDateTime;
 
 @Data
 public class ModelAttr {
@@ -29,6 +30,11 @@ public class ModelAttr {
      * 属性类型(STRING,NUMBER,BOOLEAN,DATE,COLLECTION)
      */
     private String attrType;
+
+    /**
+     * 属性模型(适用于OBJECT类型属性)
+     */
+    private String attrModelKeyRef;
 
     /**
      * 属性值来源(INPUT,DICT,ADDRESS)

@@ -46,4 +46,25 @@ public class DrlBuildSupport {
         return lhsBuilder.getResult();
     }
 
+    public static String buildNestingConditionStr(String[] oriAttr) {
+        String[] attr = new String[oriAttr.length - 1];
+        System.arraycopy(oriAttr, 0, attr, 0, oriAttr.length - 1);
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < attr.length; i++) {
+            for (int j = 0; j <= i; j++) {
+                stringBuilder.append(attr[j]);
+                if (j != i) {
+                    stringBuilder.append(".");
+                }
+            }
+            stringBuilder.append(" != null");
+            if (i != attr.length - 1) {
+                stringBuilder.append(" && ");
+            }
+        }
+        return stringBuilder.toString();
+    }
+
+
 }

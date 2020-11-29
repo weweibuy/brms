@@ -25,9 +25,22 @@ public class NotCollectionConditionBuilder implements ConditionBuilder {
     }
 
     @Override
-    public String buildConditionStr(Package rulePackage, RuleCondition ruleCondition, ModelAttr modelAttr, List<String> paramList, Integer index) {
+    public String buildConditionStr(Package rulePackage, RuleCondition ruleCondition, ConditionBuildContext conditionBuildContext) {
+        ModelAttr modelAttr = conditionBuildContext.getModelAttr();
+        List<String> paramList = conditionBuildContext.getParamList();
+        int index = conditionBuildContext.getConditionIndex();
+
         String attrName = ruleCondition.getAttrName();
         String template = String.format("%s %s %s", attrName, ruleCondition.getConditionOperator(), "$" + (index + 1));
+
+        if (conditionBuildContext.getNesting()) {
+            String conditionStr = DrlBuildSupport.buildNestingConditionStr(conditionBuildContext.getOriConditionAttrArr());
+            template = String.format("%s && %s", conditionStr, template);
+        }
+        if (conditionBuildContext.getMaxIndex() != 0) {
+            template = "(" + template + ")";
+        }
+
         String paramStr = paramStr(ruleCondition, modelAttr);
         paramList.add(paramStr);
         return template;

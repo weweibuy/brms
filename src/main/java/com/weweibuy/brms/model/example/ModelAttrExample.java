@@ -483,6 +483,76 @@ public class ModelAttrExample {
             return (Criteria) this;
         }
 
+        public Criteria andAttrModelKeyRefIsNull() {
+            addCriterion("attr_model_key_ref is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttrModelKeyRefIsNotNull() {
+            addCriterion("attr_model_key_ref is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttrModelKeyRefEqualTo(String value) {
+            addCriterion("attr_model_key_ref =", value, "attrModelKeyRef");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttrModelKeyRefNotEqualTo(String value) {
+            addCriterion("attr_model_key_ref <>", value, "attrModelKeyRef");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttrModelKeyRefGreaterThan(String value) {
+            addCriterion("attr_model_key_ref >", value, "attrModelKeyRef");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttrModelKeyRefGreaterThanOrEqualTo(String value) {
+            addCriterion("attr_model_key_ref >=", value, "attrModelKeyRef");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttrModelKeyRefLessThan(String value) {
+            addCriterion("attr_model_key_ref <", value, "attrModelKeyRef");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttrModelKeyRefLessThanOrEqualTo(String value) {
+            addCriterion("attr_model_key_ref <=", value, "attrModelKeyRef");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttrModelKeyRefLike(String value) {
+            addCriterion("attr_model_key_ref like", value, "attrModelKeyRef");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttrModelKeyRefNotLike(String value) {
+            addCriterion("attr_model_key_ref not like", value, "attrModelKeyRef");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttrModelKeyRefIn(List<String> values) {
+            addCriterion("attr_model_key_ref in", values, "attrModelKeyRef");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttrModelKeyRefNotIn(List<String> values) {
+            addCriterion("attr_model_key_ref not in", values, "attrModelKeyRef");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttrModelKeyRefBetween(String value1, String value2) {
+            addCriterion("attr_model_key_ref between", value1, value2, "attrModelKeyRef");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttrModelKeyRefNotBetween(String value1, String value2) {
+            addCriterion("attr_model_key_ref not between", value1, value2, "attrModelKeyRef");
+            return (Criteria) this;
+        }
+
         public Criteria andAttrValueSourceIsNull() {
             addCriterion("attr_value_source is null");
             return (Criteria) this;
