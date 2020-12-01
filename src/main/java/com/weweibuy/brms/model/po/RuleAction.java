@@ -37,6 +37,16 @@ public class RuleAction {
     private String valueCalculateFormula;
 
     /**
+     * 计算保留位数
+     */
+    private Integer calculateScale;
+
+    /**
+     * 计算取整方式
+     */
+    private String calculateRoundingMode;
+
+    /**
      * 是否删除
      */
     private Boolean deleted;

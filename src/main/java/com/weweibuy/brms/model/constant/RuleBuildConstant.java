@@ -10,6 +10,10 @@ public interface RuleBuildConstant {
 
     String COLLECTION_UTILS = "com.weweibuy.brms.utils.DroolsCollectionUtils";
 
+    String CALCULATE_UTILS = "com.weweibuy.brms.utils.DroolsCalculateUtils";
+
+    String MODEL = "$model";
+
     String CONDITION_MODEL = "$model:Map";
 
     String RESULT_MODEL = "resultModel";
@@ -18,6 +22,7 @@ public interface RuleBuildConstant {
 
     String RULE_HIT_FLAG_NAME = "_hit";
 
+    String CALCULATE_UTILS_METHOD = "DroolsCalculateUtils.calculate(%s, %s, %s, %s)";
 
 
 }

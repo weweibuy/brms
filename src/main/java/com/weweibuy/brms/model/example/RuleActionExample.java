@@ -553,6 +553,136 @@ public class RuleActionExample {
             return (Criteria) this;
         }
 
+        public Criteria andCalculateScaleIsNull() {
+            addCriterion("calculate_scale is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCalculateScaleIsNotNull() {
+            addCriterion("calculate_scale is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCalculateScaleEqualTo(Integer value) {
+            addCriterion("calculate_scale =", value, "calculateScale");
+            return (Criteria) this;
+        }
+
+        public Criteria andCalculateScaleNotEqualTo(Integer value) {
+            addCriterion("calculate_scale <>", value, "calculateScale");
+            return (Criteria) this;
+        }
+
+        public Criteria andCalculateScaleGreaterThan(Integer value) {
+            addCriterion("calculate_scale >", value, "calculateScale");
+            return (Criteria) this;
+        }
+
+        public Criteria andCalculateScaleGreaterThanOrEqualTo(Integer value) {
+            addCriterion("calculate_scale >=", value, "calculateScale");
+            return (Criteria) this;
+        }
+
+        public Criteria andCalculateScaleLessThan(Integer value) {
+            addCriterion("calculate_scale <", value, "calculateScale");
+            return (Criteria) this;
+        }
+
+        public Criteria andCalculateScaleLessThanOrEqualTo(Integer value) {
+            addCriterion("calculate_scale <=", value, "calculateScale");
+            return (Criteria) this;
+        }
+
+        public Criteria andCalculateScaleIn(List<Integer> values) {
+            addCriterion("calculate_scale in", values, "calculateScale");
+            return (Criteria) this;
+        }
+
+        public Criteria andCalculateScaleNotIn(List<Integer> values) {
+            addCriterion("calculate_scale not in", values, "calculateScale");
+            return (Criteria) this;
+        }
+
+        public Criteria andCalculateScaleBetween(Integer value1, Integer value2) {
+            addCriterion("calculate_scale between", value1, value2, "calculateScale");
+            return (Criteria) this;
+        }
+
+        public Criteria andCalculateScaleNotBetween(Integer value1, Integer value2) {
+            addCriterion("calculate_scale not between", value1, value2, "calculateScale");
+            return (Criteria) this;
+        }
+
+        public Criteria andCalculateRoundingModeIsNull() {
+            addCriterion("calculate_rounding_mode is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCalculateRoundingModeIsNotNull() {
+            addCriterion("calculate_rounding_mode is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCalculateRoundingModeEqualTo(String value) {
+            addCriterion("calculate_rounding_mode =", value, "calculateRoundingMode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCalculateRoundingModeNotEqualTo(String value) {
+            addCriterion("calculate_rounding_mode <>", value, "calculateRoundingMode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCalculateRoundingModeGreaterThan(String value) {
+            addCriterion("calculate_rounding_mode >", value, "calculateRoundingMode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCalculateRoundingModeGreaterThanOrEqualTo(String value) {
+            addCriterion("calculate_rounding_mode >=", value, "calculateRoundingMode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCalculateRoundingModeLessThan(String value) {
+            addCriterion("calculate_rounding_mode <", value, "calculateRoundingMode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCalculateRoundingModeLessThanOrEqualTo(String value) {
+            addCriterion("calculate_rounding_mode <=", value, "calculateRoundingMode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCalculateRoundingModeLike(String value) {
+            addCriterion("calculate_rounding_mode like", value, "calculateRoundingMode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCalculateRoundingModeNotLike(String value) {
+            addCriterion("calculate_rounding_mode not like", value, "calculateRoundingMode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCalculateRoundingModeIn(List<String> values) {
+            addCriterion("calculate_rounding_mode in", values, "calculateRoundingMode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCalculateRoundingModeNotIn(List<String> values) {
+            addCriterion("calculate_rounding_mode not in", values, "calculateRoundingMode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCalculateRoundingModeBetween(String value1, String value2) {
+            addCriterion("calculate_rounding_mode between", value1, value2, "calculateRoundingMode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCalculateRoundingModeNotBetween(String value1, String value2) {
+            addCriterion("calculate_rounding_mode not between", value1, value2, "calculateRoundingMode");
+            return (Criteria) this;
+        }
+
         public Criteria andDeletedIsNull() {
             addCriterion("is_delete is null");
             return (Criteria) this;

@@ -8,6 +8,8 @@
     <result column="action_value" jdbcType="VARCHAR" property="actionValue" />
     <result column="action_value_type" jdbcType="VARCHAR" property="actionValueType" />
     <result column="value_calculate_formula" jdbcType="VARCHAR" property="valueCalculateFormula" />
+    <result column="calculate_scale" jdbcType="TINYINT" property="calculateScale" />
+    <result column="calculate_rounding_mode" jdbcType="VARCHAR" property="calculateRoundingMode" />
     <result column="is_delete" jdbcType="BIT" property="deleted" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
@@ -72,7 +74,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, rule_key, attr_name, action_value, action_value_type, value_calculate_formula, 
-    is_delete, create_time, update_time
+    calculate_scale, calculate_rounding_mode, is_delete, create_time, update_time
   </sql>
   <select id="selectByExample" parameterType="com.weweibuy.brms.model.example.RuleActionExample" resultMap="BaseResultMap">
     select
@@ -139,10 +141,12 @@
   <insert id="insert" parameterType="com.weweibuy.brms.model.po.RuleAction">
     insert into brms_rule_action (id, rule_key, attr_name, 
       action_value, action_value_type, value_calculate_formula, 
+      calculate_scale, calculate_rounding_mode, 
       is_delete, create_time, update_time
       )
     values (#{id,jdbcType=BIGINT}, #{ruleKey,jdbcType=VARCHAR}, #{attrName,jdbcType=VARCHAR}, 
       #{actionValue,jdbcType=VARCHAR}, #{actionValueType,jdbcType=VARCHAR}, #{valueCalculateFormula,jdbcType=VARCHAR}, 
+      #{calculateScale,jdbcType=TINYINT}, #{calculateRoundingMode,jdbcType=VARCHAR}, 
       #{deleted,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
       )
   </insert>
@@ -166,6 +170,12 @@
       </if>
       <if test="valueCalculateFormula != null">
         value_calculate_formula,
+      </if>
+      <if test="calculateScale != null">
+        calculate_scale,
+      </if>
+      <if test="calculateRoundingMode != null">
+        calculate_rounding_mode,
       </if>
       <if test="deleted != null">
         is_delete,
@@ -195,6 +205,12 @@
       </if>
       <if test="valueCalculateFormula != null">
         #{valueCalculateFormula,jdbcType=VARCHAR},
+      </if>
+      <if test="calculateScale != null">
+        #{calculateScale,jdbcType=TINYINT},
+      </if>
+      <if test="calculateRoundingMode != null">
+        #{calculateRoundingMode,jdbcType=VARCHAR},
       </if>
       <if test="deleted != null">
         #{deleted,jdbcType=BIT},
@@ -234,6 +250,12 @@
       <if test="record.valueCalculateFormula != null">
         value_calculate_formula = #{record.valueCalculateFormula,jdbcType=VARCHAR},
       </if>
+      <if test="record.calculateScale != null">
+        calculate_scale = #{record.calculateScale,jdbcType=TINYINT},
+      </if>
+      <if test="record.calculateRoundingMode != null">
+        calculate_rounding_mode = #{record.calculateRoundingMode,jdbcType=VARCHAR},
+      </if>
       <if test="record.deleted != null">
         is_delete = #{record.deleted,jdbcType=BIT},
       </if>
@@ -256,6 +278,8 @@
       action_value = #{record.actionValue,jdbcType=VARCHAR},
       action_value_type = #{record.actionValueType,jdbcType=VARCHAR},
       value_calculate_formula = #{record.valueCalculateFormula,jdbcType=VARCHAR},
+      calculate_scale = #{record.calculateScale,jdbcType=TINYINT},
+      calculate_rounding_mode = #{record.calculateRoundingMode,jdbcType=VARCHAR},
       is_delete = #{record.deleted,jdbcType=BIT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
@@ -281,6 +305,12 @@
       <if test="valueCalculateFormula != null">
         value_calculate_formula = #{valueCalculateFormula,jdbcType=VARCHAR},
       </if>
+      <if test="calculateScale != null">
+        calculate_scale = #{calculateScale,jdbcType=TINYINT},
+      </if>
+      <if test="calculateRoundingMode != null">
+        calculate_rounding_mode = #{calculateRoundingMode,jdbcType=VARCHAR},
+      </if>
       <if test="deleted != null">
         is_delete = #{deleted,jdbcType=BIT},
       </if>
@@ -300,6 +330,8 @@
       action_value = #{actionValue,jdbcType=VARCHAR},
       action_value_type = #{actionValueType,jdbcType=VARCHAR},
       value_calculate_formula = #{valueCalculateFormula,jdbcType=VARCHAR},
+      calculate_scale = #{calculateScale,jdbcType=TINYINT},
+      calculate_rounding_mode = #{calculateRoundingMode,jdbcType=VARCHAR},
       is_delete = #{deleted,jdbcType=BIT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}

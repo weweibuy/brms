@@ -87,6 +87,7 @@
 
         <table tableName="brms_rule_action" domainObjectName="RuleAction" >
             <columnOverride column="is_delete"  property="deleted"  javaType="Boolean"/>
+            <columnOverride column="calculate_scale"  property="calculateScale"  javaType="Integer"/>
         </table>
 
         <table tableName="brms_rule_condition" domainObjectName="RuleCondition" >

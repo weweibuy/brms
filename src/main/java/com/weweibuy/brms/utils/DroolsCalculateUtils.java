@@ -43,14 +43,15 @@ public class DroolsCalculateUtils {
                 .filter(StringUtils::isNotBlank)
                 .collect(Collectors.toList());
         JEP jep = new JEP();
-        jep.parseExpression(formula);
-        Object result = null;
-        if (CollectionUtils.isEmpty(variableNameList)) {
-            result = jep.getValueAsObject();
-        } else {
+        if (CollectionUtils.isNotEmpty(variableNameList)) {
             variableNameList.forEach(name ->
                     jep.addVariable(name, getValue(name, model)));
         }
+        jep.parseExpression(formula);
+
+        Object result = Optional.ofNullable(jep.getValueAsObject())
+                .orElseThrow(() -> Exceptions.formatBusiness("计算公式: %s, 错误: %s", formula, jep.getErrorInfo()));
+
         BigDecimal bigDecimal = new BigDecimal(result.toString());
         if (scale != null && StringUtils.isBlank(roundingMode)) {
             bigDecimal = bigDecimal.setScale(scale, RoundingMode.valueOf(roundingMode));
@@ -60,7 +61,7 @@ public class DroolsCalculateUtils {
 
 
     private static Double getValue(String name, Map<String, Object> model) {
-        return Optional.ofNullable(getValueFromMap(name, model))
+        return getValueFromMap(name, model)
                 .map(Object::toString)
                 .filter(StringUtils::isNumeric)
                 .map(BigDecimal::new)

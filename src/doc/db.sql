@@ -106,6 +106,8 @@ create table brms_rule_action
    action_value         varchar(1000) not null comment '动作值',
    action_value_type    varchar(15) not null comment '动作值类型(INPUT:直接输入型; CALCULATE:计算型)',
    value_calculate_formula varchar(300) not null default '' comment '动作值计算公式(CALCULATE 类型下有效)',
+   calculate_scale      tinyint unsigned comment '计算保留位数',
+   calculate_rounding_mode varchar(15) not null default '' comment '计算取整方式',
    is_delete            tinyint(1) unsigned not null default 0 comment '是否删除',
    create_time          timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
    update_time          timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '更新时间',
