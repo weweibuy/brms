@@ -413,6 +413,146 @@ public class RuleActionExample {
             return (Criteria) this;
         }
 
+        public Criteria andActionValueTypeIsNull() {
+            addCriterion("action_value_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionValueTypeIsNotNull() {
+            addCriterion("action_value_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionValueTypeEqualTo(String value) {
+            addCriterion("action_value_type =", value, "actionValueType");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionValueTypeNotEqualTo(String value) {
+            addCriterion("action_value_type <>", value, "actionValueType");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionValueTypeGreaterThan(String value) {
+            addCriterion("action_value_type >", value, "actionValueType");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionValueTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("action_value_type >=", value, "actionValueType");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionValueTypeLessThan(String value) {
+            addCriterion("action_value_type <", value, "actionValueType");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionValueTypeLessThanOrEqualTo(String value) {
+            addCriterion("action_value_type <=", value, "actionValueType");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionValueTypeLike(String value) {
+            addCriterion("action_value_type like", value, "actionValueType");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionValueTypeNotLike(String value) {
+            addCriterion("action_value_type not like", value, "actionValueType");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionValueTypeIn(List<String> values) {
+            addCriterion("action_value_type in", values, "actionValueType");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionValueTypeNotIn(List<String> values) {
+            addCriterion("action_value_type not in", values, "actionValueType");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionValueTypeBetween(String value1, String value2) {
+            addCriterion("action_value_type between", value1, value2, "actionValueType");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionValueTypeNotBetween(String value1, String value2) {
+            addCriterion("action_value_type not between", value1, value2, "actionValueType");
+            return (Criteria) this;
+        }
+
+        public Criteria andValueCalculateFormulaIsNull() {
+            addCriterion("value_calculate_formula is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andValueCalculateFormulaIsNotNull() {
+            addCriterion("value_calculate_formula is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andValueCalculateFormulaEqualTo(String value) {
+            addCriterion("value_calculate_formula =", value, "valueCalculateFormula");
+            return (Criteria) this;
+        }
+
+        public Criteria andValueCalculateFormulaNotEqualTo(String value) {
+            addCriterion("value_calculate_formula <>", value, "valueCalculateFormula");
+            return (Criteria) this;
+        }
+
+        public Criteria andValueCalculateFormulaGreaterThan(String value) {
+            addCriterion("value_calculate_formula >", value, "valueCalculateFormula");
+            return (Criteria) this;
+        }
+
+        public Criteria andValueCalculateFormulaGreaterThanOrEqualTo(String value) {
+            addCriterion("value_calculate_formula >=", value, "valueCalculateFormula");
+            return (Criteria) this;
+        }
+
+        public Criteria andValueCalculateFormulaLessThan(String value) {
+            addCriterion("value_calculate_formula <", value, "valueCalculateFormula");
+            return (Criteria) this;
+        }
+
+        public Criteria andValueCalculateFormulaLessThanOrEqualTo(String value) {
+            addCriterion("value_calculate_formula <=", value, "valueCalculateFormula");
+            return (Criteria) this;
+        }
+
+        public Criteria andValueCalculateFormulaLike(String value) {
+            addCriterion("value_calculate_formula like", value, "valueCalculateFormula");
+            return (Criteria) this;
+        }
+
+        public Criteria andValueCalculateFormulaNotLike(String value) {
+            addCriterion("value_calculate_formula not like", value, "valueCalculateFormula");
+            return (Criteria) this;
+        }
+
+        public Criteria andValueCalculateFormulaIn(List<String> values) {
+            addCriterion("value_calculate_formula in", values, "valueCalculateFormula");
+            return (Criteria) this;
+        }
+
+        public Criteria andValueCalculateFormulaNotIn(List<String> values) {
+            addCriterion("value_calculate_formula not in", values, "valueCalculateFormula");
+            return (Criteria) this;
+        }
+
+        public Criteria andValueCalculateFormulaBetween(String value1, String value2) {
+            addCriterion("value_calculate_formula between", value1, value2, "valueCalculateFormula");
+            return (Criteria) this;
+        }
+
+        public Criteria andValueCalculateFormulaNotBetween(String value1, String value2) {
+            addCriterion("value_calculate_formula not between", value1, value2, "valueCalculateFormula");
+            return (Criteria) this;
+        }
+
         public Criteria andDeletedIsNull() {
             addCriterion("is_delete is null");
             return (Criteria) this;

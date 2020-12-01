@@ -132,6 +132,12 @@
             <artifactId>spring-context-support</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.scijava</groupId>
+            <artifactId>jep</artifactId>
+            <version>2.4.2</version>
+        </dependency>
+
 
     </dependencies>
 

@@ -1,7 +1,8 @@
 package com.weweibuy.brms.model.po;
 
-import java.time.LocalDateTime;
 import lombok.Data;
+
+import java.time.LocalDateTime;
 
 @Data
 public class RuleAction {
@@ -24,6 +25,16 @@ public class RuleAction {
      * 动作值
      */
     private String actionValue;
+
+    /**
+     * 动作值类型(INPUT:直接输入型; CALCULATE:计算型)
+     */
+    private String actionValueType;
+
+    /**
+     * 动作值计算公式(CALCULATE 类型下有效)
+     */
+    private String valueCalculateFormula;
 
     /**
      * 是否删除

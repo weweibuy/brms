@@ -76,4 +76,8 @@ public class ActionBuilder {
         }
     }
 
+    public static void main(String[] args) {
+
+    }
+
 }

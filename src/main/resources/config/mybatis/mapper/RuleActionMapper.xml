@@ -6,7 +6,9 @@
     <result column="rule_key" jdbcType="VARCHAR" property="ruleKey" />
     <result column="attr_name" jdbcType="VARCHAR" property="attrName" />
     <result column="action_value" jdbcType="VARCHAR" property="actionValue" />
-    <result column="is_delete" jdbcType="TINYINT" property="deleted" />
+    <result column="action_value_type" jdbcType="VARCHAR" property="actionValueType" />
+    <result column="value_calculate_formula" jdbcType="VARCHAR" property="valueCalculateFormula" />
+    <result column="is_delete" jdbcType="BIT" property="deleted" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
@@ -69,7 +71,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, rule_key, attr_name, action_value, is_delete, create_time, update_time
+    id, rule_key, attr_name, action_value, action_value_type, value_calculate_formula, 
+    is_delete, create_time, update_time
   </sql>
   <select id="selectByExample" parameterType="com.weweibuy.brms.model.example.RuleActionExample" resultMap="BaseResultMap">
     select
@@ -135,11 +138,13 @@
   </delete>
   <insert id="insert" parameterType="com.weweibuy.brms.model.po.RuleAction">
     insert into brms_rule_action (id, rule_key, attr_name, 
-      action_value, is_delete, create_time, 
-      update_time)
+      action_value, action_value_type, value_calculate_formula, 
+      is_delete, create_time, update_time
+      )
     values (#{id,jdbcType=BIGINT}, #{ruleKey,jdbcType=VARCHAR}, #{attrName,jdbcType=VARCHAR}, 
-      #{actionValue,jdbcType=VARCHAR}, #{deleted,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+      #{actionValue,jdbcType=VARCHAR}, #{actionValueType,jdbcType=VARCHAR}, #{valueCalculateFormula,jdbcType=VARCHAR}, 
+      #{deleted,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.weweibuy.brms.model.po.RuleAction">
     insert into brms_rule_action
@@ -155,6 +160,12 @@
       </if>
       <if test="actionValue != null">
         action_value,
+      </if>
+      <if test="actionValueType != null">
+        action_value_type,
+      </if>
+      <if test="valueCalculateFormula != null">
+        value_calculate_formula,
       </if>
       <if test="deleted != null">
         is_delete,
@@ -179,8 +190,14 @@
       <if test="actionValue != null">
         #{actionValue,jdbcType=VARCHAR},
       </if>
+      <if test="actionValueType != null">
+        #{actionValueType,jdbcType=VARCHAR},
+      </if>
+      <if test="valueCalculateFormula != null">
+        #{valueCalculateFormula,jdbcType=VARCHAR},
+      </if>
       <if test="deleted != null">
-        #{deleted,jdbcType=TINYINT},
+        #{deleted,jdbcType=BIT},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -211,8 +228,14 @@
       <if test="record.actionValue != null">
         action_value = #{record.actionValue,jdbcType=VARCHAR},
       </if>
+      <if test="record.actionValueType != null">
+        action_value_type = #{record.actionValueType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.valueCalculateFormula != null">
+        value_calculate_formula = #{record.valueCalculateFormula,jdbcType=VARCHAR},
+      </if>
       <if test="record.deleted != null">
-        is_delete = #{record.deleted,jdbcType=TINYINT},
+        is_delete = #{record.deleted,jdbcType=BIT},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -231,7 +254,9 @@
       rule_key = #{record.ruleKey,jdbcType=VARCHAR},
       attr_name = #{record.attrName,jdbcType=VARCHAR},
       action_value = #{record.actionValue,jdbcType=VARCHAR},
-      is_delete = #{record.deleted,jdbcType=TINYINT},
+      action_value_type = #{record.actionValueType,jdbcType=VARCHAR},
+      value_calculate_formula = #{record.valueCalculateFormula,jdbcType=VARCHAR},
+      is_delete = #{record.deleted,jdbcType=BIT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
@@ -250,8 +275,14 @@
       <if test="actionValue != null">
         action_value = #{actionValue,jdbcType=VARCHAR},
       </if>
+      <if test="actionValueType != null">
+        action_value_type = #{actionValueType,jdbcType=VARCHAR},
+      </if>
+      <if test="valueCalculateFormula != null">
+        value_calculate_formula = #{valueCalculateFormula,jdbcType=VARCHAR},
+      </if>
       <if test="deleted != null">
-        is_delete = #{deleted,jdbcType=TINYINT},
+        is_delete = #{deleted,jdbcType=BIT},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -267,7 +298,9 @@
     set rule_key = #{ruleKey,jdbcType=VARCHAR},
       attr_name = #{attrName,jdbcType=VARCHAR},
       action_value = #{actionValue,jdbcType=VARCHAR},
-      is_delete = #{deleted,jdbcType=TINYINT},
+      action_value_type = #{actionValueType,jdbcType=VARCHAR},
+      value_calculate_formula = #{valueCalculateFormula,jdbcType=VARCHAR},
+      is_delete = #{deleted,jdbcType=BIT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
