@@ -5,7 +5,8 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.nfunk.jep.JEP;
+import org.scijava.parsington.Variable;
+import org.scijava.parsington.eval.DefaultEvaluator;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -42,15 +43,22 @@ public class DroolsCalculateUtils {
         List<String> variableNameList = Arrays.stream(formula.split(REGEX))
                 .filter(StringUtils::isNotBlank)
                 .collect(Collectors.toList());
-        JEP jep = new JEP();
+        DefaultEvaluator evaluator = new DefaultEvaluator();
+
         if (CollectionUtils.isNotEmpty(variableNameList)) {
             variableNameList.forEach(name ->
-                    jep.addVariable(name, getValue(name, model)));
+                    evaluator.set(new Variable(name), getValue(name, model)));
         }
-        jep.parseExpression(formula);
 
-        Object result = Optional.ofNullable(jep.getValueAsObject())
-                .orElseThrow(() -> Exceptions.formatBusiness("计算公式: %s, 错误: %s", formula, jep.getErrorInfo()));
+        Object result = null;
+        try {
+            result = evaluator.evaluate(formula);
+        } catch (Exception e) {
+            Exceptions.formatBusiness("计算公式: %s, 错误: %s", formula, e.getMessage());
+        }
+        if (result instanceof Integer) {
+            return result + "";
+        }
 
         BigDecimal bigDecimal = new BigDecimal(result.toString());
         if (scale != null && StringUtils.isBlank(roundingMode)) {
@@ -60,12 +68,11 @@ public class DroolsCalculateUtils {
     }
 
 
-    private static Double getValue(String name, Map<String, Object> model) {
+    private static Number getValue(String name, Map<String, Object> model) {
         return getValueFromMap(name, model)
                 .map(Object::toString)
                 .filter(StringUtils::isNumeric)
-                .map(BigDecimal::new)
-                .map(BigDecimal::doubleValue)
+                .map(str -> Double.valueOf(str))
                 .orElseThrow(() -> Exceptions.formatBusiness("计算属性: %s 不存在或对应值错误", name));
     }
 
