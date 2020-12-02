@@ -103,7 +103,7 @@ create table brms_rule_action
    id                   bigint unsigned not null auto_increment comment 'id自增1',
    rule_key             varchar(50) not null comment '规则key',
    attr_name            varchar(50) not null comment '属性名称',
-   action_value         varchar(1000) not null comment '动作值',
+   action_value         varchar(1000) not null DEFAULT '' comment '动作值',
    action_value_type    varchar(15) not null comment '动作值类型(INPUT:直接输入型; CALCULATE:计算型)',
    value_calculate_formula varchar(300) not null default '' comment '动作值计算公式(CALCULATE 类型下有效)',
    calculate_scale      tinyint unsigned comment '计算保留位数',

@@ -12,6 +12,7 @@ import org.drools.template.model.Package;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,6 +32,9 @@ public class MultipleConditionBuilder {
         Condition condition = new Condition();
         StringBuilder stringBuilder = new StringBuilder();
         List<String> paramList = new ArrayList<>();
+        ruleConditionList = ruleConditionList.stream()
+                .sorted(Comparator.comparing(RuleCondition::getConditionOrder))
+                .collect(Collectors.toList());
         for (int i = 0; i < ruleConditionList.size(); i++) {
             RuleCondition ruleCondition = ruleConditionList.get(i);
             // TODO 对象类型的支持

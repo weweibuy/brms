@@ -40,6 +40,7 @@ public class DroolsCalculateUtils {
         if (StringUtils.isBlank(formula)) {
             throw Exceptions.business("计算公式错误");
         }
+        // TODO 小数分隔问题
         List<String> variableNameList = Arrays.stream(formula.split(REGEX))
                 .filter(StringUtils::isNotBlank)
                 .collect(Collectors.toList());
@@ -68,12 +69,14 @@ public class DroolsCalculateUtils {
     private static Number getValue(String name, Map<String, Object> model) {
         return getValueFromMap(name, model)
                 .map(Object::toString)
-                .filter(StringUtils::isNumeric)
                 .map(Double::valueOf)
                 .orElseThrow(() -> Exceptions.formatBusiness("计算属性: %s 不存在或对应值错误", name));
     }
 
     private static Optional<Object> getValueFromMap(String name, Map<String, Object> model) {
+        if(name.equals(".")){
+            System.err.println("");
+        }
         if (name.indexOf('.') == -1) {
             return Optional.ofNullable(model.get(name));
         }
