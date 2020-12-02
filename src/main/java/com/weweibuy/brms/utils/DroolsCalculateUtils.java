@@ -61,7 +61,7 @@ public class DroolsCalculateUtils {
         }
 
         BigDecimal bigDecimal = new BigDecimal(result.toString());
-        if (scale != null && StringUtils.isBlank(roundingMode)) {
+        if (scale != null && StringUtils.isNotBlank(roundingMode)) {
             bigDecimal = bigDecimal.setScale(scale, RoundingMode.valueOf(roundingMode));
         }
         return bigDecimal.toString();
