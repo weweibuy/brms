@@ -16,7 +16,6 @@ public class DroolsCalculateUtilsTest {
         String calculate = DroolsCalculateUtils.calculate(map, exp, null, null);
         System.out.println("计算结果： " + calculate);
 
-
     }
 
 

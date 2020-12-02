@@ -54,10 +54,7 @@ public class DroolsCalculateUtils {
         try {
             result = evaluator.evaluate(formula);
         } catch (Exception e) {
-            Exceptions.formatBusiness("计算公式: %s, 错误: %s", formula, e.getMessage());
-        }
-        if (result instanceof Integer) {
-            return result + "";
+            throw Exceptions.formatBusiness("计算公式: %s, 错误: %s", formula, e.getMessage());
         }
 
         BigDecimal bigDecimal = new BigDecimal(result.toString());
@@ -72,7 +69,7 @@ public class DroolsCalculateUtils {
         return getValueFromMap(name, model)
                 .map(Object::toString)
                 .filter(StringUtils::isNumeric)
-                .map(str -> Double.valueOf(str))
+                .map(Double::valueOf)
                 .orElseThrow(() -> Exceptions.formatBusiness("计算属性: %s 不存在或对应值错误", name));
     }
 
