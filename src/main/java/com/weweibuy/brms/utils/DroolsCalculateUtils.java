@@ -1,5 +1,6 @@
 package com.weweibuy.brms.utils;
 
+import com.weweibuy.brms.model.constant.RuleBuildConstant;
 import com.weweibuy.framework.common.core.exception.Exceptions;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,10 @@ import org.scijava.parsington.eval.DefaultEvaluator;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -74,14 +78,11 @@ public class DroolsCalculateUtils {
     }
 
     private static Optional<Object> getValueFromMap(String name, Map<String, Object> model) {
-        if (name.equals(".")) {
-            System.err.println("");
-        }
-        if (name.indexOf('.') == -1) {
+        if (name.indexOf(RuleBuildConstant.FORMULA_ATTR_SEPARATOR) == -1) {
             return Optional.ofNullable(model.get(name));
         }
 
-        String[] nameArr = name.split("\\.");
+        String[] nameArr = name.split(RuleBuildConstant.FORMULA_ATTR_SEPARATOR);
         Object value = null;
         for (int i = 0; i < nameArr.length; i++) {
             value = model.get(nameArr[i]);

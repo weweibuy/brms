@@ -24,5 +24,9 @@ public interface RuleBuildConstant {
 
     String CALCULATE_UTILS_METHOD = "DroolsCalculateUtils.calculate(%s, %s, %s, %s)";
 
+    /**
+     * 计算公式分隔符
+     */
+    String FORMULA_ATTR_SEPARATOR = "010";
 
 }
