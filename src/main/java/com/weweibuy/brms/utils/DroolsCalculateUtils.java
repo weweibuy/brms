@@ -5,15 +5,13 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.scijava.parsington.ExpressionParser;
 import org.scijava.parsington.Variable;
 import org.scijava.parsington.eval.DefaultEvaluator;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -24,8 +22,6 @@ import java.util.stream.Collectors;
  **/
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class DroolsCalculateUtils {
-
-    private static final String REGEX = "\\-|\\+|\\*|\\/|\\d|\\s+";
 
     /**
      * 计算
@@ -40,20 +36,24 @@ public class DroolsCalculateUtils {
         if (StringUtils.isBlank(formula)) {
             throw Exceptions.business("计算公式错误");
         }
-        // TODO 小数分隔问题
-        List<String> variableNameList = Arrays.stream(formula.split(REGEX))
-                .filter(StringUtils::isNotBlank)
+
+        ExpressionParser expressionParser = new ExpressionParser();
+        DefaultEvaluator evaluator = new DefaultEvaluator(expressionParser);
+        LinkedList<Object> objects = expressionParser.parsePostfix(formula);
+
+        List<Variable> variableNameList = objects.stream()
+                .filter(o -> o instanceof Variable)
+                .map(o -> (Variable) o)
                 .collect(Collectors.toList());
-        DefaultEvaluator evaluator = new DefaultEvaluator();
 
         if (CollectionUtils.isNotEmpty(variableNameList)) {
             variableNameList.forEach(name ->
-                    evaluator.set(new Variable(name), getValue(name, model)));
+                    evaluator.set(name, getValue(name.getToken(), model)));
         }
 
         Object result = null;
         try {
-            result = evaluator.evaluate(formula);
+            result = evaluator.evaluate(objects);
         } catch (Exception e) {
             throw Exceptions.formatBusiness("计算公式: %s, 错误: %s", formula, e.getMessage());
         }
@@ -74,7 +74,7 @@ public class DroolsCalculateUtils {
     }
 
     private static Optional<Object> getValueFromMap(String name, Map<String, Object> model) {
-        if(name.equals(".")){
+        if (name.equals(".")) {
             System.err.println("");
         }
         if (name.indexOf('.') == -1) {
