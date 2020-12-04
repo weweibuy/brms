@@ -35,7 +35,7 @@ public class DroolsCalculateUtils {
      * @param scale   保留位数
      * @return
      */
-    public static String calculate(Map<String, Object> model, String formula, Integer scale, String roundingMode) {
+    public static Number calculate(Map<String, Object> model, String formula, Integer scale, String roundingMode) {
 
         if (StringUtils.isBlank(formula)) {
             throw Exceptions.business("计算公式错误");
@@ -66,7 +66,7 @@ public class DroolsCalculateUtils {
         if (scale != null && StringUtils.isNotBlank(roundingMode)) {
             bigDecimal = bigDecimal.setScale(scale, RoundingMode.valueOf(roundingMode));
         }
-        return bigDecimal.toString();
+        return bigDecimal;
     }
 
 
