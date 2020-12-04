@@ -1,4 +1,4 @@
-package com.weweibuy.brms.mq.message;
+package com.weweibuy.brms.api.model.message;
 
 import com.weweibuy.brms.api.model.dto.RuleExecRespDTO;
 import lombok.Data;

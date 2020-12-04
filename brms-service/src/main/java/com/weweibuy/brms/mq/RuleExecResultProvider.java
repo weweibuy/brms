@@ -1,6 +1,6 @@
 package com.weweibuy.brms.mq;
 
-import com.weweibuy.brms.mq.message.RuleExecResultMessage;
+import com.weweibuy.brms.api.model.message.RuleExecResultMessage;
 import com.weweibuy.framework.rocketmq.annotation.RocketProducer;
 import com.weweibuy.framework.rocketmq.annotation.RocketProducerHandler;
 import com.weweibuy.framework.rocketmq.annotation.Tag;

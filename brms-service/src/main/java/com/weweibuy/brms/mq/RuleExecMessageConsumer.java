@@ -2,7 +2,7 @@ package com.weweibuy.brms.mq;
 
 import com.weweibuy.brms.api.model.dto.RuleExecRespDTO;
 import com.weweibuy.brms.api.model.message.RuleExecMessage;
-import com.weweibuy.brms.mq.message.RuleExecResultMessage;
+import com.weweibuy.brms.api.model.message.RuleExecResultMessage;
 import com.weweibuy.brms.service.RuleExecService;
 import com.weweibuy.framework.common.core.utils.BeanCopyUtils;
 import com.weweibuy.framework.rocketmq.annotation.Payload;

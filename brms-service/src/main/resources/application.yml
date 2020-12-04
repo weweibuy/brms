@@ -24,8 +24,6 @@ rocket-mq:
     group: BRMS_RULE_EXEC_RESULT_PG
     rule-result:
       topic:  RULE_EXEC_RESULT_TOPIC
-    rule:
-      topic: RULE_EXEC_TOPIC
   consumer:
     rule:
       topic: RULE_EXEC_TOPIC
