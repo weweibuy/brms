@@ -21,6 +21,7 @@
         <itfsw-mybatis-generator-plugin.version>1.3.2</itfsw-mybatis-generator-plugin.version>
         <mybatis-generator-maven-plugin.version>1.3.7</mybatis-generator-maven-plugin.version>
         <drools.verion>7.44.0.Final</drools.verion>
+        <scijava.parsington.version>2.0.0</scijava.parsington.version>
     </properties>
 
 
@@ -44,6 +45,12 @@
                 <groupId>com.weweibuy</groupId>
                 <artifactId>brms-api</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.scijava</groupId>
+                <artifactId>parsington</artifactId>
+                <version>${scijava.parsington.version}</version>
             </dependency>
 
         </dependencies>
