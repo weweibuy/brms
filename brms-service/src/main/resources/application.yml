@@ -17,3 +17,15 @@ spring:
 
 mybatis:
   mapper-locations: classpath*:config/mybatis/mapper/**/*.xml
+
+rocket-mq:
+  nameServer: 122.51.171.126:9876
+  producer:
+    group: BRMS_RULE_EXEC_RESULT_PG
+    rule-result:
+      topic:  RULE_EXEC_RESULT_TOPIC
+    rule:
+      topic: RULE_EXEC_TOPIC
+  consumer:
+    rule:
+      topic: RULE_EXEC_TOPIC
