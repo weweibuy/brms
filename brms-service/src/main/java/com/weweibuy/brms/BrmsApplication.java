@@ -1,8 +1,6 @@
 package com.weweibuy.brms;
 
 import com.weweibuy.framework.common.core.model.constant.CommonConstant;
-import com.weweibuy.framework.rocketmq.annotation.EnableRocketConsumer;
-import com.weweibuy.framework.rocketmq.annotation.EnableRocketProducer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
@@ -11,8 +9,6 @@ import org.springframework.cache.annotation.EnableCaching;
  * @author durenhao
  * @date 2020/11/8 11:32
  **/
-@EnableRocketProducer(basePackages = "com.weweibuy.brms.mq")
-@EnableRocketConsumer
 @SpringBootApplication
 @EnableCaching
 public class BrmsApplication {

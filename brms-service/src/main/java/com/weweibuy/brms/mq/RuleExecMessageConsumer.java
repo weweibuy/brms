@@ -8,7 +8,9 @@ import com.weweibuy.framework.common.core.utils.BeanCopyUtils;
 import com.weweibuy.framework.rocketmq.annotation.Payload;
 import com.weweibuy.framework.rocketmq.annotation.RocketConsumerHandler;
 import com.weweibuy.framework.rocketmq.annotation.RocketListener;
+import com.weweibuy.framework.rocketmq.core.producer.RocketProducerRegister;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.stereotype.Component;
 
 /**
@@ -20,6 +22,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RocketListener(topic = "rocket-mq.consumer.rule.topic", group = "BRMS_RULE_CG")
 @RequiredArgsConstructor
+@ConditionalOnBean(RocketProducerRegister.class)
 public class RuleExecMessageConsumer {
 
     private final RuleExecService ruleExecService;
