@@ -4,7 +4,9 @@ import com.weweibuy.brms.model.eum.ModelTypeEum;
 import com.weweibuy.brms.model.po.RuleSetModel;
 import com.weweibuy.brms.repository.RuleSetModelRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
@@ -16,6 +18,7 @@ import java.util.Optional;
  * @author durenhao
  * @date 2020/11/25 20:52
  **/
+@Slf4j
 @Component
 @Primary
 @RequiredArgsConstructor
@@ -35,4 +38,10 @@ public class CacheRuleSetModelRepositoryImpl implements RuleSetModelRepository {
     public Optional<RuleSetModel> selectRuleSetModel(String ruleSetKey, ModelTypeEum modelType) {
         return delegate.selectRuleSetModel(ruleSetKey, modelType);
     }
+
+    @CacheEvict(allEntries = true)
+    public void evict() {
+        log.warn("刷新: {} 全部缓存成功 ", "rule_set_model_cache");
+    }
+
 }

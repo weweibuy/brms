@@ -27,3 +27,7 @@ rocket-mq:
   consumer:
     rule:
       topic: RULE_EXEC_TOPIC
+  local-cache-evict:
+    consumer-group: BRMS_LOCAL_CHAHE_EVICT_CG
+    topic: LOCAL_CHAHE_EVICT_TOPIC
+    tag: BRMS

@@ -1,6 +1,7 @@
 package com.weweibuy.brms.config;
 
 import com.github.benmanes.caffeine.cache.Caffeine;
+import com.weweibuy.framework.common.lc.key.ClassMethodParamNameCacheKeyGenerator;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.caffeine.CaffeineCacheManager;
 import org.springframework.cache.interceptor.KeyGenerator;
@@ -20,7 +21,6 @@ import java.util.concurrent.TimeUnit;
 public class CacheConfig {
 
     /**
-     * TODO 刷新缓存
      *
      * @return
      */
