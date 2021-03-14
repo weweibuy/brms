@@ -60,12 +60,12 @@ public class RuleLogEventListener extends DefaultAgendaEventListener {
             FactHandle factHandle = event.getMatch().getFactHandles().get(0);
             String inputModel = "";
             if (factHandle instanceof DefaultFactHandle) {
-                inputModel = JackJsonUtils.write(((DefaultFactHandle) factHandle).getObject());
+                inputModel = JackJsonUtils.writeValue(((DefaultFactHandle) factHandle).getObject());
             }
 
             Map<String, Object> resultMap = (Map) global;
             resultMap.put(RuleBuildConstant.RULE_HIT_FLAG_NAME, true);
-            String outputModel = JackJsonUtils.write(global);
+            String outputModel = JackJsonUtils.writeValue(global);
             RuleHitLogEvent logEvent = RuleHitLogEvent.builder()
                     .ruleSetKey(packageName)
                     .ruleKey(name)

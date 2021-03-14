@@ -37,7 +37,7 @@ public class RuleManageService {
 
     public void reload(String ruleSetKey) {
         Set<String> singleton = Collections.singleton(ruleSetKey);
-        String write = JackJsonUtils.write(singleton);
+        String write = JackJsonUtils.writeValue(singleton);
         LocalCacheEvictedEvent localCacheEvictedEvent = new LocalCacheEvictedEvent(write);
         LocalCacheEvictMessage message = LocalCacheEvictMessage.evict(null, null, localCacheEvictedEvent);
         localCacheEvictProducer.send(message);
