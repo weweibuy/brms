@@ -17,7 +17,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <weweibuy-framework.version>1.1-SNAPSHOT</weweibuy-framework.version>
+        <weweibuy-framework.version>1.2-SNAPSHOT</weweibuy-framework.version>
         <itfsw-mybatis-generator-plugin.version>1.3.2</itfsw-mybatis-generator-plugin.version>
         <mybatis-generator-maven-plugin.version>1.3.7</mybatis-generator-maven-plugin.version>
         <drools.verion>7.44.0.Final</drools.verion>
