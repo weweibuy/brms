@@ -48,6 +48,12 @@ public class RuleQueryController {
         return CommonDataResponse.success(ruleQueryService.ruleSetModel(ruleSetKey));
     }
 
+    @GetMapping("/rule-set/model/attr")
+    public CommonDataResponse<List<RuleModelAttrRespDTO>> ruleSetModelAttr(@RequestParam String modelKey) {
+        return CommonDataResponse.success(ruleQueryService.ruleSetModelAttr(modelKey));
+    }
+
+
     @GetMapping("/rule/condition")
     public CommonDataResponse<List<RuleConditionRespDTO>> ruleCondition(@RequestParam String ruleKey) {
         return CommonDataResponse.success(ruleQueryService.ruleCondition(ruleKey));

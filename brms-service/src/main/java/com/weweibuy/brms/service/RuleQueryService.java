@@ -5,10 +5,7 @@ import com.weweibuy.brms.api.model.dto.req.RuleHitLogReqDTO;
 import com.weweibuy.brms.api.model.dto.resp.*;
 import com.weweibuy.brms.model.example.RuleHitLogExample;
 import com.weweibuy.brms.model.po.*;
-import com.weweibuy.brms.repository.ConditionAndActionRepository;
-import com.weweibuy.brms.repository.JdbcRuleAndSetRepositoryImpl;
-import com.weweibuy.brms.repository.JdbcRuleSetModelRepositoryImpl;
-import com.weweibuy.brms.repository.RuleHitLogRepository;
+import com.weweibuy.brms.repository.*;
 import com.weweibuy.framework.common.core.model.dto.CommonPageRequest;
 import com.weweibuy.framework.common.core.model.dto.CommonPageResult;
 import com.weweibuy.framework.common.core.utils.BeanCopyUtils;
@@ -39,6 +36,8 @@ public class RuleQueryService {
     private final ConditionAndActionRepository conditionAndActionRepository;
 
     private final RuleHitLogRepository ruleHitLogRepository;
+
+    private final JdbcModelAndAttrRepositoryImpl modelAndAttrRepository;
 
     public CommonPageResult<RuleSetRespDTO> ruleSet(String ruleSetKey, String ruleSetName, CommonPageRequest pageRequest) {
         Page<Object> objectPage = PageHelperUtils.startPage(pageRequest);
@@ -97,5 +96,10 @@ public class RuleQueryService {
                         .when(Objects.nonNull(q.getCreateTimeTo()), c -> c.andCreateTimeLessThanOrEqualTo(q.getCreateTimeTo()))
                         .example())
                 .orElse(null);
+    }
+
+    public List<RuleModelAttrRespDTO> ruleSetModelAttr(String modelKey) {
+        List<ModelAttr> modelAttrList = modelAndAttrRepository.selectModelAttrByModelKey(modelKey);
+        return BeanCopyUtils.copyCollection(modelAttrList, ModelAttr.class, RuleModelAttrRespDTO.class);
     }
 }
