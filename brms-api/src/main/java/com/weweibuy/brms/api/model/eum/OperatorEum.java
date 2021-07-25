@@ -1,4 +1,4 @@
-package com.weweibuy.brms.model.eum;
+package com.weweibuy.brms.api.model.eum;
 
 import lombok.Getter;
 

@@ -1,7 +1,7 @@
 package com.weweibuy.brms.repository;
 
 import com.weweibuy.brms.mapper.RuleSetModelMapper;
-import com.weweibuy.brms.model.eum.ModelTypeEum;
+import com.weweibuy.brms.api.model.eum.ModelTypeEum;
 import com.weweibuy.brms.model.example.RuleSetModelExample;
 import com.weweibuy.brms.model.po.RuleSetModel;
 import lombok.RequiredArgsConstructor;

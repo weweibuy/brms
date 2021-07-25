@@ -1,8 +1,8 @@
 package com.weweibuy.brms.support;
 
 import com.weweibuy.brms.model.constant.RuleBuildConstant;
-import com.weweibuy.brms.model.eum.ModelAttrTypeEum;
-import com.weweibuy.brms.model.eum.OperatorEum;
+import com.weweibuy.brms.api.model.eum.ModelAttrTypeEum;
+import com.weweibuy.brms.api.model.eum.OperatorEum;
 import com.weweibuy.brms.model.po.ModelAttr;
 import com.weweibuy.brms.model.po.RuleCondition;
 import com.weweibuy.framework.common.core.exception.Exceptions;

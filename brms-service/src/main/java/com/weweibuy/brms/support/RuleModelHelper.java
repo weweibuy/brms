@@ -3,7 +3,7 @@ package com.weweibuy.brms.support;
 import com.weweibuy.brms.api.model.dto.RuleExecReqDTO;
 import com.weweibuy.brms.manager.RuleQueryManager;
 import com.weweibuy.brms.model.context.RuleProcessContext;
-import com.weweibuy.brms.model.eum.ModelAttrTypeEum;
+import com.weweibuy.brms.api.model.eum.ModelAttrTypeEum;
 import com.weweibuy.brms.model.po.ModelAttr;
 import com.weweibuy.brms.model.po.Rule;
 import com.weweibuy.brms.repository.ModelAndAttrRepository;

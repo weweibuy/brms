@@ -1,6 +1,6 @@
 package com.weweibuy.brms.manager;
 
-import com.weweibuy.brms.model.eum.ModelTypeEum;
+import com.weweibuy.brms.api.model.eum.ModelTypeEum;
 import com.weweibuy.brms.model.po.ModelAttr;
 import com.weweibuy.brms.model.po.Rule;
 import com.weweibuy.brms.model.po.RuleSetModel;

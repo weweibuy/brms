@@ -1,4 +1,4 @@
-package com.weweibuy.brms.model.eum;
+package com.weweibuy.brms.api.model.eum;
 
 /**
  * 模型属性值来源
@@ -8,7 +8,14 @@ package com.weweibuy.brms.model.eum;
  **/
 public enum ModelAttrValueSourceEum {
 
+    /**
+     * 直接输入
+     */
     INPUT,
+
+    /**
+     * 字典
+     */
     DICT,
     /**
      * 一级地址

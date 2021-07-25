@@ -1,6 +1,6 @@
 package com.weweibuy.brms.repository.cache;
 
-import com.weweibuy.brms.model.eum.ModelTypeEum;
+import com.weweibuy.brms.api.model.eum.ModelTypeEum;
 import com.weweibuy.brms.model.po.RuleSetModel;
 import com.weweibuy.brms.repository.RuleSetModelRepository;
 import lombok.RequiredArgsConstructor;

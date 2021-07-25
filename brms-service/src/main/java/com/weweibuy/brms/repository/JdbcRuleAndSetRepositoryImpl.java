@@ -7,6 +7,7 @@ import com.weweibuy.brms.model.example.RuleSetExample;
 import com.weweibuy.brms.model.po.Rule;
 import com.weweibuy.brms.model.po.RuleSet;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -35,7 +36,18 @@ public class JdbcRuleAndSetRepositoryImpl implements RuleAndSetRepository {
     public List<Rule> selectRule(String ruleSetKey) {
         return ruleMapper.selectByExample(RuleExample.newAndCreateCriteria()
                 .andDeletedEqualTo(false)
-                .andRuleSetKeyEqualTo(ruleSetKey)
+                .when(StringUtils.isNotBlank(ruleSetKey),
+                        c -> c.andRuleSetKeyEqualTo(ruleSetKey))
+                .example());
+    }
+
+    public List<RuleSet> selectRuleSet(String ruleSetKey, String ruleSetName) {
+        return ruleSetMapper.selectByExample(RuleSetExample.newAndCreateCriteria()
+                .andDeletedEqualTo(false)
+                .when(StringUtils.isNotBlank(ruleSetKey),
+                        c -> c.andRuleSetKeyEqualTo(ruleSetKey))
+                .when(StringUtils.isNotBlank(ruleSetName),
+                        c -> c.andRuleSetNameLike("%" + ruleSetName + "%"))
                 .example());
     }
 

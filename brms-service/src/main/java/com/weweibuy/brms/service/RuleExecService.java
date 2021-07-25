@@ -7,7 +7,7 @@ import com.weweibuy.brms.drools.RuleLogEventListener;
 import com.weweibuy.brms.manager.RuleQueryManager;
 import com.weweibuy.brms.model.constant.RuleBuildConstant;
 import com.weweibuy.brms.model.context.RuleProcessContext;
-import com.weweibuy.brms.model.eum.ModelTypeEum;
+import com.weweibuy.brms.api.model.eum.ModelTypeEum;
 import com.weweibuy.brms.model.po.ModelAttr;
 import com.weweibuy.brms.support.KieBaseHolder;
 import com.weweibuy.brms.support.RuleModelHelper;

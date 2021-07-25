@@ -30,6 +30,7 @@ rocket-mq:
 common:
   local-cache:
     mq-evict:
+      enable: true
       consumer-group: BRMS_LOCAL_CHAHE_EVICT_CG
       topic: LOCAL_CHAHE_EVICT_TOPIC
       tag: BRMS

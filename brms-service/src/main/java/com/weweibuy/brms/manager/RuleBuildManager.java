@@ -1,8 +1,8 @@
 package com.weweibuy.brms.manager;
 
 import com.weweibuy.brms.model.constant.RuleBuildConstant;
-import com.weweibuy.brms.model.eum.ModelTypeEum;
-import com.weweibuy.brms.model.eum.RuleEnterTypeEum;
+import com.weweibuy.brms.api.model.eum.ModelTypeEum;
+import com.weweibuy.brms.api.model.eum.RuleEnterTypeEum;
 import com.weweibuy.brms.model.po.Rule;
 import com.weweibuy.brms.model.po.*;
 import com.weweibuy.brms.repository.ConditionAndActionRepository;
