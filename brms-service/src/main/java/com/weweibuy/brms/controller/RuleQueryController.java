@@ -1,5 +1,6 @@
 package com.weweibuy.brms.controller;
 
+import com.weweibuy.brms.api.model.dto.req.RuleHitLogReqDTO;
 import com.weweibuy.brms.api.model.dto.resp.*;
 import com.weweibuy.brms.service.RuleQueryService;
 import com.weweibuy.framework.common.core.model.dto.CommonDataResponse;
@@ -55,6 +56,11 @@ public class RuleQueryController {
     @GetMapping("/rule/action")
     public CommonDataResponse<List<RuleActionRespDTO>> ruleAction(@RequestParam String ruleKey) {
         return CommonDataResponse.success(ruleQueryService.ruleAction(ruleKey));
+    }
+
+    @GetMapping("/rule/hit-log/list")
+    public CommonDataResponse<CommonPageResult<RuleHitLogRespDTO>> ruleHitLog(RuleHitLogReqDTO query) {
+        return CommonDataResponse.success(ruleQueryService.ruleHitLog(query));
     }
 
 
