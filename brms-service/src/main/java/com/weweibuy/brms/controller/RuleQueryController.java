@@ -69,5 +69,15 @@ public class RuleQueryController {
         return CommonDataResponse.success(ruleQueryService.ruleHitLog(query));
     }
 
+    /**
+     * 翻译规则
+     *
+     * @param ruleKey
+     * @return
+     */
+    @GetMapping("/rule/translate")
+    public CommonDataResponse<RuleTranslateRespDTO> ruleTranslate(@RequestParam String ruleKey) {
+        return CommonDataResponse.success(ruleQueryService.ruleTranslate(ruleKey));
+    }
 
 }

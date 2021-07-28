@@ -3,20 +3,24 @@ package com.weweibuy.brms.service;
 import com.github.pagehelper.Page;
 import com.weweibuy.brms.api.model.dto.req.RuleHitLogReqDTO;
 import com.weweibuy.brms.api.model.dto.resp.*;
+import com.weweibuy.brms.api.model.eum.ModelTypeEum;
+import com.weweibuy.brms.api.model.eum.RuleActionValueTypeEum;
+import com.weweibuy.brms.model.constant.RuleBuildConstant;
 import com.weweibuy.brms.model.example.RuleHitLogExample;
 import com.weweibuy.brms.model.po.*;
 import com.weweibuy.brms.repository.*;
+import com.weweibuy.brms.support.RuleTranslateHelper;
+import com.weweibuy.framework.common.core.exception.Exceptions;
 import com.weweibuy.framework.common.core.model.dto.CommonPageRequest;
 import com.weweibuy.framework.common.core.model.dto.CommonPageResult;
 import com.weweibuy.framework.common.core.utils.BeanCopyUtils;
 import com.weweibuy.framework.common.db.utils.PageHelperUtils;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -38,6 +42,8 @@ public class RuleQueryService {
     private final RuleHitLogRepository ruleHitLogRepository;
 
     private final JdbcModelAndAttrRepositoryImpl modelAndAttrRepository;
+
+    private final RuleTranslateHelper ruleTranslateHelper;
 
     public CommonPageResult<RuleSetRespDTO> ruleSet(String ruleSetKey, String ruleSetName, CommonPageRequest pageRequest) {
         Page<Object> objectPage = PageHelperUtils.startPage(pageRequest);
@@ -102,4 +108,78 @@ public class RuleQueryService {
         List<ModelAttr> modelAttrList = modelAndAttrRepository.selectModelAttrByModelKey(modelKey);
         return BeanCopyUtils.copyCollection(modelAttrList, ModelAttr.class, RuleModelAttrRespDTO.class);
     }
+
+    public RuleTranslateRespDTO ruleTranslate(String ruleKey) {
+        Rule rule = ruleAndSetRepository.selectRuleByRuleKey(ruleKey)
+                .orElseThrow(() -> Exceptions.business("规则不存在"));
+        List<RuleSetModel> modelList = ruleSetModelRepository.selectRuleSetModel(rule.getRuleSetKey());
+        RuleSetModel inputModel = modelList.stream()
+                .filter(r -> ModelTypeEum.INPUT.toString().equals(r.getModelType()))
+                .findFirst()
+                .orElse(null);
+
+
+        RuleSetModel outputModel = modelList.stream()
+                .filter(r -> ModelTypeEum.OUTPUT.toString().equals(r.getModelType()))
+                .findFirst()
+                .orElse(null);
+
+        RuleTranslateRespDTO ruleTranslateRespDTO = new RuleTranslateRespDTO();
+
+        if (inputModel != null) {
+            Map<String, String> stringStringMap = ruleTranslateHelper.translateAttr(inputModel, RuleBuildConstant.MODEL_ATTR_SEPARATOR);
+
+            List<RuleCondition> ruleConditionList = conditionAndActionRepository.selectRuleCondition(ruleKey);
+            if (CollectionUtils.isNotEmpty(ruleConditionList)) {
+                List<String> collect = ruleConditionList.stream()
+                        .map(c -> {
+                            String desc = stringStringMap.get(c.getAttrName());
+                            return desc + " " + c.getConditionOperator() + " " + c.getConditionValue();
+                        })
+                        .collect(Collectors.toList());
+                ruleTranslateRespDTO.setCondition(collect);
+            }
+        }
+
+        if (outputModel != null) {
+            Map<String, String> stringStringMap = ruleTranslateHelper.translateAttr(outputModel, ".");
+
+            Map<String, String> inputMap = Optional.ofNullable(inputModel)
+                    .map(i -> ruleTranslateHelper.translateAttr(i, RuleBuildConstant.FORMULA_ATTR_SEPARATOR))
+                    .orElse(Collections.emptyMap());
+
+            List<RuleAction> ruleActionList = conditionAndActionRepository.selectRuleAction(ruleKey);
+            if (CollectionUtils.isNotEmpty(ruleActionList)) {
+                List<String> collect = ruleActionList.stream()
+                        .map(a ->
+                                RuleActionValueTypeEum.fromValue(a.getActionValueType())
+                                        .map(t -> actionDesc(t, a, stringStringMap.get(a.getAttrName()), inputMap))
+                                        .orElse(""))
+                        .collect(Collectors.toList());
+                ruleTranslateRespDTO.setAction(collect);
+            }
+        }
+
+        return ruleTranslateRespDTO;
+    }
+
+
+    private String actionDesc(RuleActionValueTypeEum actionValueType, RuleAction ruleAction,
+                              String attrDesc, Map<String, String> inputMap) {
+        switch (actionValueType) {
+            case INPUT:
+                return attrDesc + " = " + ruleAction.getActionValue();
+            case CALCULATE:
+                String anElse = Optional.ofNullable(ruleAction.getValueCalculateFormula())
+                        .map(s -> Arrays.stream(s.split(" "))
+                                .map(String::trim)
+                                .map(i -> Optional.ofNullable(inputMap.get(i)).orElse(i))
+                                .collect(Collectors.joining(" ")))
+                        .orElse("");
+                return attrDesc + " = " + anElse;
+            default:
+                return "";
+        }
+    }
+
 }

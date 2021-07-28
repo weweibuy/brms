@@ -25,8 +25,15 @@ public interface RuleBuildConstant {
     String CALCULATE_UTILS_METHOD = "DroolsCalculateUtils.calculate(%s, %s, %s, %s)";
 
     /**
-     * 计算公式分隔符  TODO 更好的解决办法
+     * 模型属性的分隔符  eg:  user.name
      */
-    String FORMULA_ATTR_SEPARATOR = "010";
+    String MODEL_ATTR_SEPARATOR = ".";
+
+
+    /**
+     * 计算公式分隔符, 防止 [.] 被作为计算符号
+     * user@name
+     */
+    String FORMULA_ATTR_SEPARATOR = "@";
 
 }

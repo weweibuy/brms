@@ -41,6 +41,13 @@ public class JdbcRuleAndSetRepositoryImpl implements RuleAndSetRepository {
                 .example());
     }
 
+    public Optional<Rule> selectRuleByRuleKey(String ruleKey) {
+        return Optional.ofNullable(ruleMapper.selectOneByExample(RuleExample.newAndCreateCriteria()
+                .andDeletedEqualTo(false)
+                .andRuleKeyEqualTo(ruleKey)
+                .example()));
+    }
+
     public List<RuleSet> selectRuleSet(String ruleSetKey, String ruleSetName) {
         return ruleSetMapper.selectByExample(RuleSetExample.newAndCreateCriteria()
                 .andDeletedEqualTo(false)

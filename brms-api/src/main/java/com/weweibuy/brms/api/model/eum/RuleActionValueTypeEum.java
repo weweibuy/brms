@@ -1,5 +1,8 @@
 package com.weweibuy.brms.api.model.eum;
 
+import java.util.Arrays;
+import java.util.Optional;
+
 /**
  * 规则 action 值类型
  *
@@ -18,6 +21,12 @@ public enum RuleActionValueTypeEum {
      */
     CALCULATE,
     ;
+
+    public static Optional<RuleActionValueTypeEum> fromValue(String value) {
+        return Arrays.stream(RuleActionValueTypeEum.values())
+                .filter(a -> a.toString().equals(value))
+                .findFirst();
+    }
 
 
 }
