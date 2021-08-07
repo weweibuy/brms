@@ -38,6 +38,11 @@ public class RuleQueryController {
         return CommonDataResponse.success(ruleQueryService.ruleSet(ruleSetKey));
     }
 
+    @GetMapping("/rule")
+    public CommonDataResponse<RuleRespDTO> rule(@RequestParam String ruleKey) {
+        return CommonDataResponse.success(ruleQueryService.rule(ruleKey));
+    }
+
     @GetMapping("/rule/list")
     public CommonDataResponse<CommonPageResult<RuleRespDTO>> ruleList(String ruleSetKey, CommonPageRequest pageRequest) {
         return CommonDataResponse.success(ruleQueryService.ruleList(ruleSetKey, pageRequest));
@@ -48,7 +53,12 @@ public class RuleQueryController {
         return CommonDataResponse.success(ruleQueryService.ruleSetModel(ruleSetKey));
     }
 
-    @GetMapping("/rule-set/model/attr")
+    @GetMapping("/model")
+    public CommonDataResponse<ModelRespDTO> model(@RequestParam String modelKey) {
+        return CommonDataResponse.success(ruleQueryService.model(modelKey));
+    }
+
+    @GetMapping("/model/attr")
     public CommonDataResponse<List<RuleModelAttrRespDTO>> ruleSetModelAttr(@RequestParam String modelKey) {
         return CommonDataResponse.success(ruleQueryService.ruleSetModelAttr(modelKey));
     }

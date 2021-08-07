@@ -1,11 +1,11 @@
 package com.weweibuy.brms.service;
 
 import com.github.pagehelper.Page;
+import com.weweibuy.brms.api.model.RuleBuildConstant;
 import com.weweibuy.brms.api.model.dto.req.RuleHitLogReqDTO;
 import com.weweibuy.brms.api.model.dto.resp.*;
 import com.weweibuy.brms.api.model.eum.ModelTypeEum;
 import com.weweibuy.brms.api.model.eum.RuleActionValueTypeEum;
-import com.weweibuy.brms.model.constant.RuleBuildConstant;
 import com.weweibuy.brms.model.example.RuleHitLogExample;
 import com.weweibuy.brms.model.po.*;
 import com.weweibuy.brms.repository.*;
@@ -180,6 +180,19 @@ public class RuleQueryService {
             default:
                 return "";
         }
+    }
+
+    public RuleRespDTO rule(String ruleKey) {
+        return ruleAndSetRepository.selectRuleByRuleKey(ruleKey)
+                .map(r -> BeanCopyUtils.copy(r, RuleRespDTO.class))
+                .orElse(null);
+
+    }
+
+    public ModelRespDTO model(String modelKey) {
+        return modelAndAttrRepository.selectModel(modelKey)
+                .map(m -> BeanCopyUtils.copy(m, ModelRespDTO.class))
+                .orElse(null);
     }
 
 }

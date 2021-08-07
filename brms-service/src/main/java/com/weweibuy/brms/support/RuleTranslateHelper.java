@@ -55,7 +55,7 @@ public class RuleTranslateHelper {
     private String key(String lastKey, String currentKey, String keySeparator) {
         return Optional.ofNullable(lastKey)
                 .filter(StringUtils::isNotBlank)
-                .map(l -> keySeparator + currentKey)
+                .map(l -> l + keySeparator + currentKey)
                 .orElse(currentKey);
     }
 

@@ -44,4 +44,10 @@ public interface RuleQueryApi {
     @GetMapping("/rule/hit-log/list")
     CommonDataResponse<CommonPageResult<RuleHitLogRespDTO>> ruleHitLog(@SpringQueryMap RuleHitLogReqDTO query);
 
+    @GetMapping("/rule")
+    CommonDataResponse<RuleRespDTO> rule(@RequestParam("ruleKey") String ruleKey);
+
+    @GetMapping("/model")
+    CommonDataResponse<ModelRespDTO> model(@RequestParam("modelKey") String modelKey);
+
 }
