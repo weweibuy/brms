@@ -32,7 +32,7 @@ public interface RuleQueryApi {
     @GetMapping("/rule-set/model")
     CommonDataResponse<List<RuleSetModelRespDTO>> ruleSetModel(@RequestParam("ruleSetKey") String ruleSetKey);
 
-    @GetMapping("/rule-set/model/attr")
+    @GetMapping("/model/attr")
     CommonDataResponse<List<RuleModelAttrRespDTO>> ruleSetModelAttr(@RequestParam("modelKey") String modelKey);
 
     @GetMapping("/rule/condition")

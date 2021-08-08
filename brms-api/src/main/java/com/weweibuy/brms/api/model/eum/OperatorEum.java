@@ -1,6 +1,7 @@
 package com.weweibuy.brms.api.model.eum;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -9,41 +10,54 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
- * 操作符
+ * 条件操作符
  *
  * @author durenhao
  * @date 2020/11/12 21:48
  **/
 @Getter
+@RequiredArgsConstructor
 public enum OperatorEum {
 
-    MEMBER_OF("memberOf"),
+    GREATER_THAN(">", "大于"),
 
-    ALL_MEMBER_OF("all memberOf"),
+    GREATER_THAN_or_equal(">=", "大于等于"),
 
-    NOT_MEMBER_OF("not memberOf"),
+    LESS_THAN("<", "小于"),
 
-    NOT_ALL_MEMBER_OF("not all memberOf"),
+    LESS_THAN_OR_EQUAL("<=", "小于等于"),
 
-    CONTAINS("contains"),
+    EQUAL_TO("==", "等于"),
 
-    NOT_CONTAINS("not contains"),
+    NOT_EQUAL_TO("!=", "不等于"),
 
-    CONTAINS_ALL("contains all"),
+    MEMBER_OF("memberOf", "memberOf"),
 
-    NTO_CONTAINS_ALL("not contains all"),;
+    ALL_MEMBER_OF("all memberOf", "all memberOf"),
 
-    private String code;
+    NOT_MEMBER_OF("not memberOf", "not memberOf"),
+
+    NOT_ALL_MEMBER_OF("not all memberOf", "not all memberOf"),
+
+    CONTAINS("contains", "包含"),
+
+    NOT_CONTAINS("not contains", "不包含"),
+
+    CONTAINS_ALL("contains all", "全包含"),
+
+    NTO_CONTAINS_ALL("not contains all", "全不包含"),
+
+    ;
+
+    private final String code;
+
+    private final String desc;
 
     private static Map<String, OperatorEum> operatorEumMap;
 
     static {
         operatorEumMap = Arrays.stream(OperatorEum.values())
                 .collect(Collectors.toMap(OperatorEum::getCode, Function.identity(), (o, n) -> n));
-    }
-
-    OperatorEum(String code) {
-        this.code = code;
     }
 
 
