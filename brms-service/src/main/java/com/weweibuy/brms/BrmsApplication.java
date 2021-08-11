@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 
 /**
+ * 业务规则系统
+ *
  * @author durenhao
  * @date 2020/11/8 11:32
  **/
