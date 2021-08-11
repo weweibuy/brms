@@ -1,4 +1,4 @@
-package com.weweibuy.brms.api.model;
+package com.weweibuy.brms.api.model.constant;
 
 /**
  * @author durenhao

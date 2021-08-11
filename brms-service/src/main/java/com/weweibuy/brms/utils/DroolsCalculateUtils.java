@@ -1,6 +1,6 @@
 package com.weweibuy.brms.utils;
 
-import com.weweibuy.brms.model.constant.RuleBuildConstant;
+import com.weweibuy.brms.api.model.constant.RuleBuildConstant;
 import com.weweibuy.framework.common.core.exception.Exceptions;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

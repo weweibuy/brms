@@ -1,7 +1,7 @@
 package com.weweibuy.brms.service;
 
 import com.github.pagehelper.Page;
-import com.weweibuy.brms.api.model.RuleBuildConstant;
+import com.weweibuy.brms.api.model.constant.RuleBuildConstant;
 import com.weweibuy.brms.api.model.dto.req.RuleHitLogReqDTO;
 import com.weweibuy.brms.api.model.dto.resp.*;
 import com.weweibuy.brms.api.model.eum.ModelTypeEum;

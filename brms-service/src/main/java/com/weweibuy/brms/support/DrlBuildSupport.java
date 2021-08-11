@@ -1,6 +1,6 @@
 package com.weweibuy.brms.support;
 
-import com.weweibuy.brms.model.constant.RuleBuildConstant;
+import com.weweibuy.brms.api.model.constant.RuleBuildConstant;
 import com.weweibuy.framework.common.core.model.constant.CommonConstant;
 import org.drools.decisiontable.parser.LhsBuilder;
 

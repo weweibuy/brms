@@ -1,6 +1,6 @@
 package com.weweibuy.brms.support;
 
-import com.weweibuy.brms.model.constant.RuleBuildConstant;
+import com.weweibuy.brms.api.model.constant.RuleBuildConstant;
 import com.weweibuy.brms.api.model.eum.ModelAttrTypeEum;
 import com.weweibuy.brms.api.model.eum.RuleActionValueTypeEum;
 import com.weweibuy.brms.model.po.ModelAttr;

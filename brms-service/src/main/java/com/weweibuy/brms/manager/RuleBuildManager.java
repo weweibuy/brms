@@ -1,6 +1,6 @@
 package com.weweibuy.brms.manager;
 
-import com.weweibuy.brms.model.constant.RuleBuildConstant;
+import com.weweibuy.brms.api.model.constant.RuleBuildConstant;
 import com.weweibuy.brms.api.model.eum.ModelTypeEum;
 import com.weweibuy.brms.api.model.eum.RuleEnterTypeEum;
 import com.weweibuy.brms.model.po.Rule;

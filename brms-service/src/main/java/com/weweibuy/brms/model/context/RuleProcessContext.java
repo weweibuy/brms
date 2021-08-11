@@ -1,8 +1,8 @@
 package com.weweibuy.brms.model.context;
 
+import com.weweibuy.brms.api.model.constant.RuleBuildConstant;
 import com.weweibuy.brms.api.model.dto.RuleExecProcessRespDTO;
 import com.weweibuy.brms.api.model.dto.RuleExecRespDTO;
-import com.weweibuy.brms.model.constant.RuleBuildConstant;
 import com.weweibuy.brms.model.po.Rule;
 import com.weweibuy.framework.common.core.utils.BeanCopyUtils;
 import lombok.Data;

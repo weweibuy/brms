@@ -1,6 +1,6 @@
 package com.weweibuy.brms.drools;
 
-import com.weweibuy.brms.model.constant.RuleBuildConstant;
+import com.weweibuy.brms.api.model.constant.RuleBuildConstant;
 import com.weweibuy.brms.model.context.RuleProcessContext;
 import com.weweibuy.brms.model.event.RuleHitLogEvent;
 import com.weweibuy.brms.support.RuleProcessContextHolder;
