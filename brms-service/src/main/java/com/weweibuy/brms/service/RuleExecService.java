@@ -57,11 +57,12 @@ public class RuleExecService {
         for (RuleExecReqDTO.RuleSetKeyReqDTO ruleSetKeyReqDTO : ruleSet) {
             List<ModelAttr> modelAttrList = ruleQueryManager.queryModelAttr(ruleSetKeyReqDTO.getRuleSetKey(), ModelTypeEum.INPUT)
                     .orElseThrow(() -> Exceptions.business("规则模型不存在"));
-            // fix 属性
+            // fix 属性 对不存在的属性赋空值
             ruleModelHelper.fixModel(resultMap, modelAttrList);
             // 执行规则
             resultMap = doExecRule(ruleSetKeyReqDTO.getRuleSetKey(), ruleSetKeyReqDTO.getRuleNameList(),
                     ruleSetKeyReqDTO.getAgendaGroup(), resultMap);
+            // 没有命中规则 则跳出
             if (!(Boolean) resultMap.get(RuleBuildConstant.RULE_HIT_FLAG_NAME)) {
                 break;
             }
@@ -103,6 +104,7 @@ public class RuleExecService {
         KieBase kieBase = kieBaseHolder.findKieBase(ruleSetKey);
         KieSession kieSession = kieBase.newKieSession();
         try {
+            // 日志监听
             kieSession.addEventListener(ruleLogEventListener);
             Map<String, Object> result = new HashMap<>();
             result.put(RuleBuildConstant.RULE_HIT_FLAG_NAME, false);

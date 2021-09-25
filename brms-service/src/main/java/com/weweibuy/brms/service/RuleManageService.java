@@ -49,8 +49,7 @@ public class RuleManageService {
         String body = localCacheEvictedEvent.getBody();
         if (StringUtils.isNotBlank(body)) {
             Set<String> set = JackJsonUtils.readValue(body, Set.class);
-            set.stream()
-                    .forEach(this::doReload);
+            set.forEach(this::doReload);
         }
     }
 

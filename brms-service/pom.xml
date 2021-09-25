@@ -87,6 +87,13 @@
             <groupId>org.scijava</groupId>
             <artifactId>parsington</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.googlecode.aviator</groupId>
+            <artifactId>aviator</artifactId>
+            <version>5.2.7</version>
+        </dependency>
+
     </dependencies>
 
 </project>
