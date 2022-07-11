@@ -16,38 +16,37 @@ import java.util.List;
  * @author durenhao
  * @date 2021/7/25 17:00
  **/
-@RequestMapping("/rule/query")
 public interface RuleQueryApi {
 
-    @GetMapping("/rule-set/list")
+    @GetMapping("/rule/query/rule-set/list")
     CommonDataResponse<CommonPageResult<RuleSetRespDTO>> ruleSet(@RequestParam("ruleSetKey") String ruleSetKey, @RequestParam("ruleSetName") String ruleSetName,
                                                                  @SpringQueryMap CommonPageRequest pageRequest);
 
-    @GetMapping("/rule-set")
+    @GetMapping("/rule/query/rule-set")
     CommonDataResponse<RuleSetRespDTO> ruleSet(@RequestParam("ruleSetKey") String ruleSetKey);
 
-    @GetMapping("/rule/list")
+    @GetMapping("/rule/query/rule/list")
     CommonDataResponse<CommonPageResult<RuleRespDTO>> ruleList(@RequestParam("ruleSetKey") String ruleSetKey, @SpringQueryMap CommonPageRequest pageRequest);
 
-    @GetMapping("/rule-set/model")
+    @GetMapping("/rule/query/rule-set/model")
     CommonDataResponse<List<RuleSetModelRespDTO>> ruleSetModel(@RequestParam("ruleSetKey") String ruleSetKey);
 
-    @GetMapping("/model/attr")
+    @GetMapping("/rule/query/model/attr")
     CommonDataResponse<List<RuleModelAttrRespDTO>> ruleSetModelAttr(@RequestParam("modelKey") String modelKey);
 
-    @GetMapping("/rule/condition")
+    @GetMapping("/rule/query/rule/condition")
     CommonDataResponse<List<RuleConditionRespDTO>> ruleCondition(@RequestParam("ruleKey") String ruleKey);
 
-    @GetMapping("/rule/action")
+    @GetMapping("/rule/query/rule/action")
     CommonDataResponse<List<RuleActionRespDTO>> ruleAction(@RequestParam("ruleKey") String ruleKey);
 
-    @GetMapping("/rule/hit-log/list")
+    @GetMapping("/rule/query/rule/hit-log/list")
     CommonDataResponse<CommonPageResult<RuleHitLogRespDTO>> ruleHitLog(@SpringQueryMap RuleHitLogReqDTO query);
 
-    @GetMapping("/rule")
+    @GetMapping("/rule/query/rule")
     CommonDataResponse<RuleRespDTO> rule(@RequestParam("ruleKey") String ruleKey);
 
-    @GetMapping("/model")
+    @GetMapping("/rule/query/model")
     CommonDataResponse<ModelRespDTO> model(@RequestParam("modelKey") String modelKey);
 
 }

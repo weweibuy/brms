@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author durenhao
  * @date 2020/12/3 22:16
  **/
-@RequestMapping("/rule")
 public interface RuleExecApi {
 
     /**
@@ -19,7 +18,7 @@ public interface RuleExecApi {
      * @param reqDTO
      * @return
      */
-    @PostMapping("/exec")
+    @PostMapping("/rule/exec")
     CommonDataResponse<RuleExecRespDTO> execRule(RuleExecReqDTO reqDTO);
 
 }
