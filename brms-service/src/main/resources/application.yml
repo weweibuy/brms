@@ -8,7 +8,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://106.12.208.53:3306/webuy_brms?useUnicode=true&characterEncoding=UTF-8&allowMutiQueries=true&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://223.247.141.69:3306/webuy_brms?useUnicode=true&characterEncoding=UTF-8&allowMutiQueries=true&serverTimezone=Asia/Shanghai
     username: user01
     password: ak402507979
   jackson:
@@ -19,7 +19,7 @@ mybatis:
   mapper-locations: classpath*:config/mybatis/mapper/**/*.xml
 
 rocket-mq:
-  nameServer: 122.51.171.126:9876
+  nameServer: 223.247.141.69:9876
   producer:
     group: BRMS_RULE_EXEC_RESULT_PG
     rule-result:

@@ -1,5 +1,7 @@
 package com.weweibuy.brms.utils;
 
+import com.ql.util.express.DefaultContext;
+import com.ql.util.express.ExpressRunner;
 import com.weweibuy.brms.api.model.constant.RuleBuildConstant;
 import com.weweibuy.framework.common.core.exception.Exceptions;
 import lombok.AccessLevel;
@@ -12,10 +14,7 @@ import org.scijava.parsington.eval.DefaultEvaluator;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -41,6 +40,46 @@ public class DroolsCalculateUtils {
             throw Exceptions.business("计算公式错误");
         }
 
+        ExpressRunner expressRunner = new ExpressRunner();
+        DefaultContext<String, Object> context = new DefaultContext<String, Object>();
+        context.putAll(model);
+
+        Object result = qlExpressCalculate(model, formula);
+
+        BigDecimal bigDecimal = new BigDecimal(result.toString());
+        if (scale != null && StringUtils.isNotBlank(roundingMode)) {
+            bigDecimal = bigDecimal.setScale(scale, RoundingMode.valueOf(roundingMode));
+        }
+        return bigDecimal;
+    }
+
+    /**
+     * QLExpress 计算
+     * https://github.com/alibaba/QLExpress
+     *
+     * @param model
+     * @param formula
+     * @return
+     */
+    public static Object qlExpressCalculate(Map<String, Object> model, String formula) {
+        ExpressRunner expressRunner = new ExpressRunner();
+        DefaultContext<String, Object> context = new DefaultContext<>();
+        context.putAll(model);
+
+        try {
+            return expressRunner.execute(formula, context, null, true, false);
+        } catch (Exception e) {
+            throw Exceptions.formatBusiness("计算公式: %s, 错误: %s", formula, e.getMessage());
+        }
+    }
+
+    /**
+     * 使用 scijava 进行计算
+     * https://github.com/scijava/parsington
+     *
+     * @return
+     */
+    public static Object scijavaCalculate(Map<String, Object> model, String formula) {
         ExpressionParser expressionParser = new ExpressionParser();
         DefaultEvaluator evaluator = new DefaultEvaluator(expressionParser);
         LinkedList<Object> objects = expressionParser.parsePostfix(formula);
@@ -54,19 +93,11 @@ public class DroolsCalculateUtils {
             variableNameList.forEach(name ->
                     evaluator.set(name, getValue(name.getToken(), model)));
         }
-
-        Object result = null;
         try {
-            result = evaluator.evaluate(objects);
+            return evaluator.evaluate(objects);
         } catch (Exception e) {
             throw Exceptions.formatBusiness("计算公式: %s, 错误: %s", formula, e.getMessage());
         }
-
-        BigDecimal bigDecimal = new BigDecimal(result.toString());
-        if (scale != null && StringUtils.isNotBlank(roundingMode)) {
-            bigDecimal = bigDecimal.setScale(scale, RoundingMode.valueOf(roundingMode));
-        }
-        return bigDecimal;
     }
 
 
